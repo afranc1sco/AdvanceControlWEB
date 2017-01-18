@@ -1,0 +1,89 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Bancos</h1>
+<style>
+.container {
+  width: 100%;
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewcatbanco">
+        Nuevo Banco
+      </button>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="superior" class="display"><!--el id activos es de datatables referenciado en activos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Descripcion</th>
+      <th>Status</th>
+      <th>Acciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_catbancos">
+      <%= render @catbancos %><!--carga todos los activos-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@catbanco, remote: true, html: {class: "form-horizontal activox"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewcatbanco" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Banco</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Clave, "Clave:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= f.text_field :Clave, class: "form-control catbanco_cb",autofocus: true, minlength: "1"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Descripcion, "Descripción:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= f.text_field :Descripcion, class: "form-control catbanco_cb",autofocus: true, minlength: "1"  %>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <%= f.label :Status,"Activo:", class: "control-label col-xs-3 col-sm-6 col-md-1 " %>
+            <div class="col-md-1">
+              <%= f.check_box :Status,{checked: true} %>
+            </div>
+          </div>
+
+            <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewcatbancoclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<%= link_to 'Bancos eliminados ó inhabilitados<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, catbancos_inactivos_path, class: "btn btn-danger btn-xs"%>

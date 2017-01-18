@@ -1,0 +1,54 @@
+<%if relmen.CodProducto != nil%><!--si CodPoducto es diferente de nil entonces es un producto-->
+  <tr id="relmen_<%= relmen.id %>">
+    <td><%= relmen.productos.id %></td>
+    <td><%= relmen.productos.Producto %></td>
+    <td><%= relmen.productos.CodBarras %></td>
+    <td><%= relmen.productos.Sector%></td>
+      <td>
+
+          <!--Destroy-->
+          <%= link_to 'Quitar', relmen, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+        </td>
+        <td></td>
+
+  </tr>
+<%elsif relmen.CodCliente != nil%>
+    <tr id="relmen_<%= relmen.id %>">
+      <td><%= relmen.clientes.id %></td>
+      <td><%= relmen.clientes.Nombre %></td>
+      <td><%= relmen.clientes.NombreCorto %></td>
+      <td><%= relmen.clientes.Telefono %></td>
+      <td><%= relmen.clientes.Credito %></td>
+      <td><%= relmen.clientes.Horario %></td>
+      <td><%= relmen.clientes.Colonia %></td>
+        <td>
+
+            <!--Destroy-->
+            <%= link_to 'Quitar', relmen, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+          </td>
+          <td></td>
+
+
+    </tr>
+
+<%elsif relmen.CodRuta != nil%>
+    <tr id="relmen_<%= relmen.id %>">
+      <td><%= relmen.rutas.id %></td>
+      <td><%= relmen.rutas.Ruta %></td>
+      <td><%= relmen.rutas.TipoRuta %></td>
+      <td><%= relmen.rutas.Sector %></td>
+      <td><%= relmen.rutas.Vendedor %></td>
+      <td><%= relmen.rutas.Activa %></td>
+      <td><%= relmen.rutas.Activa %></td>
+        <td>
+
+            <!--Destroy-->
+            <%= link_to 'Quitar', relmen, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+          </td>
+          <td></td>
+
+    </tr>
+<%end%>

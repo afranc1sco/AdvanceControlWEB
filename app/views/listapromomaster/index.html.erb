@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Listapromomaster</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Listamaster</th>
+      <th>Promociones</th>
+      <th>Idempresa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @listapromomaster.each do |listapromomast| %>
+      <tr>
+        <td><%= listapromomast.Id %></td>
+        <td><%= listapromomast.ListaMaster %></td>
+        <td><%= listapromomast.Promociones %></td>
+        <td><%= listapromomast.IdEmpresa %></td>
+        <td><%= link_to 'Show', listapromomast %></td>
+        <td><%= link_to 'Edit', edit_listapromomast_path(listapromomast) %></td>
+        <td><%= link_to 'Destroy', listapromomast, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Listapromomast', new_listapromomast_path %>

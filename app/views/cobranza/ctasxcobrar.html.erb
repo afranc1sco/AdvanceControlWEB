@@ -1,0 +1,45 @@
+<!--<p id="notice"><%= notice %></p>-->
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <h1>Cuentas por cobrar</h1>
+
+  <br>
+  <br>
+
+  <%= render "busqueda_cxc" %>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Id</th>
+      <th>Ruta</th>
+      <th>Vendedor</th>
+      <th>Cliente</th>
+      <th>Nombre</th>
+      <th>Razón Social</th>
+      <th>Documento</th>
+      <th>Saldo Inicial</th>
+      <th>Abono</th>
+      <th>Saldo Actual</th>
+      <th>Fecha Reg</th>
+      <th>Fecha Vence</th>
+      <th>TipoDoc</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_cobranza">
+      <%= render @cobranza %>
+</tbody>
+
+
+</table>
+</div >

@@ -1,0 +1,97 @@
+<%= form_for(@producto) do |f| %>
+  <% if @producto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@producto.errors.count, "error") %> prohibited this producto from being saved:</h2>
+
+      <ul>
+      <% @producto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :productosxpza do |productosxpza| %>
+  <div class="productosxpza_fields">
+    <div class="field">
+    <%= productosxpza.label :PzaXCja %><br>
+    <%= productosxpza.number_field :PzaXCja %>
+  </div>
+
+  </div>
+  <%end%>
+
+
+  <div class="field">
+    <%= f.label :Clave %><br>
+    <%= f.text_field :Clave %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Producto %><br>
+    <%= f.text_field :Producto %>
+  </div>
+  <div class="field">
+    <%= f.label :CodBarras %><br>
+    <%= f.text_field :CodBarras %>
+  </div>
+  <div class="field">
+    <%= f.label :IVA %><br>
+    <%= f.number_field :IVA %>
+  </div>
+  <div class="field">
+    <%= f.label :UniMed %><br>
+    <%= f.text_field :UniMed %>
+  </div>
+  piezas por caja
+  <div class="field">
+    <%= f.label :Equivalente %><br>
+    <%= f.number_field :Equivalente %>
+  </div>
+  <div class="field">
+    <%= f.label :Sector %><br>
+    <%= f.text_field :Sector %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :IEPS %><br>
+    <%= f.number_field :IEPS %>
+  </div>
+
+  <div class="field">
+    <%= f.label :VBase %><br>
+    <%= f.number_field :VBase %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Ban_Envase %><br>
+    <%= f.check_box :Ban_Envase %>
+  </div>
+  <div class="field">
+    <%= f.label :idclasp %><br>
+    <%= f.number_field :idclasp %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="field">
+    <%= f.label :Granel %><br>
+    <%= f.check_box :Granel %>
+  </div>
+  <div class="field">
+    <%= f.label :Status %><br>
+    <%= f.text_field :Status %>
+  </div>
+  <div class="field">
+
+    foto:
+      <%= f.file_field :cover %>
+      <br>
+
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

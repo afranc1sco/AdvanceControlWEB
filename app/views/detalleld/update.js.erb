@@ -1,0 +1,15 @@
+$("#myupdatedetalle_<%= @detalle.id %>").modal('hide');
+
+$("#detalle_<%= @detalle.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  $("#container_detalleld").prepend('<%= j render @detalle %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

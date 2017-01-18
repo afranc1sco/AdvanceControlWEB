@@ -1,0 +1,4 @@
+<div class="count"><%=@total_clientes%></div>
+<% if (@total_clientes_porcentaje != nil) && (@total_clientes_porcentaje != 0)%>
+  <span class="count_bottom"><i><%= (@total_clientes*100)/@total_clientes_porcentaje%>% </i> de clientes</span>
+<%end%>

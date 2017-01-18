@@ -1,0 +1,1 @@
+json.array! @cp, partial: 'cp/codigopostal', as: :codigopostal

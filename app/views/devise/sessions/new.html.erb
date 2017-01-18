@@ -1,0 +1,85 @@
+
+<%# views/devise/sessions/new.html.erb %>
+<style>
+body {
+  color: #73879C;
+  background: #FFF;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.471;
+  padding-left: 30%;
+  padding-right: 30%;
+
+
+}
+.forml{
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+</style>
+<div class="">
+  <a class="hiddenanchor" id="toregister"></a>
+  <a class="hiddenanchor" id="tologin"></a>
+  <%= image_tag 'logo.png', alt: "logo", class:"logoadA" %>
+
+  <div id="wrapper">
+    <div id="login" class="animate form">
+      <section class="login_content">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
+      <h1>Login Form</h1>
+
+      <div class="forml">
+      <div class="form-group">
+
+          <div >
+            <%= f.text_field :login, autofocus: true, :class => "form-control", :placeholder =>"Username or Email",  :required => ""  %>
+
+          </div>
+        </div>
+        <div class="form-group">
+          <div >
+
+            <%= f.password_field :password, autofocus: true, :class => "form-control", :placeholder =>"Password",  :required => ""  %>
+
+          </div>
+          <div class="form-group">
+            <%= label_tag :empresa, "Empresa:" %>
+            <div class="">
+              <%= select_tag :empresa, options_for_select(@empresas.map{|e|[e.Empresa, e.id]}), :'data-remote' => 'true', :'data-url' => url_for(:controller => 'sessions', :action => 'busqueda_sucursales', format: 'js') %>
+            </div>
+          </div>
+
+          <div id="sucursales"><%= render 'sucursales' %></div>
+
+
+
+        </div>
+</div>
+        <div class="form-group">
+            <% if devise_mapping.rememberable? -%>
+                <div class="checkbox-inline col-md-5">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+            <% end -%>
+          </div>
+        <div>
+
+            <%= f.submit "Log in", :class => "btn btn-default submit col-md-10"%>
+            <div class="form-group">
+              <%= render "devise/shared/links" %>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="separator">
+          </div>
+        <% end %>
+        <!-- form -->
+      </section>
+      <!-- content -->
+    </div>
+
+  </div>
+</div>

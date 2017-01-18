@@ -1,0 +1,8 @@
+$("#myupdatelistaprom_<%= @listaprom.id %>").modal('hide');
+
+$("#listaprom_<%= @listaprom.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $("#container_listapromo").prepend('<%= j render @listaprom %>');
+
+});
+$(window.location.replace("/listapromo/<%= @listaprom.id %>/edit"))

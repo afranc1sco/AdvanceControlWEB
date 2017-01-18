@@ -1,0 +1,65 @@
+<%= form_for(@detalleco) do |f| %>
+  <% if @detalleco.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@detalleco.errors.count, "error") %> prohibited this detalleco from being saved:</h2>
+
+      <ul>
+      <% @detalleco.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :IdCobranza %><br>
+    <%= f.text_field :IdCobranza %>
+  </div>
+  <div class="field">
+    <%= f.label :Abono %><br>
+    <%= f.text_field :Abono %>
+  </div>
+  <div class="field">
+    <%= f.label :Fecha %><br>
+    <%= f.text_field :Fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :RutaId %><br>
+    <%= f.text_field :RutaId %>
+  </div>
+  <div class="field">
+    <%= f.label :SaldoAnt %><br>
+    <%= f.text_field :SaldoAnt %>
+  </div>
+  <div class="field">
+    <%= f.label :Saldo %><br>
+    <%= f.text_field :Saldo %>
+  </div>
+  <div class="field">
+    <%= f.label :FormaP %><br>
+    <%= f.text_field :FormaP %>
+  </div>
+  <div class="field">
+    <%= f.label :DiaO %><br>
+    <%= f.text_field :DiaO %>
+  </div>
+  <div class="field">
+    <%= f.label :Documento %><br>
+    <%= f.text_field :Documento %>
+  </div>
+  <div class="field">
+    <%= f.label :Cliente %><br>
+    <%= f.text_field :Cliente %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="field">
+    <%= f.label :Cancelada %><br>
+    <%= f.text_field :Cancelada %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

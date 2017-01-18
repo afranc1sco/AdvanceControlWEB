@@ -1,0 +1,19 @@
+<h2>Producto negado</h2>
+<div class="well center-block">
+
+  <%= form_tag("/busqueda_producto_negado", method: 'get', remote: true, id:"search",class: "form-horizontal" ) do %>
+    <%= render 'partials/buscadorReportes/buscador_reportes' %>
+
+    <div class="form-group">
+      <%= label_tag :Diao, "Selecciona el dia:", class: "control-label col-md-2" %>
+      <div class="col-md-2">
+       <%= select_tag :diao, options_for_select(@diaso.map{|e|[e.DiaO, e.Id]}), :prompt => "Por favor seleccione", class: "form-control" %>
+     </div>
+    </div>
+
+    <%= render 'partials/buscadorReportes/buscador_reportes5' %>
+
+  <%end%>
+
+</div>
+<div id="producto_negado"><%= render 'producto_negado' %></div>

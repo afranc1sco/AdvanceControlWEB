@@ -1,0 +1,155 @@
+<tr id="vehiculo_<%= vehiculo.id %>">
+  <td><%= vehiculo.Clave %>
+    <!--Modal - update vehiculo-->
+<%= form_for(vehiculo, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{vehiculo.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdatevehiculo_<%= vehiculo.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar Vehículo</h4>
+        </div>
+
+        <div class="modal-body">
+
+
+          <div class="form-group">
+
+            <%= f.label :Descripcion, "Descripción:", class:"control-label col-md-2"  %>
+            <div class="col-md-8">
+              <%= f.text_field :Descripcion, class: "form-control ", maxlength: "40", required: "true" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <%= f.label :Marcas, "Marca:", class:"control-label col-md-2" , class:"control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.text_field :Marcas, class: "form-control ", maxlength: "20", required: "true" %>
+            </div>
+
+            <%= f.label :Modelo, "Modelo(Tipo):", class:"control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.text_field :Modelo, class: "form-control ", maxlength: "20", required: "true" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Modelo_year, "Modelo(Año):", class:"control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.number_field :Modelo_year, class: "form-control ", maxlength: "4", required: "true" %>
+            </div>
+
+              <%= f.label :Placas, "Placa:", class:"control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.text_field :Placas, class: "form-control ", maxlength: "10", required: "true" %>
+            </div>
+
+
+          </div>
+
+        <div class="form-group">
+          <%= f.label :Kilometraje, "KMs Ult Servicio:", class:"control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= f.number_field :Kilometraje, class: "form-control", maxlength: "7", required: "true"  %>
+          </div>
+
+          <%= f.label :NumeroEco, "N° Economico:", class:"control-label col-md-2" %>
+          <div class="col-md-3">
+           <%= f.text_field :NumeroEco, class: "form-control", maxlength: "15", required: "true" %>
+         </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <%= f.label :Aseguradora, "Aseguradora:", class:"control-label col-md-2"  %>
+       <div class="col-md-3">
+         <%= f.text_field :Aseguradora, class: "form-control ", maxlength: "40" %>
+       </div>
+
+          <%= f.label :Poliza, "Poliza:", class:"control-label col-md-2" , class:"control-label col-md-2"  %>
+        <div class="col-md-3">
+          <%= f.text_field :Poliza, class: "form-control", maxlength: "20" %>
+        </div>
+
+
+      </div>
+
+      <div class="form-group">
+        <%= f.label :FechaVencSeguro, "Venc Seguro:", class:"control-label col-md-2"  %>
+        <div class="col-md-3">
+          <%= f.text_field :FechaVencSeguro, class: "form-control datepicker ", :value => vehiculo.FechaVencSeguro.strftime("%d-%m-%Y"), maxlength: "10", required: "true"  %>
+        </div>
+
+          <%= f.label :TelSeguro, "Tel Aseguradora:", class:"control-label col-md-2"  %>
+        <div class="col-md-3">
+          <%= f.text_field :TelSeguro, class: "form-control ", maxlength: "20" %>
+        </div>
+      </div>
+
+
+
+        <div class="form-group">
+          <%= f.label :MesVerifica, "Fecha de Verificación:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= f.text_field :MesVerifica, class: "form-control datepicker  ", :value => vehiculo.MesVerifica.strftime("%d-%m-%Y") %>
+          </div>
+
+          <%= f.label :KilometrajeSem, "KMs Ult Servicio:", class:"control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= f.text_field :KilometrajeSem, class: "form-control ", maxlength: "7", required: "true"  %>
+          </div>
+        </div>
+
+
+        <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        <div class="form-group">
+          <%= f.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-3"%>
+          <div class="col-md-1">
+            <%= f.check_box :Status %>
+          </div>
+        </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= vehiculo.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<script>
+  $(".formulario-validado-update<%=vehiculo.id%>").validate();
+
+</script>
+  </td>
+  <td><%= vehiculo.Marcas %></td>
+  <td><%= vehiculo.Modelo %></td>
+  <td><%= vehiculo.Placas %></td>
+  <td><%= vehiculo.MesVerifica.strftime("%d-%m-%Y") %></td>
+  <td><%= vehiculo.Kilometraje %></td>
+  <td><%= vehiculo.FechaVencSeguro.strftime("%d-%m-%Y") %></td>
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatevehiculo_<%= vehiculo.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <% if vehiculo.Status == "1"%>
+          <%= link_to 'Eliminar', vehiculo, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+        <%else%>
+        <%= link_to 'Habilitar', vehiculo, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+
+        <%end%>
+      </td>
+
+
+<td class="no" >
+  </td>
+</tr>

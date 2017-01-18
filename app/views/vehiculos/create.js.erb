@@ -1,0 +1,29 @@
+$("#mynewvehiculo").modal('hide');
+$(".vehiculo-clave").val('');
+$(".vehiculo-mesverifica").val('');
+$(".vehiculo-kilometrajesem").val('');
+$(".vehiculo-kilometraje").val('');
+$(".vehiculo-numeroeco").val('');
+$(".vehiculo-aseguradora").val('');
+$(".vehiculo-modelo").val('');
+$(".vehiculo-modelo_year").val('');
+$(".vehiculo-marcas").val('');
+$(".vehiculo-poliza").val('');
+$(".vehiculo-placas").val('');
+$(".vehiculo-teleseguro").val('');
+$(".vehiculo-fechavencseguro").val('');
+$(".vehiculo-descripcion").val('');
+$(".vehiculo-telseguro").val('');
+
+if (<%= @vehiculo.Status == "1" %>){
+  $("#container_vehiculos").prepend('<%= j render @vehiculo %>'); //Prepend before append
+  $("#vehiculo_<%= @vehiculo.id %>").hide().fadeIn(1000);
+}
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

@@ -1,0 +1,1 @@
+json.partial! "catmarcas/catmarca", catmarca: @catmarca

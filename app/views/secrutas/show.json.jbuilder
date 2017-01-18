@@ -1,0 +1,1 @@
+json.partial! "secrutas/secruta", secruta: @secruta

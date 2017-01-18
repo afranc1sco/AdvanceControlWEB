@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Lista: MyString
+  Descripcion: MyString
+  Caduca: MyString
+  FechaI: MyString
+  FechaF: MyString
+  Grupo: MyString
+  Activa: MyString
+  Tipo: MyString
+  IdEmpresa: MyString
+
+two:
+  Lista: MyString
+  Descripcion: MyString
+  Caduca: MyString
+  FechaI: MyString
+  FechaF: MyString
+  Grupo: MyString
+  Activa: MyString
+  Tipo: MyString
+  IdEmpresa: MyString

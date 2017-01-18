@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Producto: MyString
+  Envase: MyString
+  Cant_Base: MyString
+  Cant_Eq: MyString
+  Status: MyString
+  IdEmpresa: MyString
+
+two:
+  Producto: MyString
+  Envase: MyString
+  Cant_Base: MyString
+  Cant_Eq: MyString
+  Status: MyString
+  IdEmpresa: MyString

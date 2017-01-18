@@ -1,0 +1,1 @@
+json.array! @catunidadmedida, partial: 'catunidadmedida/catunidadmed', as: :catunidadmed

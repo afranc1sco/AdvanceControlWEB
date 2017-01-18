@@ -1,0 +1,1 @@
+json.array! @catbancos, partial: 'catbancos/catbanco', as: :catbanco

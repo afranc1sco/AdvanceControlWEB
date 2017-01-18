@@ -1,0 +1,136 @@
+<tr id="activo_<%= activo.id %>">
+    <td><%= activo.IdActivos %>
+
+      <!--Modal - update activo-->
+  <%= form_for(activo, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{activo.id}"}) do |f| %><!--ajax-->
+    <div nohidden class="modal fade si" id="myupdateactivo_<%= activo.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Editar activo</h4>
+          </div>
+
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="col-md-12">
+                    <div class="panel with-nav-tabs panel-default">
+                        <div class="panel-heading">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab1default<%= activo.id %>" data-toggle="tab">Información general</a></li>
+                                    <li><a href="#tab2default<%= activo.id %>" data-toggle="tab">Imagen</a></li>
+                                </ul>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tab1default<%= activo.id %>">
+
+                                  <div class="form-group">
+
+                                    <%= f.label :CB, "Código de Barras:", class: "control-label col-md-3"  %>
+                                    <div class="col-md-7">
+                                      <%= f.text_field :CB, class: "form-control ",autofocus: true, minlength: "1", required: "true"   %>
+                                    </div>
+
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :Serie, "Serie:", class: "control-label col-md-3"  %>
+                                    <div class="col-md-8">
+                                      <%= f.text_field :Serie, class: "form-control ", minlength: "3", required: "true"   %>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :Descripcion, "Descripción:", class: "control-label col-md-3"  %>
+                                    <div class="col-md-8">
+                                      <%= f.text_field :Descripcion, class: "form-control ", minlength: "3", required: "true"  %>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :Modelo, "Modelo:", class: "control-label col-md-3"  %>
+                                    <div class="col-md-8">
+                                      <%= f.text_field :Modelo, class: "form-control ", minlength: "3", required: "true"  %>
+                                    </div>
+                                  </div>
+
+
+                                  <div class="form-group">
+                                    <%= f.label :Status,"Activo:", class: "control-label col-xs-3 col-sm-6 col-md-1 " %>
+                                    <div class="col-md-1">
+                                      <%= f.check_box :Status,{}, "Disponible", "No disponible" %>
+
+                                    </div>
+                                  </div>
+
+                                </div>
+
+
+                                <div class="tab-pane fade" id="tab2default<%= activo.id %>">
+                                    <div class="form-group">
+                                      <%= f.label :cover, "Imagen:", class: "control-label col-md-3" %>
+                                      <div class="col-md-9">
+                                        <%= f.file_field :cover, class: "" %>
+                                      </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="myupdatebutton_<%= activo.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+
+  <script>
+    $(".formulario-validado-update<%=activo.id%>").validate();
+
+  </script>
+</td>
+    <td><%= activo.Descripcion %></td>
+    <td><%= activo.Modelo %></td>
+    <td>
+      <% if activo.Fecha != nil %>
+        <%= activo.Fecha.strftime("%d-%m-%Y")%></td>
+      <%end%>
+    <td><%= activo.Serie %></td>
+    <td><%= activo.CB %></td>
+    <td id="producto-imagen" >
+      <% if activo.cover? %>
+        <%= image_tag activo.cover.url(:minithumb) %>
+      <%end%>
+    </td>
+    <td><%= activo.Status %>
+    </td>
+    <td>
+
+      <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateactivo_<%= activo.id %>">
+        Editar
+      </button>
+      <!--Destroy-->
+      <% if activo.Status == "Disponible"%>
+        <%= link_to 'Eliminar', activo, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+      <%else%>
+        <%= link_to 'Habilitar', activo, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+      <%end%>
+
+    </td>
+
+
+
+
+<td class="no" >
+</td>
+</tr>

@@ -1,0 +1,97 @@
+<%= form_for(@cliente) do |f| %>
+  <% if @cliente.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
+
+      <ul>
+      <% @cliente.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :nombrecorto %><br>
+    <%= f.text_field :nombrecorto %>
+  </div>
+  <div class="field">
+    <%= f.label :direccion %><br>
+    <%= f.text_field :direccion %>
+  </div>
+  <div class="field">
+    <%= f.label :referencia %><br>
+    <%= f.text_field :referencia %>
+  </div>
+  <div class="field">
+    <%= f.label :telefono %><br>
+    <%= f.text_field :telefono %>
+  </div>
+  <div class="field">
+    <%= f.label :cp %><br>
+    <%= f.text_field :cp %>
+  </div>
+  <div class="field">
+    <%= f.label :credito %><br>
+    <%= f.check_box :credito %>
+  </div>
+  <div class="field">
+    <%= f.label :limitecredito %><br>
+    <%= f.text_field :limitecredito %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.check_box :status %>
+  </div>
+  <div class="field">
+    <%= f.label :diascreedito %><br>
+    <%= f.number_field :diascreedito %>
+  </div>
+  <div class="field">
+    <%= f.label :colonia %><br>
+    <%= f.text_field :colonia %>
+  </div>
+  <div class="field">
+    <%= f.label :tel2 %><br>
+    <%= f.text_field :tel2 %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :visitaobligada %><br>
+    <%= f.check_box :visitaobligada %>
+  </div>
+  <div class="field">
+    <%= f.label :firmaobligada %><br>
+    <%= f.check_box :firmaobligada %>
+  </div>
+  <div class="field">
+    <%= f.label :motivobajaid %><br>
+    <%= f.number_field :motivobajaid %>
+  </div>
+  <div class="field">
+    <%= f.label :saldo %><br>
+    <%= f.text_field :saldo %>
+  </div>
+  <div class="field">
+    <%= f.label :horario %><br>
+    <%= f.text_field :horario %>
+  </div>
+  <div class="field">
+    <%= f.label :idclasc %><br>
+    <%= f.text_field :idclasc %>
+  </div>
+  <div class="field">
+    <%= f.label :idempresa %><br>
+    <%= f.text_field :idempresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

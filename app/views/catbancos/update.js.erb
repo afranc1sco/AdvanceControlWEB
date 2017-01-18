@@ -1,0 +1,15 @@
+$("#myupdatecatbanco_<%= @catbanco.id %>").modal('hide');
+
+$("#catbanco_<%= @catbanco.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  $("#container_catbancos").prepend('<%= j render @catbanco %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

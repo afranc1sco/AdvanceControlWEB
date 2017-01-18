@@ -1,0 +1,108 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Admn clientes de la Lista de Descuentos</h1><br>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <!--<div class="row">
+    <div class="text-center">
+      <!- Button trigger modal ->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewrelclili">
+        Nueva Lista de Descuento
+      </button>
+    </div>
+  </div>-->
+
+  <br>
+  <br>
+  <div class="well center-block">
+    <h2 class="text-center"> Lista de Clientes </h2>
+
+  <table id="clientes" class="display"><!--el id clientes es de datatables referenciado en clientes.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Nombre</th>
+      <th>Teléfono</th>
+      <th>Colonia</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_clientes">
+      <% @clientes.each do |cliente| %>
+      <tr id="cliente_<%= cliente.id %>">
+          <td><%= cliente.id %></td>
+          <td><%= cliente.Nombre %></td>
+          <td><%= cliente.Telefono %></td>
+          <td><%= cliente.Colonia %></td>
+
+          <td>
+              <!--Modal - create relclili-->
+              <%= form_for(@relclili, remote: true, html: {class: "form-horizontal"}) do |f| %> <!--ajax remote: true-->
+
+                      <div class="field">
+                        <%= f.hidden_field :ListaD, value: params[:id]  %>
+                      </div>
+                      <div class="field">
+                        <%= f.hidden_field :CodCliente, value: cliente.id%>
+                      </div>
+                      <div class="field">
+                        <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+                      </div>
+
+                    </div>
+
+                    <%= submit_tag "Añadir", class: "btn btn-warning btn-xs", data: { disable_with: 'Añadir' }%>
+            <%end%>
+          </td>
+          <td>
+
+          </td>
+
+      </tr>
+      <%end%>
+
+
+  </tbody>
+
+
+  </table>
+</div>
+
+    <br>
+    <br>
+    <div class="well center-block">
+    <h2 class="text-center"> Clientes Añadidos a la Lista</h2>
+    <br>
+    <br>
+  <table id="relclilis" class="display"><!--el id relclilis es de datatables referenciado en relclilis.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+
+
+      <th>Clave</th>
+      <th>Nombre</th>
+      <th>Teléfono</th>
+      <th>Colonia</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_relclilis">
+      <%= render @relclilis %><!--carga todos los relmen-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+
+</div>
+</div>

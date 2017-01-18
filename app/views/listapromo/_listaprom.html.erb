@@ -1,0 +1,109 @@
+<tr id="listaprom_<%= listaprom.id %>">
+  <td><%=listaprom.id%>
+
+    <!--Modal - update listaprom-->
+  <div nohidden class="modal fade si" id="myupdatelistaprom_<%= listaprom.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar lista</h4>
+        </div>
+
+        <div class="modal-body">
+          <%= form_for(listaprom, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{listaprom.id}"}) do |f| %><!--ajax-->
+
+
+
+          <div class="form-group">
+
+            <%= f.label :Descripcion,"Descripción:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Descripcion, class: "form-control ", minlength: "7", required: "true" %>
+            </div>
+            <%= f.label :Tipo, "Tipo:", class: "control-label col-md-1"  %>
+            <div class="col-md-3">
+              <%= f.select :Tipo, ['Producto','Monto de Venta','Volumen'], class: "form-control"%>
+
+            </div>
+
+          </div>
+
+          <div class="well center-block">
+            <div class="form-group">
+              <%= f.label :FechaI,"Inicio:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaI, class: "form-control datepicker ", :value => listaprom.FechaI.strftime("%d-%m-%Y"), minlength: "7", required: "true" %>
+
+              </div>
+
+              <%= f.label :FechaF,"Fin:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaF, class: "form-control datepicker ", :value => listaprom.FechaF.strftime("%d-%m-%Y"), minlength: "7", required: "true" %>
+              </div>
+            </div>
+            <div class="form-group">
+
+                <%= f.label :Caduca,"Caduca:", class: "control-label col-xs-7 col-sm-6 col-md-1"%>
+                <div class="col-md-1">
+                  <%= f.check_box :Caduca %>
+                </div>
+
+              <%= f.label :Activa,"Activa:", class: "control-label col-xs-7 col-sm-6 col-md-1"%>
+              <div class="col-md-1">
+                <%= f.check_box :Activa %>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="myupdatebutton_<%= listaprom.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+          </div>
+          <%end%>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</td>
+
+  </td>
+
+  <script>
+    $(".formulario-validado-update<%=listaprom.id%>").validate();
+
+  </script>
+
+  <td><%=listaprom.Descripcion%></td>
+  <td><%=listaprom.Caduca%></td>
+  <td><%=listaprom.FechaI.strftime("%d-%m-%Y")%></td>
+  <td><%=listaprom.FechaF.strftime("%d-%m-%Y")%></td>
+  <td><%=listaprom.Activa%></td>
+
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatelistaprom_<%= listaprom.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <% if listaprom.Activa == true%>
+          <%= link_to 'Eliminar', listaprom, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+        <%else%>
+          <%= link_to 'Habilitar', listaprom, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+        <%end%>
+
+
+      </td>
+
+
+<td class="no" >
+
+</tr>

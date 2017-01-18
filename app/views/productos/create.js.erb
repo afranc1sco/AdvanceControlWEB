@@ -1,0 +1,38 @@
+$("#mynewproducto").modal('hide');
+$(".producto_clave").val('');
+$(".producto_producto").val('');
+$(".producto_codbarras").val('');
+$(".producto_iva").val('');
+$(".producto_ieps").val('');
+$(".producto_unimed").val('');
+$(".producto_vbase").val('');
+$(".producto_equivalente").val('');
+$(".producto_van_envase").val('');
+$(".producto_sector").val('');
+$(".producto_granel").val('');
+$(".producto_cover").val('');
+$(".producto_pzaxcja").val('');
+$(".producto_Utl.Env").val('');
+
+$("#mynewproductoenvase").modal('show');
+
+$("#container_productos").prepend('<%= j render @producto %>'); //Prepend before append
+$("#producto_<%= @producto.id %>").hide().fadeIn(1000);
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);
+$('#showAreaBox').change(function() {
+
+    // if the checkbox is checked, invoke the link
+    if( this.checked ) {
+      $(window.location.replace("/Productos/<%= @producto.id %>/envase"))
+
+    }
+
+    // checkbox is unchecked
+    // else {}
+});

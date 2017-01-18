@@ -1,0 +1,77 @@
+<%= form_for(@configruta) do |f| %>
+  <% if @configruta.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@configruta.errors.count, "error") %> prohibited this configruta from being saved:</h2>
+
+      <ul>
+      <% @configruta.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :RutaId %><br>
+    <%= f.text_field :RutaId %>
+  </div>
+  <div class="field">
+    <%= f.label :ModelPrinter %><br>
+    <%= f.text_field :ModelPrinter %>
+  </div>
+  <div class="field">
+    <%= f.label :VelCom %><br>
+    <%= f.text_field :VelCom %>
+  </div>
+  <div class="field">
+    <%= f.label :COM %><br>
+    <%= f.text_field :COM %>
+  </div>
+  <div class="field">
+    <%= f.label :Server %><br>
+    <%= f.text_field :Server %>
+  </div>
+  <div class="field">
+    <%= f.label :Puerto %><br>
+    <%= f.text_field :Puerto %>
+  </div>
+  <div class="field">
+    <%= f.label :ServerGPS %><br>
+    <%= f.text_field :ServerGPS %>
+  </div>
+  <div class="field">
+    <%= f.label :GPS %><br>
+    <%= f.text_field :GPS %>
+  </div>
+  <div class="field">
+    <%= f.label :PuertoG %><br>
+    <%= f.text_field :PuertoG %>
+  </div>
+  <div class="field">
+    <%= f.label :PagoContado %><br>
+    <%= f.text_field :PagoContado %>
+  </div>
+  <div class="field">
+    <%= f.label :CteNvo %><br>
+    <%= f.text_field :CteNvo %>
+  </div>
+  <div class="field">
+    <%= f.label :CveCteNvo %><br>
+    <%= f.text_field :CveCteNvo %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="field">
+    <%= f.label :SugerirCant %><br>
+    <%= f.text_field :SugerirCant %>
+  </div>
+  <div class="field">
+    <%= f.label :PromoEq %><br>
+    <%= f.text_field :PromoEq %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

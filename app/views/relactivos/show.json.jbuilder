@@ -1,0 +1,1 @@
+json.partial! "relactivos/relactivo", relactivo: @relactivo

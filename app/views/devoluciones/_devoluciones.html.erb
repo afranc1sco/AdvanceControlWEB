@@ -1,0 +1,116 @@
+<style media="screen">
+.modal-content{
+  min-width: 150%;
+  margin-left: -20%;
+}
+
+</style>
+<% if @devoluciones != nil%>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Fecha</th>
+      <th>Cliente</th>
+      <th>Responsable</th>
+      <th>Nombre Comercial</th>
+      <th>Folio</th>
+      <th>Subtotal</th>
+      <th>IVA</th>
+      <th>Total</th>
+      <th>Cajas</th>
+      <th>Piezas</th>
+      <th>Cancelada</th>
+
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_devolucion">
+      <% @devoluciones.each do |devolucion| %>
+      <tr id="devolucion_<%= devolucion.id %>">
+        <td><%=devolucion.Fecha.strftime("%d-%m-%Y") %>
+              <div class="modal fade" id="mydetalledevol_<%= devolucion.id %>" class="modalxD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Devoluciones</h4>
+                    </div>
+                    <div class="modal-body">
+
+<div class="row table-responsive">
+                        <table class="detalle" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+                        <thead>
+
+                          <tr><!--active es para sombrear la fila-->
+                            <th>Ruta</th>
+                            <th>Folio</th>
+                            <th>Sku</th>
+                            <th>Producto</th>
+                            <th>Piezas</th>
+                            <th>Unidad</th>
+                            <th>Motivo</th>
+                            <th>Estado</th>
+
+                          </tr>
+                        </thead>
+                          <tbody id="container_detalledevol_<%= devolucion.id %>">
+                            <%= render @detalledevol.where(:Docto => devolucion.Docto, :RutaId => devolucion.Ruta) %><!--carga todos los td_comision-->
+
+                          </tbody>
+                      </table>
+                    </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" id="mydetalledevolclose_<%= devolucion.id %>">Cerrar</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </td>
+        <td><%=devolucion.CodCliente%></td>
+        <td><%=devolucion.cliente.Nombre%></td>
+        <td><%=devolucion.cliente.NombreCorto%></td>
+        <td><%=devolucion.Docto%></td>
+        <td><%=devolucion.Subtotal%></td>
+        <td><%=devolucion.IVA%></td>
+        <td><%=devolucion.Total%></td>
+        <td><%=devolucion.detalles_count%></td>
+
+        <td><%=devolucion.sum_Pza%></td>
+        <td>
+          <% if devolucion.Cancelada == true %>
+            Si
+          <%else%>
+            No
+          <%end%>
+        </td>
+
+
+        <td>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mydetalledevol_<%= devolucion.id %>">
+            <i class="fa fa-money" aria-hidden="true">Detalle</i>
+          </button>
+
+        </td>
+      <td></td>
+      </tr>
+
+      <% end %>
+
+</tbody>
+
+
+</table>
+
+<% end %>

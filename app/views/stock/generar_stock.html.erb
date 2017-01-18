@@ -1,0 +1,61 @@
+<!--<p id="notice"><%= notice %></p>-->
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <h1>Carga de Stock a ruta</h1>
+
+  <br>
+  <br>
+
+  <div class="well center-block">
+    <h2>Por favor selecciona la ruta </h2>
+
+    <%= form_for @stoc, html: {class: "form-horizontal"}, :url => {:action => 'obtener_ruta'} do |f| %>
+
+      <div class="form-group">
+          <%= f.label :Ruta, "Fecha:", class: "control-label col-md-2" %>
+          <div class="col-md-2">
+          <h5><b><%= Time.now.strftime("%d-%m-%Y") %></b></h5>
+          </div>
+
+        <%= f.label :Ruta, "Ruta:", class: "control-label col-md-2" %>
+        <div class="col-md-2">
+          <%= f.select :Ruta, options_for_select(@rutas.map{|e|[e.Ruta, e.IdRutas]},selected: params[:id]), class: "form-control" %>
+        </div>
+
+        <div class="col-md-3">
+          <%= submit_tag "Buscar", class: "btn btn-primary btn-lg btn-block"%>
+        </div>
+      </div>
+
+
+    <%end%>
+  </div>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>StockCajas</th>
+      <th>StockPiezas</th>
+      <th>id_stock</th>
+      <th>Ruta</th>
+      <th>Clave</th>
+      <th>Producto</th>
+      <th>CodBarras</th>
+      <th>Sector</th>
+      <th>Ruta</th>
+
+    </tr>
+  </thead>
+    <tbody id="container_stock">
+      <%= render @stock %><!--carga todos los empresas-->
+</tbody>
+
+
+</table>

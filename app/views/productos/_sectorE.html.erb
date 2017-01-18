@@ -1,0 +1,6 @@
+<div class="col-md-4">
+  <%= select_tag :Sector, options_for_select(@catgrupos.map{|e|[e.Descripcion, e.Clave]},selected: producto.Sector), class: "dropdown"  %>
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mynewcategory">
+    ...
+  </button>
+</div>

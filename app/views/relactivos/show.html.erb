@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @relactivo.Cliente %>
+</p>
+
+<p>
+  <strong>Activo:</strong>
+  <%= @relactivo.Activo %>
+</p>
+
+<p>
+  <strong>Fechaasignacion:</strong>
+  <%= @relactivo.FechaAsignacion %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @relactivo.IdEmpresa %>
+</p>
+
+<%= link_to 'Edit', edit_relactivo_path(@relactivo) %> |
+<%= link_to 'Back', relactivos_path %>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Cp</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cp</th>
+      <th>Colonia</th>
+      <th>Municipio</th>
+      <th>Estado</th>
+      <th>Ciudad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cp.each do |codigopostal| %>
+      <tr>
+        <td><%= codigopostal.CP %></td>
+        <td><%= codigopostal.Colonia %></td>
+        <td><%= codigopostal.Municipio %></td>
+        <td><%= codigopostal.Estado %></td>
+        <td><%= codigopostal.Ciudad %></td>
+        <td><%= link_to 'Show', codigopostal %></td>
+        <td><%= link_to 'Edit', edit_codigopostal_path(codigopostal) %></td>
+        <td><%= link_to 'Destroy', codigopostal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Codigopostal', new_codigopostal_path %>

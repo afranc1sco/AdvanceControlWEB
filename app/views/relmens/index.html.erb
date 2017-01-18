@@ -1,0 +1,110 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Admn productos al Mensaje</h1><br>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <!--<div class="row">
+    <div class="text-center">
+      <!- Button trigger modal ->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewrelmen">
+        Nueva Lista de Descuento
+      </button>
+    </div>
+  </div>-->
+
+  <br>
+  <br>
+  <div class="well center-block">
+    <h2 class="text-center"> Lista de Productos </h2>
+
+  <table id="productos" class="display"><!--el id productos es de datatables referenciado en productos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Producto</th>
+      <th>Codbarras</th>
+      <th>Sector</th>
+      <th>Vbase</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_productos">
+      <% @productos.each do |producto| %>
+
+         <tr id="producto_<%= producto.id %>">
+          <td><%= producto.Clave %></td>
+          <td><%= producto.Producto %></td>
+          <td><%= producto.CodBarras %></td>
+          <td><%= producto.Sector %></td>
+          <td><%= producto.VBase %></td>
+          <td>
+              <!--Modal - create relmen-->
+              <%= form_for(@relmen, remote: true, html: {class: "form-horizontal"}) do |f| %> <!--ajax remote: true-->
+
+                      <div class="field">
+                        <%= f.hidden_field :IdProducto, value: params[:id]  %>
+                      </div>
+                      <div class="field">
+                        <%= f.hidden_field :CodProducto, value: producto.Clave%>
+                      </div>
+                      <div class="field">
+                        <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+                      </div>
+
+                    </div>
+
+                    <%= submit_tag "Añadir", class: "btn btn-warning btn-xs", data: { disable_with: 'Añadiendo' }%>
+            <%end%>
+          </td>
+          <td></td>
+
+
+      </tr>
+      <%end%>
+
+
+  </tbody>
+
+
+  </table>
+</div>
+
+    <br>
+    <br>
+    <div class="well center-block">
+    <h2 class="text-center"> Productos Añadidos al Mensaje</h2>
+    <br>
+    <br>
+  <table id="relmens" class="display"><!--el id relmens es de datatables referenciado en relmens.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+
+
+      <th>Clave</th>
+      <th>Producto</th>
+      <th>Codigo de Barras</th>
+      <th>Sector</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+  <tbody id="container_relmens">
+    <%= render @relmens %><!--carga todos los relmen-->
+
+
+  </tbody>
+
+
+</table>
+<!-- Modal create action -->
+
+</div>
+</div>

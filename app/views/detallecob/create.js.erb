@@ -1,0 +1,24 @@
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+$(".abono-abono<%=@detalleco.IdCobranza%>").val('');
+$(".abono-abono<%=@detalleco.IdCobranza%>").attr({max:<%=@detalleco.Saldo%>});//Actualiza el atributo max del pago a efectuar, para evitar pagar mas de lo debido
+$(".abono-saldoanterior_<%=@detalleco.IdCobranza%>").val(<%=@detalleco.Saldo%>);//Actualiza el pago
+$(".CtaxCobrar_SaldoAbonos_<%=@detalleco.IdCobranza%>").replaceWith('<td class="CtaxCobrar_SaldoAbonos_<%=@detalleco.IdCobranza%>"><%=@detalleco.cobran.Saldo - @detalleco.Saldo%></td>');
+$(".CtaxCobrar_SaldoActual_<%=@detalleco.IdCobranza%>").replaceWith('<td class="CtaxCobrar_SaldoActual_<%=@detalleco.IdCobranza%>"><%=@detalleco.Saldo%></td>');
+
+$("#container_abono_<%= @detalleco.IdCobranza %>").prepend('<%= j render @detalleco %>'); //Prepend before append
+$("#abono_<%= @detalleco.id %>").hide().fadeIn(1000);
+
+
+if (<%=@detalleco.Saldo%> == 0) {
+    $("#btn<%=@detalleco.IdCobranza%>").hide();
+    $(".abono-abono<%=@detalleco.IdCobranza%>").hide();
+    $(".label-abono<%=@detalleco.IdCobranza%>").hide();
+}
+
+
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

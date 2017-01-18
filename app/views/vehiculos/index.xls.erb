@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Clave</Data></Cell>
+        <Cell><Data ss:Type="String">MesVerifica</Data></Cell>
+        <Cell><Data ss:Type="String">KilometrajeSem</Data></Cell>
+        <Cell><Data ss:Type="String">NumeroEco</Data></Cell>
+        <Cell><Data ss:Type="String">Aseguradora</Data></Cell>
+        <Cell><Data ss:Type="String">Modelo</Data></Cell>
+        <Cell><Data ss:Type="String">Marcas</Data></Cell>
+        <Cell><Data ss:Type="String">Poliza</Data></Cell>
+        <Cell><Data ss:Type="String">Placas</Data></Cell>
+        <Cell><Data ss:Type="String">TelSeguro</Data></Cell>
+        <Cell><Data ss:Type="String">FechaVencSeguro</Data></Cell>
+        <Cell><Data ss:Type="String">Descripcion</Data></Cell>
+        <Cell><Data ss:Type="String">Status</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+
+
+      </Row>
+
+      <% @vehiculos.each do |vehiculo| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= vehiculo.Clave%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.MesVerifica%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.KilometrajeSem%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.NumeroEco%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.Aseguradora%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.Modelo%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.Marcas%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.Poliza%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.Placas%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.TelSeguro%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.FechaVencSeguro%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.Descripcion%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.Status%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vehiculo.IdEmpresa%></Data></Cell>
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

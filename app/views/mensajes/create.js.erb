@@ -1,0 +1,17 @@
+$("#mynewmensaje").modal('hide');
+$(".mensaje_clave").val('');
+$(".mensaje_descripcion").val('');
+$(".mensaje_mensaje").val('');
+$(".mensaje_fechainicio").val('');
+$(".mensaje_fechafinal").val('');
+
+
+$("#container_mensajes").prepend('<%= j render @mensaje %>'); //Prepend before append
+$("#mensaje_<%= @mensaje.id %>").hide().fadeIn(1000);
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

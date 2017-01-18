@@ -1,0 +1,299 @@
+<tr id="ruta_<%= ruta.id %>">
+  <td><%=ruta.Ruta%>
+    <!--Modal - update ruta-->
+<%= form_for(ruta, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{ruta.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdateruta_<%= ruta.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar Ruta</h4>
+        </div>
+
+        <div class="modal-body">
+
+                  <div class="modal-body">
+
+                    <div class="row">
+                      <div class="col-md-12">
+                            <div class="panel with-nav-tabs panel-default">
+                                <div class="panel-heading">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#tab1default<%= ruta.id %>" data-toggle="tab">Datos Generales</a></li>
+                                            <li><a href="#tab3default<%= ruta.id %>" data-toggle="tab">Datos de Grupos</a></li>
+                                            <li><a href="#tab2default<%= ruta.id %>" data-toggle="tab">Datos de Configuración</a></li>
+                                        </ul>
+                                </div>
+
+
+
+
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="tab1default<%= ruta.id %>">
+
+                                          <div class="form-group">
+                                            <%= f.label :Ruta, "Número de Ruta:", class: "control-label col-md-3" %>
+                                            <div class="col-md-7">
+                                              <%= f.text_field :Ruta, class: "form-control", required: "true" %>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+
+                                            <%= f.label :TipoRuta, "Tipo:", class: "control-label col-md-3"  %>
+                                            <div class="col-md-3">
+                                              <%= f.select :TipoRuta, ['Venta Directa', 'Levantar Pedidos', 'Cobranza'], class: "form-control"%>
+
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <%= f.label :Oficina, "Oficina:", class: "control-label col-md-3" %>
+                                            <div class="col-md-8">
+                                              <%= f.text_area :Oficina, class: "form-control ", minlength: "7", required: "true" %>
+                                            </div>
+                                          </div>
+
+
+                                          <div class="form-group">
+
+                                            <%= f.label :Sector, "Grupo:", class: "control-label col-md-3"  %>
+                                            <div class="col-md-3">
+                                              <%= f.select :Sector, ['Bebidas', 'Cartón', 'Botella', 'Mixto'], class: "form-control"%>
+
+                                            </div>
+                                          </div>
+
+                                            <div class="form-group">
+                                                <%= f.label :Vendedor, "Empleado:", class: "control-label col-md-3" %>
+                                              <div class="col-md-3">
+                                                <%= f.select :Vendedor, options_for_select(@vendedores.map{|e|[e.Nombre, e.IdVendedor]},selected: ruta.Vendedor), class: "form-control" %>
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <%= f.label :id_ayudante1, "Asistente 1:", class: "control-label col-md-3" %>
+                                              <div class="col-md-3">
+                                                <%= f.select :id_ayudante1, options_for_select(@ayudantes.map{|e|[e.Nombre, e.IdVendedor]},selected: ruta.id_ayudante1), :prompt => "Por favor seleccione", class: "form-control" %>
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <%= f.label :id_ayudante2, "Asistente 2:", class: "control-label col-md-3" %>
+                                              <div class="col-md-3">
+                                                <%= f.select :id_ayudante2, options_for_select(@ayudantes.map{|e|[e.Nombre, e.IdVendedor]},selected: ruta.id_ayudante2), :prompt => "Por favor seleccione", class: "form-control" %>
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <%= f.label :vehiculo, "Vehículo:", class: "control-label col-md-3" %>
+                                              <div class="col-md-3">
+                                                <%= f.select :vehiculo, options_for_select(@vehiculos.map{|e| ["#{e.Placas} - #{e.Descripcion}", e.IdVehiculos]},selected: ruta.vehiculo)%>
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                              <%= f.label :Activa,"Activa:", class: "control-label col-xs-7 col-sm-6 col-md-3"%>
+                                              <div class="col-md-1">
+                                                <%= f.check_box :Activa %>
+                                              </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+
+                                        <div class="tab-pane fade" id="tab2default<%= ruta.id %>">
+                                          <div class="well center-block">
+                                            <div class="form-group">
+                                              <h4 class="col-md-5">Impresora:</h4>
+                                            </div>
+
+                                            <%= f.fields_for :configruta do |configruta| %>
+                                              <div class="form-group">
+                                                <%= configruta.label :ModelPrinter, "Impersora:", class: "control-label col-md-3"  %>
+                                                <div class="col-md-3">
+                                                  <%= configruta.select :ModelPrinter, ['Zebra 220', 'Zebra 320', 'Bixolon SPP-R200'], class: "form-control"%>
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <%= configruta.label :COM, "Puerto:", class: "control-label col-md-3"  %>
+                                                <div class="col-md-3">
+                                                  <%= configruta.select :COM, ['COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9' ], class: "form-control"%>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="well center-block">
+                                              <div class="form-group">
+                                                <h4 class="col-md-5">Servidor:</h4>
+                                              </div>
+                                              <div class="form-group">
+                                                <%= configruta.label :Server, "Servidor FTP:", class: "control-label col-md-3" %>
+                                                <div class="col-md-5">
+                                                  <%= configruta.text_field :Server, class: "form-control", minlength: "7", required: "true" %>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="well center-block">
+                                              <div class="form-group">
+                                                <h4 class="col-md-5">Clientes Nuevos:</h4>
+                                              </div>
+                                              <div class="form-group">
+                                                <%= configruta.label :CteNvo,"Capturar Clientes Nuevos:", class: "control-label col-xs-7 col-sm-5 col-md-5"%>
+                                                <div class="col-md-1">
+                                                  <%= configruta.check_box :CteNvo %>
+                                                </div>
+                                              </div>
+
+
+                                              <div class="form-group">
+                                                <%= configruta.label :CveCteNvo, "Definir Clave:", class: "control-label col-xs-7 col-sm-5 col-md-5" %>
+                                                <div class="col-md-1">
+                                                  <%= configruta.check_box :CveCteNvo %>
+                                                </div>
+                                              </div>
+
+                                              <%= f.fields_for :continuid do |continuid| %>
+                                                <div class="form-group">
+                                                  <%= continuid.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+                                                  <%= continuid.label :CteNvo, "Clave Actual:", class: "control-label col-md-5" %>
+                                                  <div class="col-md-5">
+                                                    <%= continuid.text_field :CteNvo,  class: "form-control " %>
+                                                  </div>
+                                                </div>
+                                                <%= continuid.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+                                                <%= continuid.hidden_field :RutaID, value: ruta.id %>
+
+                                              <%end%>
+                                            </div>
+
+                                            <div class="form-group">
+                                              <%= configruta.label :PromoEq,"Sugerir Promoción equivalente:", class: "control-label col-xs-7 col-sm-5 col-md-5"%>
+                                              <div class="col-md-1">
+                                                <%= configruta.check_box :PromoEq %>
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                              <%= configruta.label :SugerirCant,"Capturar Clientes Nuevos:", class: "control-label col-xs-7 col-sm-5 col-md-5"%>
+                                              <div class="col-md-1">
+                                                <%= configruta.check_box :SugerirCant %>
+                                              </div>
+                                            </div>
+
+                                            <%= configruta.hidden_field :VelCom, value: 19200 %>
+                                            <%= configruta.hidden_field :Puerto, value: 21 %>
+                                            <%= configruta.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+                                          <%end%>
+                                          <div class="form-group">
+                                            <%= f.label :Foranea,"Foranea:", class: "control-label col-xs-7 col-sm-5 col-md-5"%>
+                                            <div class="col-md-1">
+                                              <%= f.check_box :Foranea %>
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="tab3default<%= ruta.id %>">
+                                          <%= f.fields_for :relrucla do |relrucla| %>
+
+                                          <div class="form-group">
+                                              <%= relrucla.label :Clas1, "Clasificación 1:", class: "control-label col-md-3" %>
+                                            <div class="col-md-3">
+                                              <%= relrucla.select :Clas1, options_for_select(@clas1.map{|e|[e.Descripcion, e.IdCRutas]},selected: ruta.relrucla.Clas1), :prompt => "Por favor seleccione", class: "form-control" %>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                              <%= relrucla.label :Clas2, "Clasificación 2:", class: "control-label col-md-3" %>
+                                            <div class="col-md-3">
+                                              <%= relrucla.select :Clas2, options_for_select(@clas2.map{|e|[e.Descripcion, e.IdCRutas]},selected: ruta.relrucla.Clas2), :prompt => "Por favor seleccione",  class: "form-control" %>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                              <%= relrucla.label :Clas3, "Clasificación 3:", class: "control-label col-md-3" %>
+                                            <div class="col-md-3">
+                                              <%= relrucla.select :Clas3, options_for_select(@clas3.map{|e|[e.Descripcion, e.IdCRutas]},selected: ruta.relrucla.Clas3), :prompt => "Por favor seleccione", class: "form-control" %>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                              <%= relrucla.label :Clas4, "Clasificación 4:", class: "control-label col-md-3" %>
+                                            <div class="col-md-3">
+                                              <%= relrucla.select :Clas4, options_for_select(@clas4.map{|e|[e.Descripcion, e.IdCRutas]},selected: ruta.relrucla.Clas4), :prompt => "Por favor seleccione", class: "form-control" %>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                              <%= relrucla.label :Clas5, "Clasificación 5:", class: "control-label col-md-3" %>
+                                            <div class="col-md-3">
+                                              <%= relrucla.select :Clas5, options_for_select(@clas5.map{|e|[e.Descripcion, e.IdCRutas]},selected: ruta.relrucla.Clas5), :prompt => "Por favor seleccione", class: "form-control" %>
+                                            </div>
+                                          </div>
+                                            <%= relrucla.hidden_field :RutaId, value: ruta.id %>
+
+                                          <%end%>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                  </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= ruta.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<script>
+  $(".formulario-validado-update<%=ruta.id%>").validate();
+
+</script>
+
+</td>
+  <td>
+     <% if ruta.Activa == true%>
+      Activa
+    <%else%>
+      Inactiva
+    <%end%>
+</td>
+  <td><%=ruta.Sector%></td>
+  <td><%=ruta.vendedor.Clave%></td>
+  <td><%=ruta.TipoRuta%></td>
+  <td><%=ruta.vendedor.Nombre%></td>
+
+
+
+
+
+    <td>
+        <%= link_to '<i class="fa fa-user-plus" aria-hidden="true"></i>Clientes'.html_safe, ruta_clientes_path(ruta), class:"btn btn-success btn-xs boton", title:"Agregar clientes"   %>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateruta_<%= ruta.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <% if ruta.Activa == true%>
+          <%= link_to 'Eliminar', ruta, method: :delete, class: "btn btn-danger btn-xs", remote:true, data: { disable_with: 'Eliminando' } %>
+        <%else%>
+          <%= link_to 'Habilitar', ruta, method: :delete, class: "btn btn-success btn-xs", remote:true, data: { disable_with: 'Habilitando' }  %>
+        <%end%>
+        </td>
+
+
+<td class="no" >
+    </td>
+</tr>

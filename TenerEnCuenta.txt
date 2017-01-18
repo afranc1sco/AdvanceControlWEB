@@ -1,0 +1,26 @@
+corregir el bug de turbolinks cuando se recarga la pagina.
+Editar la tabla Empresas y cambiar el tipo de dato por serial.
+eliminar la columna idvehiculo de la tabla vendedores, o al menos quitarle el no null.
+En la tabla producto de la BD se debe borrar el campo de la imagen y crear la migracion de paperclip que generara los nuevos campos.
+Borrar el campo usuario de usuarios, y el password.
+agregar empresa_id a usuario y hacerlo foraneo con empresa.
+en la tabla productosxpzas el idp es el pk.
+cambiar el nombre del campo producto en la tabla PRODUCTOXPZA por producto_id, y rehacer el campo foraneo con la tabla producto en el campo clave
+crear la relacion de la tabla producto - a la tabla detalleld con clave(producto) - articulo(detalleld).
+hacer la relacion de la tabla relclilis a la tabla clientes
+hacer la relacion de la tabla detallelp a la tabla productos
+IMPORTANTE, UN CLIENTE NO PUEDE NI DEBE ESTAR EN MAS DE UNA LISTA DE PRECIOS O DE DESCUENTO.
+
+
+Editar la tabla Empresas y cambiar el tipo de dato por serial.
+eliminar la columna idvehiculo de la tabla vendedores, o al menos quitarle el no null.
+En la tabla producto de la BD se debe borrar el campo de la imagen y crear la migracion de paperclip que generara los nuevos campos.
+agregar empresa_id a usuario y hacerlo foraneo con empresa.
+en la tabla productosxpzas el idp es el pk.
+cambiar el nombre del campo producto en la tabla PRODUCTOXPZA por producto_id, y rehacer el campo foraneo con la tabla producto en el campo clave
+crear la relacion de la tabla producto - a la tabla detalleld con clave(producto) - articulo(detalleld).
+hacer la relacion de la tabla relclilis a la tabla clientes
+hacer la relacion de la tabla detallelp a la tabla productos
+
+
+Actualizar todos los registros nulos de vendedores Vendedor.update_all(tipo: "Vendedor") 

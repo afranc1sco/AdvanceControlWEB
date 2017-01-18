@@ -1,0 +1,85 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Motivo Devoluciones</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewmvodevolucion">
+        Nuevo Motivo de Devolución
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="mvodev" class="display"><!--el id mvodev es de datatables referenciado en mvodev.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Motivo</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_mvodev">
+      <%= render @mvodev %><!--carga todos los mvodev-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@mvodevolucion, remote: true, html: {class: "form-horizontal mvodevolucion-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewmvodevolucion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Motivo Devolución</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="field">
+            <%= f.label :Clave,"Clave:" %><br>
+            <%= f.text_field :Clave, class: "form-control mvodevolucion_clave",autofocus: true, minlength: "1", required: "true"   %>
+          </div>
+
+          <div class="field">
+            <%= f.label :MvoDev, "Motivo:" %><br>
+            <%= f.text_field :MvoDev, class: "form-control mvodevolucion_mvodev", minlength: "7", required: "true"   %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-3"%>
+            <div class="col-md-1">
+              <%= f.check_box :Status %>
+            </div>
+          </div>
+          <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewmvodevolucionclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", mvodev_path(format:"csv") %> |
+  <%= link_to "Excel", mvodev_path(format:"xls") %>
+</p>
+<%= link_to 'Motivos eliminados ó inhabilitados<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, mvodev_inactivos_path, class: "btn btn-danger btn-xs"%>

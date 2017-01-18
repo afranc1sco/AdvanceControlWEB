@@ -1,0 +1,33 @@
+<%= form_for(@detalle) do |f| %>
+  <% if @detalle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@detalle.errors.count, "error") %> prohibited this detalle from being saved:</h2>
+
+      <ul>
+      <% @detalle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :listaid %><br>
+    <%= f.number_field :listaid %>
+  </div>
+  <div class="field">
+    <%= f.label :articulo %><br>
+    <%= f.text_field :articulo %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo %><br>
+    <%= f.text_field :tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :idempresa %><br>
+    <%= f.text_field :idempresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

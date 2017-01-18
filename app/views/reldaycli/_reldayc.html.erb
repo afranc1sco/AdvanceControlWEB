@@ -1,0 +1,71 @@
+<tr id="reldayc_<%= reldayc.id %>">
+  <td><%= reldayc.cliente.IdCli %></td>
+  <td><%= reldayc.cliente.Nombre %></td>
+  <td><%= reldayc.cliente.NombreCorto %></td>
+  <td><%= reldayc.cliente.Direccion %></td>
+  <td><%= reldayc.cliente.Colonia %></td>
+  <td><%= reldayc.RutaId %></td>
+  <td><%= reldayc.cliente.Horario %></td>
+
+  <td><!--para que muestre la secuencia dependiendo del dia por parametro-->
+
+    <% if reldayc[@dia] != 0 %>
+
+      <%= form_for(reldayc, :method => :put, remote: true, html: {class: "form-horizontal"}) do |f| %><!--ajax-->
+
+                <%if @dia == "Lunes"%>
+                  <%= f.text_field :Lunes, value: reldayc.Lunes %>
+
+                <%elsif @dia == "Martes"%>
+                  <%= f.text_field :Martes, value: reldayc.Martes %>
+
+                <%elsif @dia == "Miercoles"%>
+                  <%= f.text_field :Miercoles, value: reldayc.Miercoles %>
+
+                <%elsif @dia == "Jueves"%>
+                  <%= f.text_field :Jueves, value: reldayc.Jueves %>
+
+                <%elsif @dia == "Viernes"%>
+                  <%= f.text_field :Viernes, value: reldayc.Viernes %>
+
+                <%elsif @dia == "Sabado"%>
+                  <%= f.text_field :Sabado, value: reldayc.Sabado %>
+
+                <%elsif @dia == "Domingo"%>
+                  <%= f.text_field :Domingo, value: reldayc.Domingo %>
+
+                <%end%>
+            <%= submit_tag "Ingresar", class: "btn btn-warning btn-xs", data: { disable_with: 'Ingresando' }%>
+      <%end%>
+
+     <%else%>
+
+      <%= form_for(reldayc, :method => :put, remote: true, html: {class: "form-horizontal"}) do |f| %><!--ajax-->
+
+                <%= f.hidden_field @dia, value: 1 %>
+
+            <%= submit_tag "Añadir", class: "btn btn-warning btn-xs", data: { disable_with: 'Añadiendo' }%>
+      <%end%>
+
+<%end%>
+
+
+
+
+</td>
+
+<td>
+  <% if reldayc[@dia] > 0 %>
+
+  <%= form_for(reldayc, :method => :put, remote: true, html: {class: "form-horizontal"}) do |f| %><!--ajax-->
+
+            <%= f.hidden_field @dia, value: 0 %>
+
+        <%= submit_tag "Borrar", class: "btn btn-warning btn-xs", data: { disable_with: 'Borrando' }%>
+  <%end%>
+  <%end%>
+
+</td>
+
+
+</tr>

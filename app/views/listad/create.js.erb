@@ -1,0 +1,16 @@
+$("#mynewslista").modal('hide');
+$(".slista_lista").val('');
+$(".slista_caduca").val('');
+$(".slista_fechaini").val('');
+$(".slista_fechafin").val('');
+
+
+$("#container_listad").prepend('<%= j render @slista %>'); //Prepend before append
+$("#slista_<%= @slista.id %>").hide().fadeIn(1000);
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

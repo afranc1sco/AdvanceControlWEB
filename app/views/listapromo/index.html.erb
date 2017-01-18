@@ -1,0 +1,172 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Administración de promociones</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewlistaprom">
+        Nueva lista
+      </button>
+      <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#mygrupo">
+        Grupos
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="listapromo" class="display"><!--el id listapromo es de datatables referenciado en listapromo.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Caduca</th>
+      <th>Inicio</th>
+      <th>Final</th>
+      <th>Estado</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_listapromo">
+      <%= render @listapromo %><!--carga todos los listapromo-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@listaprom, remote: true, html: {class: "form-horizontal promocion-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewlistaprom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar lista</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Lista, "Clave:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Lista, class: "form-control listaprom_clave",autofocus: true, minlength: "1", required: "true" %>
+            </div>
+
+              <%= f.label :Caduca,"Caduca:", class: "control-label col-xs-7 col-sm-6 col-md-1"%>
+              <div class="col-md-1">
+                <%= f.check_box :Caduca %>
+              </div>
+
+            <%= f.label :Activa,"Activa:", class: "control-label col-xs-7 col-sm-6 col-md-1"%>
+            <div class="col-md-1">
+              <%= f.check_box :Activa %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Descripcion,"Descripción:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Descripcion, class: "form-control listaprom_descripcion", minlength: "7", required: "true" %>
+            </div>
+            <%= f.label :Tipo, "Tipo:", class: "control-label col-md-1"  %>
+            <div class="col-md-3">
+              <%= f.select :Tipo, ['Producto','Monto de Venta','Volumen'], class: "form-control"%>
+
+            </div>
+
+          </div>
+
+          <div class="well center-block">
+            <div class="form-group">
+              <%= f.label :FechaI,"Inicio:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaI, class: "form-control datepicker listaprom_fechainicio", minlength: "7", required: "true" %>
+              </div>
+
+              <%= f.label :FechaF,"Fin:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaF, class: "form-control datepicker listaprom_fechafinal",minlength: "7", required: "true" %>
+              </div>
+            </div>
+          </div>
+
+          <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewlistapromclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+
+  <div class="modal fade" id="mygrupo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Administrando grupos</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="well center-block">
+            <p>
+              Nuevo Grupo
+            </p>
+            <%= form_for(@listapromomast, remote: true, html: {class: "form-horizontal"}) do |lpm| %> <!--ajax remote: true-->
+              <div class="form-group">
+                <%= lpm.label :ListaMaster, "Nombre:", class: "control-label col-md-2 " %>
+                <div class="col-md-5">
+                  <%= lpm.text_field :ListaMaster, class: "form-control listapromomast_nombre" %>
+                </div>
+                <%= lpm.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+                <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+              </div>
+            <%end%>
+          </div>
+
+          <table id="listapromomaster" class="display"><!--el id listapromo es de datatables referenciado en listapromo.coffe y display class es una clase de datatables-->
+          <thead>
+
+            <tr><!--active es para sombrear la fila-->
+              <th>ID</th>
+              <th>ListaMaster</th>
+              <th>Asignación</th>
+              <th>Acción</th>
+
+            </tr>
+          </thead>
+            <tbody id="container_listapromomaster">
+            <%= render @listapromomaster %>
+          </tbody>
+
+
+          </table>
+
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mygroupclouse">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Promociones eliminadas ó inhabilitadas<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, listapromo_inactivos_path, class: "btn btn-danger btn-xs"%>

@@ -1,0 +1,92 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Lista de Encuestas</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewencuesta">
+        Nueva Encuesta
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="encuestas" class="display"><!--el id encuestas es de datatables referenciado en encuestas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Descripción</th>
+      <th>Tipo</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_encuestas">
+      <%= render @encuestas %><!--carga todos los encuestas-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@encuesta, remote: true, html: {class: "form-horizontal formulario-validado-create"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewencuesta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar encuesta</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Clave_Enc, "Clave:", class:"control-label col-md-3" %>
+            <div class="col-md-8">
+              <%= f.text_field :Clave_Enc, class: "form-control encuesta_clave", autofocus: true, required: "true"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Desc_Enc, "Descripción:", class:"control-label col-md-3" %>
+            <div class="col-md-8">
+              <%= f.text_area :Desc_Enc, class: "form-control encuesta_desc_enc", required: "true", minlength: "7"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Tipo_Enc, "Tipo:", class: "control-label col-md-3"  %>
+            <div class="col-md-2">
+            <%= f.select :Tipo_Enc, ['Encuesta de Selección', 'Encuesta con Respuesta Abierta'], class: "form-control "%>
+            </div>
+
+          </div>
+
+
+          <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewencuestaclose">Close</button>
+          <%= submit_tag "Create", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", encuestas_path(format:"csv") %> |
+  <%= link_to "Excel", encuestas_path(format:"xls") %>
+</p>

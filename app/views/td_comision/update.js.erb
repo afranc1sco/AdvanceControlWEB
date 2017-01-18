@@ -1,0 +1,15 @@
+$("#myupdatetdcomision_<%= @tdcomision.id %>").modal('hide');
+
+$("#tdcomision_<%= @tdcomision.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  $("#container_td_comision").prepend('<%= j render @tdcomision %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

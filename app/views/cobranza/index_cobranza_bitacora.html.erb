@@ -1,0 +1,14 @@
+<h2>Bitacora de cobranza</h2>
+<div class="well center-block">
+  <h2>Ruta y dia operativo</h2>
+
+    <%= form_tag("bit_cobranza/busqueda_cobranza", method: 'get', remote: true, id:"search",class: "form-horizontal" ) do %>
+      <%= render 'partials/buscadorReportes/buscador_reportes' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes2' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes4' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes5' %>
+
+    <%end%>
+
+</div>
+<div id="bit_cobranza"><%= render 'bit_cobranza' %></div>

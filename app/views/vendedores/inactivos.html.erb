@@ -1,0 +1,76 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Empleados eliminados ó deshabilitados</h1>
+<style>
+.container {
+  width: 100%;
+}
+
+</style>
+<div class="container">
+
+  <br>
+  <br>
+
+
+
+  <table id="vendedores" class="display"><!--el id vendedores es de datatables referenciado en vendedores.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Pdapw</th>
+      <th>Metadiaria</th>
+      <th>Metames</th>
+      <th>Movil</th>
+      <th>Vencelic</th>
+      <th>Opciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_vendedores">
+      <%= render @vendedores %><!--carga todos los vendedores-->
+</tbody>
+
+
+</table>
+<p>
+  Download:
+  <%= link_to "CSV", vendedores_path(format:"csv") %> |
+  <%= link_to "Excel", vendedores_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>
+
+
+<div class="modal fade" id="myimportdata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar Datos</h4>
+      </div>
+      <div class="modal-body">
+      <p>
+        Nota: El formato excel a exportar debe ser .xlsx ó .csv
+      </p>
+        <%= form_tag import_vendedores_path, multipart: true do %>
+          <%= file_field_tag :file %>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="myimportdataclose">Close</button>
+        <%= submit_tag "Importar", class: "btn btn-primary", data: { disable_with: 'Importando' } %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Volver a Vendedores', vendedores_path, class: "btn btn-primary btn-lg" %>

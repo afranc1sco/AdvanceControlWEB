@@ -1,0 +1,25 @@
+$("#mynewvendedor").modal('hide');
+$(".vendedor_nombre").val('');
+$(".vendedor_direccion").val('');
+$(".vendedor_telefono").val('');
+$(".vendedor_pdapw").val('');
+$(".vendedor_numlicencia").val('');
+$(".vendedor_metadiaria").val('');
+$(".vendedor_metames").val('');
+$(".vendedor_movil").val('');
+$(".vendedor_vencelic").val('');
+$(".vendedor_clave").val('');
+
+if (<%= @vendedor.Status == true %>){
+  $("#container_vendedores").prepend('<%= j render @vendedor %>'); //Prepend before append
+  $("#vendedor_<%= @vendedor.id %>").hide().fadeIn(1000);
+}
+
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

@@ -1,0 +1,93 @@
+<tr id="empresa_<%= empresa.id %>">
+  <td><%=empresa.IdEmpresa%>
+
+          <!--Modal - update empresa-->
+      <%= form_for(empresa, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{empresa.id}"}) do |f| %><!--ajax-->
+
+        <div nohidden class="modal fade si" id="myupdateempresa_<%= empresa.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar sucursal</h4>
+              </div>
+
+
+              <div class="modal-body">
+              <div class="form-group">
+                <%= f.label :Sucursal, "Sucursal:", class: "control-label col-md-2 " %>
+                <div class="col-md-3">
+                  <%= f.text_field :Sucursal, class: "form-control ", minlength: "5", required: "true"  %>
+                </div>
+                  <%= f.label :NombreComercial, "No.Comercial:", class: "control-label col-md-2" %>
+                <div class="col-md-5">
+                  <%= f.text_field :NombreComercial, class: "form-control ",minlength: "4" %>
+                </div>
+              </div>
+
+                <div class="form-group">
+                  <%= f.label :Telefono, "Teléfono:", class: "control-label col-md-2 " %>
+                  <div class="col-md-3">
+                    <%= f.text_field :Telefono, class: "form-control ", minlength: "7", required: "true"  %>
+                  </div>
+                    <%= f.label :Contacto, "Contacto:", class: "control-label col-md-2" %>
+                  <div class="col-md-5">
+                    <%= f.text_field :Contacto, class: "form-control ",minlength: "4", required: "true"  %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :CP, "CP:", class: "control-label col-md-2" %>
+                  <div class="col-md-3">
+                    <%= f.text_field :CP, class: "form-control ",minlength: "5", required: "true"  %>
+                  </div>
+                  <%= f.label :Email, "Email:", class: "control-label col-md-2 " %>
+                  <div class="col-md-5">
+                    <%= f.email_field :Email, class: "form-control ", minlength: "7", required: "true"  %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :NoInterior, "No.Interior:", class: "control-label col-md-2 " %>
+                  <div class="col-md-3">
+                    <%= f.text_field :NoInterior, class: "form-control ", maxlength: "10" %>
+                  </div>
+                    <%= f.label :NoExterior, "No.Exterior:", class: "control-label col-md-2" %>
+                  <div class="col-md-5">
+                    <%= f.text_field :NoExterior, class: "form-control ", maxlength: "10" %>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="myupdatebutton_<%= empresa.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+              </div>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </td>
+  <td><%=empresa.Sucursal%></td>
+  <script>
+    $(".formulario-validado-update<%=empresa.id%>").validate();
+
+  </script>
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateempresa_<%= empresa.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <%= link_to 'Eliminar', empresa, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+      </td>
+      <td>
+
+      </td>
+
+</tr>

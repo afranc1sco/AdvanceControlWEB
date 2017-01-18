@@ -1,0 +1,49 @@
+<%= form_for(@mensaje) do |f| %>
+  <% if @mensaje.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mensaje.errors.count, "error") %> prohibited this mensaje from being saved:</h2>
+
+      <ul>
+      <% @mensaje.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Clave %><br>
+    <%= f.text_field :Clave %>
+  </div>
+  <div class="field">
+    <%= f.label :EnBaseA %><br>
+    <%= f.text_field :EnBaseA %>
+  </div>
+  <div class="field">
+    <%= f.label :Descripcion %><br>
+    <%= f.text_field :Descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :Mensaje %><br>
+    <%= f.text_field :Mensaje %>
+  </div>
+  <div class="field">
+    <%= f.label :FechaInicio %><br>
+    <%= f.text_field :FechaInicio %>
+  </div>
+  <div class="field">
+    <%= f.label :FechaFinal %><br>
+    <%= f.text_field :FechaFinal %>
+  </div>
+  <div class="field">
+    <%= f.label :Estado %><br>
+    <%= f.check_box :Estado %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Ruta</Data></Cell>
+        <Cell><Data ss:Type="String">TipoRuta</Data></Cell>
+        <Cell><Data ss:Type="String">Oficina</Data></Cell>
+        <Cell><Data ss:Type="String">Vendedor</Data></Cell>
+        <Cell><Data ss:Type="String">id_ayudante1</Data></Cell>
+        <Cell><Data ss:Type="String">id_ayudante2</Data></Cell>
+        <Cell><Data ss:Type="String">VenSinStock</Data></Cell>
+        <Cell><Data ss:Type="String">Sector</Data></Cell>
+        <Cell><Data ss:Type="String">Tipo</Data></Cell>
+        <Cell><Data ss:Type="String">VendedorAyudante</Data></Cell>
+        <Cell><Data ss:Type="String">Activa</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+      </Row>
+
+      <% @rutas.each do |ruta| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= ruta.Ruta%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.TipoRuta%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.Oficina%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.Vendedor%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.id_ayudante1%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.id_ayudante2%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.VenSinStock%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.Sector%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.Tipo%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.VendedorAyudante%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.Activa%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= ruta.IdEmpresa%></Data></Cell>  </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

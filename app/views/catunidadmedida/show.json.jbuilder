@@ -1,0 +1,1 @@
+json.partial! "catunidadmedida/catunidadmed", catunidadmed: @catunidadmed

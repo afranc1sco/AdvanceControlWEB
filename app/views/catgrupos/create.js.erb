@@ -1,0 +1,12 @@
+$("#mynewcategory").modal('hide');
+$(".catgrupo_clave").val('');
+$(".catgrupo_descripcion").val('');
+
+$("#sector").html("<%= escape_javascript(render("productos/sector"))%>")
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

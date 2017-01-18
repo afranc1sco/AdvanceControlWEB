@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clave: MyString
+  producto: MyString
+  codbarras: MyString
+  granel: false
+  iva: 1
+  ieps: 1
+  unimed: MyString
+  vbase: 1
+  equivalente: 1
+  sector: MyString
+  ban_envase: false
+  idclasp: 1
+  idempresa: MyString
+  status: MyString
+
+two:
+  clave: MyString
+  producto: MyString
+  codbarras: MyString
+  granel: false
+  iva: 1
+  ieps: 1
+  unimed: MyString
+  vbase: 1
+  equivalente: 1
+  sector: MyString
+  ban_envase: false
+  idclasp: 1
+  idempresa: MyString
+  status: MyString

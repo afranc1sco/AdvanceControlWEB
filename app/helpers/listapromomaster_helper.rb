@@ -1,0 +1,2 @@
+module ListapromomasterHelper
+end

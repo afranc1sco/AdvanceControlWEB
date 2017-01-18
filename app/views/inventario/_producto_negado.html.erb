@@ -1,0 +1,36 @@
+<% if @producto_negado != nil%>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Clave</th>
+      <th>Producto</th>
+      <th>Pidieron</th>
+      <th>Surtido</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_productoneg">
+      <% @producto_negado.each do |productoneg| %>
+      <tr id="productoneg_<%= productoneg.id %>">
+        <td><%=productoneg.CodProd%></td>
+        <td><%=productoneg.producto.Producto%></td>
+        <td><%=productoneg.Pidieron%></td>
+        <td><%=productoneg.Habia%></td>
+
+
+      <td></td>
+      </tr>
+
+      <% end %>
+
+</tbody>
+
+
+</table>
+
+<% end %>

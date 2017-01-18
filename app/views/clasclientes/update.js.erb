@@ -1,0 +1,14 @@
+$("#myupdateclascliente_<%= @clascliente.id %>").modal('hide');
+
+$("#clascliente_<%= @clascliente.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $("#container_clasclientes").prepend('<%= j render @clascliente %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

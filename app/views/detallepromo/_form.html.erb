@@ -1,0 +1,57 @@
+<%= form_for(@detalleprom) do |f| %>
+  <% if @detalleprom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@detalleprom.errors.count, "error") %> prohibited this detalleprom from being saved:</h2>
+
+      <ul>
+      <% @detalleprom.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Articulo %><br>
+    <%= f.text_field :Articulo %>
+  </div>
+  <div class="field">
+    <%= f.label :PromoId %><br>
+    <%= f.text_field :PromoId %>
+  </div>
+  <div class="field">
+    <%= f.label :Cantidad %><br>
+    <%= f.text_field :Cantidad %>
+  </div>
+  <div class="field">
+    <%= f.label :Tipo %><br>
+    <%= f.text_field :Tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :TipoProm %><br>
+    <%= f.text_field :TipoProm %>
+  </div>
+  <div class="field">
+    <%= f.label :Monto %><br>
+    <%= f.text_field :Monto %>
+  </div>
+  <div class="field">
+    <%= f.label :Volumen %><br>
+    <%= f.text_field :Volumen %>
+  </div>
+  <div class="field">
+    <%= f.label :TipMed %><br>
+    <%= f.text_field :TipMed %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="field">
+    <%= f.label :Nivel %><br>
+    <%= f.text_field :Nivel %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

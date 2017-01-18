@@ -1,0 +1,59 @@
+<!--<p id="notice"><%= notice %></p>-->
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <h1>Cuentas por cobrar</h1>
+
+  <br>
+  <br>
+
+  <div class="well center-block">
+    <h2>Por favor selecciona la ruta </h2>
+
+    <%= form_for @detalleco, html: {class: "form-horizontal"}, :url => {:action => 'obtener_ruta'} do |f| %>
+      <div class="form-group">
+
+        <%= f.label :RutaId, "Ruta:", class: "control-label col-md-2" %>
+        <div class="col-md-2">
+          <%= f.select :RutaId, options_for_select(@rutas.map{|e|[e.Ruta, e.IdRutas]},selected: params[:id]), class: "form-control" %>
+        </div>
+
+        <div class="col-md-3">
+          <%= submit_tag "Buscar", class: "btn btn-primary btn-lg btn-block"%>
+        </div>
+      </div>
+    <%end%>
+  </div>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Id</th>
+      <th>Ruta</th>
+      <th>Clave</th>
+      <th>Vendedor</th>
+      <th>Cliente</th>
+      <th>Nombre</th>
+      <th>Razón Social</th>
+      <th>Documento</th>
+      <th>Saldo Inicial</th>
+      <th>Abono</th>
+      <th>Saldo Actual</th>
+      <th>Fecha Reg</th>
+      <th>Fecha Vence</th>
+      <th>TipoDoc</th>
+    </tr>
+  </thead>
+    <tbody id="container_stock">
+      <%= render @cobranza %><!--carga todos los empresas-->
+</tbody>
+
+
+</table>
+</div >

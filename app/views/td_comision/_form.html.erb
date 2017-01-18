@@ -1,0 +1,46 @@
+<%= form_for(@tdcomision) do |f| %>
+  <% if @tdcomision.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tdcomision.errors.count, "error") %> prohibited this tdcomision from being saved:</h2>
+
+      <ul>
+      <% @tdcomision.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :ID_Detalle %><br>
+    <%= f.text_field :ID_Detalle %>
+  </div>
+  <div class="field">
+    <%= f.label :ID_Comision %><br>
+    <%= f.text_field :ID_Comision %>
+  </div>
+  <div class="field">
+    <%= f.label :RangoIni %><br>
+    <%= f.number_field :RangoIni %>
+  </div>
+  <div class="field">
+    <%= f.label :RangoFin %><br>
+    <%= f.number_field :RangoFin %>
+  </div>
+  <div class="field">
+    <%= f.label :Angente %><br>
+    <%= f.number_field :Angente %>
+  </div>
+  <div class="field">
+    <%= f.label :Ayudante %><br>
+    <%= f.number_field :Ayudante %>
+  </div>
+  <div class="field">
+    <%= f.label :Tipo %><br>
+    <%= f.number_field :Tipo %>
+  </div>
+  <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+$("#mynewempresa").modal('hide');
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+$(".empresa_empresa").val('');
+$(".empresa_clave").val('');
+$(".empresa_Telefono").val('');
+$(".empresa_Contacto").val('');
+$(".empresa_Email").val('');
+$(".empresa_RCF").val('');
+$(".empresa_Direccion").val('');
+$(".empresa_NombreComercial").val('');
+
+
+$("#container_empresas").prepend('<%= j render @empresa %>'); //Prepend before append
+$("#empresa_<%= @empresa.id %>").hide().fadeIn(1000);
+
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

@@ -1,0 +1,1 @@
+json.array! @relactivos, partial: 'relactivos/relactivo', as: :relactivo

@@ -1,0 +1,15 @@
+$("#myupdateformapag_<%= @formapag.id %>").modal('hide');
+
+$("#formapag_<%= @formapag.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  $("#container_formaspag").prepend('<%= j render @formapag %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

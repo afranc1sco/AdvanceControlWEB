@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Motivo:</strong>
+  <%= @motivonoventa.motivo %>
+</p>
+
+<p>
+  <strong>Clave:</strong>
+  <%= @motivonoventa.clave %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @motivonoventa.status %>
+</p>
+
+<%= link_to 'Edit', edit_motivonoventa_path(@motivonoventa) %> |
+<%= link_to 'Back', motivosnoventa_path %>

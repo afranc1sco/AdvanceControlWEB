@@ -1,0 +1,14 @@
+$("#mynewencuesta").modal('hide');
+$(".encuesta_clave").val('');
+$(".encuesta_desc_enc").val('');
+
+
+$("#container_encuestas").prepend('<%= j render @encuesta %>'); //Prepend before append
+$("#encuesta_<%= @encuesta.id %>").hide().fadeIn(1000);
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

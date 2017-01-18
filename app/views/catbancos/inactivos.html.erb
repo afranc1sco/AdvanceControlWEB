@@ -1,0 +1,34 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Bancos inactivos</h1>
+<style>
+.container {
+  width: 100%;
+}
+
+</style>
+<div class="container">
+  <br>
+  <br>
+
+
+
+  <table id="superior" class="display"><!--el id activos es de datatables referenciado en activos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Descripcion</th>
+      <th>Status</th>
+      <th>Acciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_catbancos">
+      <%= render @catbancos %><!--carga todos los activos-->
+</tbody>
+
+
+</table>
+</div>
+<%= link_to 'Volver a Bancos', catbancos_path, class: "btn btn-primary btn-lg" %>

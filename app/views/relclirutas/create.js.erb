@@ -1,0 +1,18 @@
+$("#myclientadder_<%= @relcliruta.IdCliente %>").modal('hide');
+
+$("#container_relclirutas").prepend('<%= j render @relcliruta %>'); //Prepend before append
+$("#relcliruta_<%= @relcliruta.id %>").hide().fadeIn(1000);
+$("#cliente_<%= @relcliruta.IdCliente %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

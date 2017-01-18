@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Clave</Data></Cell>
+        <Cell><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">Direccion</Data></Cell>
+        <Cell><Data ss:Type="String">Telefono</Data></Cell>
+        <Cell><Data ss:Type="String">NumLicencia</Data></Cell>
+        <Cell><Data ss:Type="String">VenceLic</Data></Cell>
+        <Cell><Data ss:Type="String">PdaPw</Data></Cell>
+        <Cell><Data ss:Type="String">MetaDiaria</Data></Cell>
+        <Cell><Data ss:Type="String">MetaMes</Data></Cell>
+        <Cell><Data ss:Type="String">Movil</Data></Cell>
+        <Cell><Data ss:Type="String">Status</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+      </Row>
+
+      <% @vendedores.each do |vendedor| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= vendedor.Clave%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.Nombre%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.Direccion%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.Telefono%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.NumLicencia%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.VenceLic%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.PdaPw%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.MetaDiaria%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.MetaMes%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.Movil%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.Status%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= vendedor.IdEmpresa%></Data></Cell>
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

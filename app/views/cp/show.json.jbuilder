@@ -1,0 +1,1 @@
+json.partial! "cp/codigopostal", codigopostal: @codigopostal

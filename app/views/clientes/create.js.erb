@@ -1,0 +1,36 @@
+$("#mynewcliente").modal('hide');
+$(".cliente-idcli").val('');
+$(".cliente-nombre").val('');
+$(".cliente-nombrecorto").val('');
+$(".cliente-direccion").val('');
+$(".cliente-referencia").val('');
+$(".cliente-telefono").val('');
+$(".cliente-cp").val('');
+$(".cliente-credito").val('');
+$(".cliente-limitecredito").val('');
+$(".cliente-status").val('');
+$(".cliente-diascreedito").val('');
+$(".cliente-colonia").val('');
+$(".cliente-tel2").val('');
+$(".cliente-email").val('');
+$(".cliente-visitaobligada").val('');
+$(".cliente-firmaobligada").val('');
+$(".cliente-motivabajaid").val('');
+$(".cliente-saldo").val('');
+$(".cliente-horario").val('');
+$(".cliente-idclasc").val('');
+
+
+
+
+if (<%= @cliente.Status == true %>){
+  $("#container_clientes").prepend('<%= j render @cliente %>'); //Prepend before append
+  $("#cliente_<%= @cliente.id %>").hide().fadeIn(1000);
+}
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

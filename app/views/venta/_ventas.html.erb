@@ -1,0 +1,132 @@
+<style media="screen">
+.modal-content{
+  min-width: 150%;
+  margin-left: -20%;
+}
+
+</style>
+<% if @ventas != nil%>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Fecha</th>
+      <th>Cliente</th>
+      <th>Responsable</th>
+      <th>Nombre Comercial</th>
+      <th>Folio</th>
+      <th>Tipo</th>
+      <th>Importe</th>
+      <th>IVA</th>
+      <th>Descuento</th>
+      <th>Total</th>
+      <th>Cajas</th>
+      <th>Piezas</th>
+      <th>Cancelada</th>
+      <th>Ayudante1</th>
+      <th>Ayudante2</th>
+      <th>Promociones</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_venta">
+      <% @ventas.each do |vent| %>
+      <tr id="venta_<%= vent.id %>">
+        <td><%=vent.Fecha.strftime("%d-%m-%Y") %>
+              <div class="modal fade" id="mydetallevet_<%= vent.id %>" class="modalxD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Ventas</h4>
+                    </div>
+                    <div class="modal-body">
+
+<div class="row table-responsive">
+                        <table class="detallevet" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+                        <thead>
+
+                          <tr><!--active es para sombrear la fila-->
+                            <th>Ruta</th>
+                            <th>Cliente</th>
+                            <th>Folio</th>
+                            <th>Sku</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                            <th>PrecioUnitario</th>
+                            <th>IVA</th>
+                            <th>SubTotal</th>
+                            <th>Descuento</th>
+                            <th>Total</th>
+
+                          </tr>
+                        </thead>
+                          <tbody id="container_detallevet_<%= vent.id %>">
+                            <%= render @detallevet.where(:Docto => vent.Documento, :RutaId => vent.RutaId) %><!--carga todos los td_comision-->
+
+                          </tbody>
+                      </table>
+                    </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" id="mydetallevetclose_<%= vent.id %>">Cerrar</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </td>
+        <td><%=vent.CodCliente%></td>
+        <td><%=vent.cliente.Nombre%></td>
+        <td><%=vent.cliente.NombreCorto%></td>
+        <td><%=vent.Documento%></td>
+        <td><%=vent.TipoVta%></td>
+        <td><%= vent.IVA + vent.TOTAL%></td>
+        <td><%=vent.IVA%></td>
+        <td><%=vent.sum_DescMon%></td>
+        <td><%=vent.TOTAL%></td>
+        <td><%=vent.venta_count%></td>
+
+        <td><%=vent.sum_Pza%></td>
+        <td>
+          <% if vent.Cancelada == true %>
+            Si
+          <%else%>
+            No
+          <%end%>
+        </td>
+        <td>Ayudante1</td>
+        <td>Ayudante2</td>
+        <td>
+        <% if vent.cliente.listapromomast != nil %>
+          <%= vent.cliente.listapromomast.ListaMaster%>
+        <%end%>
+        </td>
+
+        <td>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mydetallevet_<%= vent.id %>">
+            <i class="fa fa-money" aria-hidden="true">Detalle</i>
+          </button>
+
+        </td>
+      <td></td>
+      </tr>
+
+      <% end %>
+
+</tbody>
+
+
+</table>
+
+<% end %>

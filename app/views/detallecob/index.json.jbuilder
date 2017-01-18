@@ -1,0 +1,1 @@
+json.array! @detallecob, partial: 'detallecob/detalleco', as: :detalleco

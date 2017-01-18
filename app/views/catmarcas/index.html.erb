@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Catmarcas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clave</th>
+      <th>Descripcion</th>
+      <th>Status</th>
+      <th>Tipomarca</th>
+      <th>Idempresa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @catmarcas.each do |catmarca| %>
+      <tr>
+        <td><%= catmarca.Clave %></td>
+        <td><%= catmarca.Descripcion %></td>
+        <td><%= catmarca.Status %></td>
+        <td><%= catmarca.TipoMarca %></td>
+        <td><%= catmarca.IdEmpresa %></td>
+        <td><%= link_to 'Show', catmarca %></td>
+        <td><%= link_to 'Edit', edit_catmarca_path(catmarca) %></td>
+        <td><%= link_to 'Destroy', catmarca, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Catmarca', new_catmarca_path %>

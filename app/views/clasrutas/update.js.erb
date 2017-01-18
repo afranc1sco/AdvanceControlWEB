@@ -1,0 +1,7 @@
+$("#myupdateclasruta_<%= @clasruta.id %>").modal('hide');
+
+$("#clasruta_<%= @clasruta.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $("#container_clasrutas").prepend('<%= j render @clasruta %>');
+
+});

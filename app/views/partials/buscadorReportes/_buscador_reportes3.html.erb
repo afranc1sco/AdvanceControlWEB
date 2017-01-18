@@ -1,0 +1,6 @@
+<div class="form-group">
+ <%= label_tag :Productos, "Selecciona Producto:", class: "control-label col-md-2" %>
+ <div class="col-md-2">
+  <%= select_tag :search3, options_for_select(@productos.map{|e|[e.Producto, e.Clave]}), :prompt => "Por favor seleccione", class: "form-control js-example-basic-single" %>
+</div>
+</div>

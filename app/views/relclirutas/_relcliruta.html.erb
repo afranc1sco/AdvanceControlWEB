@@ -1,0 +1,18 @@
+<tr id="relcliruta_<%= relcliruta.id %>">
+  <td><%= relcliruta.cliente.id %></td>
+  <td><%= relcliruta.cliente.Nombre %></td>
+  <td><%= relcliruta.cliente.Telefono %></td>
+  <td><%= relcliruta.cliente.Colonia%></td>
+    <td>
+
+        <!--Destroy-->
+        <%= link_to 'Quitar', relcliruta, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+      </td>
+
+    <td>
+
+    </td>
+
+
+</tr>

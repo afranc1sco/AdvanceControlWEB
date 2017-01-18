@@ -1,0 +1,29 @@
+<%= form_for(@detallelpromast) do |f| %>
+  <% if @detallelpromast.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@detallelpromast.errors.count, "error") %> prohibited this detallelpromast from being saved:</h2>
+
+      <ul>
+      <% @detallelpromast.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :IdLm %><br>
+    <%= f.text_field :IdLm %>
+  </div>
+  <div class="field">
+    <%= f.label :IdPromo %><br>
+    <%= f.text_field :IdPromo %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

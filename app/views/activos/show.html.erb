@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @activo.Descripcion %>
+</p>
+
+<p>
+  <strong>Modelo:</strong>
+  <%= @activo.Modelo %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @activo.Fecha %>
+</p>
+
+<p>
+  <strong>Imagen:</strong>
+  <%= @activo.Imagen %>
+</p>
+
+<p>
+  <strong>Serie:</strong>
+  <%= @activo.Serie %>
+</p>
+
+<p>
+  <strong>Cb:</strong>
+  <%= @activo.CB %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @activo.Status %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @activo.IdEmpresa %>
+</p>
+
+<%= link_to 'Edit', edit_activo_path(@activo) %> |
+<%= link_to 'Back', activos_path %>

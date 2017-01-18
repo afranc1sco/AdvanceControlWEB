@@ -1,0 +1,153 @@
+<tr id="vendedor_<%= vendedor.id %>">
+    <td><%=vendedor.Clave%>
+      <!--Modal - update vendedor-->
+  <%= form_for(vendedor, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{vendedor.id}"}) do |f| %><!--ajax-->
+    <div nohidden class="modal fade si" id="myupdatevendedor_<%= vendedor.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Editar Empleado</h4>
+          </div>
+
+          <div class="modal-body">
+
+
+            <div class="form-group">
+
+
+                <%= f.label :Nombre, "Nombre:", class: "control-label col-md-2" %>
+              <div class="col-md-5">
+                <%= f.text_field :Nombre, class: "form-control", minlength: "7", required: "true" %>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+
+              <%= f.label :Telefono, "Teléfono:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :Telefono, class: "form-control", required: "true" %>
+              </div>
+
+              <%= f.label :NumLicencia, "Licencia:", class: "control-label col-md-2" %>
+              <div class="col-md-5">
+                <%= f.text_field :NumLicencia, class: "form-control", minlength: "7", required: "true" %>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <%= f.label :PdaPw, "PDA Pw:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :PdaPw, class: "form-control", required: "true" %>
+              </div>
+
+              <%= f.label :Movil, "Movil:", class: "control-label col-md-2" %>
+              <div class="col-md-5">
+                <%= f.text_field :Movil, class: "form-control" %>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <%= f.label :MetaDiaria, "MetaDiaria:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.number_field :MetaDiaria, class: "form-control ", required: "true" %>
+              </div>
+
+              <%= f.label :MetaMes, "MetaMes:", class: "control-label col-md-2" %>
+              <div class="col-md-5">
+                <%= f.number_field :MetaMes, class: "form-control ", required: "true" %>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+
+              <%= f.label :Tipo, "Categoría:", class: "control-label col-md-2"  %>
+              <div class="col-md-3">
+                <%= f.select :Tipo, ['Ayudante','Cobrador','Encuestador','Gerente','Repartidor','Supervisor','Vendedor'], class: "form-control"%>
+              </div>
+
+              <%= f.label :VenceLic, "Vencelic:", class: "control-label col-md-2" %>
+              <div class="col-md-5">
+                <%= f.text_field :VenceLic, class: "form-control datepicker ", minlength: "4", required: "true", :value => vendedor.VenceLic.strftime("%d-%m-%Y") %>
+              </div>
+
+
+            </div>
+            <div class="form-group">
+
+              <%= f.label :Direccion, "Dirección:", class: "control-label col-md-3"  %>
+              <div class="col-md-7">
+                <%= f.text_area :Direccion, class: "form-control", minlength: "7", required: "true" %>
+              </div>
+            </div>
+
+
+
+              <div class="col-md-3">
+                <%= f.label :Status, "Activo:", class: "control-label col-md-2" %>
+                <%= f.check_box :Status, class: "form-control" %>
+              </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="myupdatebutton_<%= vendedor.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+
+  <script>
+    $(".formulario-validado-update<%=vendedor.id%>").validate();
+
+  </script>
+
+    </td>
+    <td><%=vendedor.Nombre%></td>
+    <td>
+      <% if vendedor.Tipo == nil%>
+        Vendedor
+      <%else%>
+        <%=vendedor.Tipo%>
+      <%end%>
+    </td>
+    <td><%=vendedor.Direccion%></td>
+    <td><%=vendedor.Telefono%></td>
+    <td><%=vendedor.PdaPw%></td>
+    <td><%=vendedor.MetaDiaria%></td>
+    <td><%=vendedor.MetaMes%></td>
+    <td><%=vendedor.Movil%></td>
+    <td><%=vendedor.VenceLic.strftime("%d-%m-%Y")%></td>
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatevendedor_<%= vendedor.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+
+        <% if vendedor.Status == true%>
+          <%= link_to 'Eliminar', vendedor, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+        <%else%>
+        <%= link_to 'Habilitar', vendedor, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+
+        <%end%>
+      </td>
+
+
+<td class="no" >
+</td>
+</tr>

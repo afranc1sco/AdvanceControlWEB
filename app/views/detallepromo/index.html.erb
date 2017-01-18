@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Detallepromo</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Articulo</th>
+      <th>Promoid</th>
+      <th>Cantidad</th>
+      <th>Tipo</th>
+      <th>Tipoprom</th>
+      <th>Monto</th>
+      <th>Volumen</th>
+      <th>Tipmed</th>
+      <th>Idempresa</th>
+      <th>Nivel</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @detallepromo.each do |detalleprom| %>
+      <tr>
+        <td><%= detalleprom.Articulo %></td>
+        <td><%= detalleprom.PromoId %></td>
+        <td><%= detalleprom.Cantidad %></td>
+        <td><%= detalleprom.Tipo %></td>
+        <td><%= detalleprom.TipoProm %></td>
+        <td><%= detalleprom.Monto %></td>
+        <td><%= detalleprom.Volumen %></td>
+        <td><%= detalleprom.TipMed %></td>
+        <td><%= detalleprom.IdEmpresa %></td>
+        <td><%= detalleprom.Nivel %></td>
+        <td><%= link_to 'Show', detalleprom %></td>
+        <td><%= link_to 'Edit', edit_detalleprom_path(detalleprom) %></td>
+        <td><%= link_to 'Destroy', detalleprom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Detalleprom', new_detalleprom_path %>

@@ -1,0 +1,90 @@
+<!--blue green purple aero red-->
+<style>
+
+.color1{color: #3498DB;}
+.color2{color: #1ABB9C;}
+.color3{color: #E74C3C;}
+.color4{color: #9B59B6;}
+.color5{color: #9CC2CB;}
+
+</style>
+<% if @worst_seller != nil%>
+<div class="x_content">
+  <table class="" style="width:100%">
+    <tr>
+      <th style="width:37%;">
+        <p>Top 5</p>
+      </th>
+      <th>
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+          <p class="">(Clave) Productos</p>
+        </div>
+
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <canvas id="canvas1" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+      </td>
+      <td>
+        <table class="tile_info">
+          <% @worst_seller.each do |worst_seller| %>
+            <tr>
+              <td>
+                <% @contador -= 1%>
+                <p><i class="fa fa-square color<%=@contador%>"></i>(<%= worst_seller.Clave %>) <%= worst_seller.Producto %></p>
+              </td>
+            </tr>
+            <%end%>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- Doughnut Chart -->
+<script>
+  $(document).ready(function(){
+    var options = {
+      legend: false,
+      responsive: false
+    };
+
+    new Chart(document.getElementById("canvas1"), {
+      type: 'doughnut',
+      tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+      data: {
+        labels: [
+          <% @worst_seller.each do |worst_seller| %>
+              "(<%=  truncate(worst_seller.Clave,length:5) %>)"
+              <%= "," unless worst_seller == @worst_seller.last %>
+          <% end %>
+        ],
+        datasets: [{
+          data: [
+            <% @worst_seller.each do |worst_seller| %>
+            <%=  worst_seller.count %>
+            <%= "," unless worst_seller == @worst_seller.last %>
+            <% end %>
+          ],
+          backgroundColor: [
+            "#BDC3C7",
+            "#9B59B6",
+            "#E74C3C",
+            "#26B99A",
+            "#3498DB"
+          ],
+          hoverBackgroundColor: [
+            "#CFD4D8",
+            "#B370CF",
+            "#E95E4F",
+            "#36CAAB",
+            "#49A9EA"
+          ]
+        }]
+      },
+      options: options
+    });
+  });
+</script>
+<!-- /Doughnut Chart -->
+<% end %>

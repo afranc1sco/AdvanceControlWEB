@@ -1,0 +1,169 @@
+<tr id="producto_<%= producto.id %>">
+    <td><%= producto.Clave %>
+
+      <!--Modal - update producto-->
+  <%= form_for(producto, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{producto.id}"}) do |f| %><!--ajax-->
+    <div nohidden class="modal fade si" id="myupdateproducto_<%= producto.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Editar producto</h4>
+          </div>
+
+          <div class="modal-body">
+
+
+
+            <div class="form-group">
+              <%= f.label :Producto, "Producto:", class: "control-label col-md-3"  %>
+              <div class="col-md-9">
+                <%= f.text_field :Producto, class: "form-control", minlength: "3", required: "true"  %>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+
+              <%= f.label :CodBarras, "Codigo de Barras:", class: "control-label col-md-3"  %>
+              <div class="col-md-9">
+                <%= f.text_field :CodBarras, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <%= f.label :IVA, "IVA: %", class: "control-label col-md-3"  %>
+              <div class="col-md-3">
+                <%= f.number_field :IVA, class: "form-control" %>
+              </div>
+
+              <%= f.label :IEPS, "IEPS: %", class: "control-label col-md-3"  %>
+              <div class="col-md-3">
+                <%= f.number_field :IEPS, class: "form-control" %>
+              </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <%= f.label :UniMed, "Unidad Medida:", class: "control-label col-md-3"  %>
+              <div class="col-md-3">
+                <%= f.select :UniMed, ['PZA', 'CJ', 'KG'], class: "form-control"%>
+
+              </div>
+
+              <%= f.label :VBase, "Precio Base: $", class: "control-label col-md-3"  %>
+              <div class="col-md-3">
+                <%= f.number_field :VBase, class: "form-control" %>
+              </div>
+
+            </div>
+
+
+
+              <div class="form-group">
+                <%= f.fields_for :productosxpza do |builder| %>
+                  <%= builder.label :PzaXCja,"PzaXCja:", class: "control-label col-md-3" %>
+                  <div class="col-md-3">
+                    <%= builder.text_field :PzaXCja, class:"form-control ", minlength: "1", required: "true"  %>
+                  </div>
+                <%end%>
+
+              <%= f.label :Ban_Envase, "Es envase:", class: "control-label col-md-3"  %>
+              <div class="col-md-1">
+                <%= f.check_box :Ban_Envase %>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <%= f.label :Equivalente, "Equivalente (Lt/Kg):", class: "control-label col-md-3"  %>
+              <div class="col-md-3">
+                <%= f.number_field :Equivalente, class: "form-control" %>
+              </div>
+
+              <label class="control-label col-md-3">Utiliza Envase:</label>
+            <div class="col-md-1">
+              <input type="checkbox" id='showAreaBox' name='envase' class="producto_Utl.Env">
+            </div>
+
+
+            </div>
+
+            <div class="form-group">
+
+              <%= f.label :Sector, "Sector:", class: "control-label col-md-3"  %>
+              <div class="col-md-4">
+                <%= f.select :Sector, options_for_select(@catgrupos.map{|e|[e.Descripcion, e.Clave]},selected: producto.Sector), class: "dropdown"  %>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mynewcategory">
+                  ...
+                </button>
+              </div>
+
+              <%= f.label :Granel, "granel:", class: "control-label col-md-3"  %>
+              <div class="col-md-1">
+                <%= f.check_box :Granel %>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <%= f.label :Cover, "Foto:", class: "control-label col-md-3"  %>
+              <div class="col-md-3">
+                <%= f.file_field :cover%>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="myupdatebutton_<%= producto.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+
+  <script>
+    $(".formulario-validado-update<%=producto.id%>").validate();
+
+  </script>
+</td>
+    <td><%= producto.Producto %></td>
+    <td><%= producto.catgrupo.Descripcion %></td>
+    <td><%= producto.CodBarras %></td>
+    <td><%= producto.VBase %></td>
+    <td><%= producto.IVA %></td>
+    <td><%= producto.Ban_Envase %></td>
+    <td><%= producto.UniMed %>
+    </td>
+
+    <td id="producto-imagen" >
+      <% if producto.cover? %>
+        <%= image_tag producto.cover.url(:minithumb) %>
+
+      <%end%>
+    </td>
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateproducto_<%= producto.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <% if producto.Status == "A"%>
+        <%= link_to 'Eliminar', producto, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+        <%else%>
+          <%= link_to 'Habilitar', producto, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+        <%end%>
+      </td>
+
+
+<td class="no" >
+</td>
+</tr>

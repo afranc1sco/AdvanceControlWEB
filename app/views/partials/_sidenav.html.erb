@@ -1,0 +1,285 @@
+  <div class="main_container">
+    <div class="col-md-3 left_col">
+      <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+          <%= image_tag 'logo.png', alt: "logo", class:"logo-advc" %>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile">
+          <div class="profile_pic">
+            <%= image_tag 'usuario.png', alt: "imagen1", class:"img-circle profile_img" %>
+          </div>
+          <div class="profile_info">
+            <span>Bienvenido,</span>
+            <h2><%= current_usuario.usuario %></h2>
+          </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <br />
+        <% if current_usuario.empresa_id != nil %><!-- el usuario inicio sesion? ese user que esta escrito alli, es el nombre del modelo que ejecutamos en el generador rails generate devise User. si fuese alumno, alumno_signed_in-->
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section">
+            <p style="color:white;">Sucursal</p> <h3><%= current_usuario.empresa.Sucursal %></h3>
+
+            <ul class="nav side-menu">
+              <li><a><i class="fa fa-home"></i> Inicio <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+
+                  <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>Gráficos:</a>
+
+                  <li>
+                      <%= link_to "Dashboard Ejecutivo de Ventas", ventas1_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Ventas2", ventas2_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Ventas3", ventas3_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Ventas4", ventas4_path %>
+                  </li>
+
+                </ul>
+              </li>
+              <li><a><i class="fa fa-book"></i> Catálogos <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+
+                  <a href="#"><i class="fa fa-road" aria-hidden="true"></i>Rutas:</a>
+                  <li>
+                      <%= link_to "Rutas", rutas_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Empleados", vendedores_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Vehículos", vehiculos_path %>
+                  </li>
+
+                  <a href="#"><i class="fa fa-users" aria-hidden="true"></i>Clientes:</a>
+                  <li>
+                      <%= link_to "Clientes", clientes_path %>
+                  </li>
+
+                  <a href="#"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Productos:</a>
+                  <li>
+                      <%= link_to "Productos", productos_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Promociones", listapromo_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Lista de Precios", listap_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Lista de Descuentos", listad_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Motivos de Merma", mvomerma_path %>
+                  </li>
+
+                  <a href="#"><i class="fa fa-money" aria-hidden="true"></i>Venta:</a>
+                  <li>
+                      <%= link_to "Formas de Pago", formaspag_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Motivos de No Venta", motivosnoventa_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Motivos Devolución", mvodev_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Cuotas", cuotas_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Comisiones", th_comision_path %>
+                  </li>
+      <li>
+                      <%= link_to "Bancos", catbancos_path %>
+                  </li>
+                  <a href="#"><i class="fa fa-desktop" aria-hidden="true"></i>Miscelaneo:</a>
+                  <li>
+                      <%= link_to "Usuarios", usuarios_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Activos", activos_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Empresas", empresasmadre_path %>
+                  </li>
+            
+
+                  <a href="#"><i class="fa fa-terminal" aria-hidden="true"></i>Terminal:</a>
+                  <li>
+                      <%= link_to "Mensajes", mensajes_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Encuestas", encuestas_path %>
+                  </li>
+
+                </ul>
+              </li>
+              <li><a><i class="fa fa-edit"></i> Procesos <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <a href="#"><i class="fa fa-truck" aria-hidden="true"></i>AutoVenta:</a>
+                  <li>
+                      <%= link_to "Generar ruta", reldaycli_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Carga de stock", stock_path %>
+                  </li>
+
+                  <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cobranza:</a>
+                  <li>
+                      <%= link_to "Cuentas x cobrar", cobranza_path %>
+                  </li>
+
+                </ul>
+              </li>
+              <li><a><i class="fa fa-info-circle"></i> Información <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <a href="#"><i class="fa fa-road" aria-hidden="true"></i>De ruta:</a>
+                  <li>
+                      <%= link_to "Cobranza", index_cobranza_bitacora_path %>
+                  </li>
+
+                  <li>
+                      <%= link_to "Ventas", venta_venta_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Devoluciones", devoluciones_index_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Producto promoción", pregalado_index_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Producto regalo", pregalado_producto_obsequio_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Cobranza", index_cobranza_bitacora_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Visita sin venta", reportesventas_Visita_sin_venta_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Producto Negado", inventario_producto_negado_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Recargas", reportes_ruta_recargas_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Envases", reportes_ruta_envases_path %>
+                  </li>
+                  <li>
+                      <%= link_to "Consumos", reportes_ruta_consumos_path %>
+                  </li>
+                </ul>
+              </li><!--
+              <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="general_elements.html">General Elements</a></li>
+                  <li><a href="media_gallery.html">Media Gallery</a></li>
+                  <li><a href="typography.html">Typography</a></li>
+                  <li><a href="icons.html">Icons</a></li>
+                  <li><a href="glyphicons.html">Glyphicons</a></li>
+                  <li><a href="widgets.html">Widgets</a></li>
+                  <li><a href="invoice.html">Invoice</a></li>
+                  <li><a href="inbox.html">Inbox</a></li>
+                  <li><a href="calendar.html">Calendar</a></li>
+                </ul>
+              </li>
+              <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="tables.html">Tables</a></li>
+                  <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                </ul>
+              </li>
+              <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="chartjs.html">Chart JS</a></li>
+                  <li><a href="chartjs2.html">Chart JS2</a></li>
+                  <li><a href="morisjs.html">Moris JS</a></li>
+                  <li><a href="echarts.html">ECharts</a></li>
+                  <li><a href="other_charts.html">Other Charts</a></li>
+                </ul>
+              </li>
+              <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
+                  <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="menu_section">
+            <h3>Live On</h3>
+            <ul class="nav side-menu">
+              <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="e_commerce.html">E-commerce</a></li>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="project_detail.html">Project Detail</a></li>
+                  <li><a href="contacts.html">Contacts</a></li>
+                  <li><a href="profile.html">Profile</a></li>
+                </ul>
+              </li>
+              <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="page_403.html">403 Error</a></li>
+                  <li><a href="page_404.html">404 Error</a></li>
+                  <li><a href="page_500.html">500 Error</a></li>
+                  <li><a href="plain_page.html">Plain Page</a></li>
+                  <li><a href="login.html">Login Page</a></li>
+                  <li><a href="pricing_tables.html">Pricing Tables</a></li>
+                </ul>
+              </li>
+              <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="#level1_1">Level One</a>
+                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li class="sub_menu"><a href="level2.html">Level Two</a>
+                        </li>
+                        <li><a href="#level2_1">Level Two</a>
+                        </li>
+                        <li><a href="#level2_2">Level Two</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a href="#level1_2">Level One</a>
+                    </li>
+                </ul>
+              </li>
+              <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+            </ul>-->
+          </div>
+
+        </div>
+        <!-- /sidebar menu -->
+        <%end%>
+        <!-- /menu footer buttons -->
+        <!--
+        <div class="sidebar-footer hidden-small">
+          <a data-toggle="tooltip" data-placement="top" title="Settings">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="Lock">
+            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="Logout">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          </a>
+        </div>-->
+        <!-- /menu footer buttons -->
+      </div>
+    </div>

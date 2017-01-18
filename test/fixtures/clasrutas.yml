@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  IdCRutas: MyString
+  Descripcion: MyString
+  NivelNum: MyString
+
+two:
+  IdCRutas: MyString
+  Descripcion: MyString
+  NivelNum: MyString

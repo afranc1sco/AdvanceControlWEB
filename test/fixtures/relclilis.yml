@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codcliente: MyString
+  listap: MyString
+  listad: MyString
+  listapromo: MyString
+  idempresa: MyString
+
+two:
+  codcliente: MyString
+  listap: MyString
+  listad: MyString
+  listapromo: MyString
+  idempresa: MyString

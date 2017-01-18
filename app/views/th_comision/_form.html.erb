@@ -1,0 +1,33 @@
+<%= form_for(@comision) do |f| %>
+  <% if @comision.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comision.errors.count, "error") %> prohibited this comision from being saved:</h2>
+
+      <ul>
+      <% @comision.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Status %><br>
+    <%= f.text_field :Status %>
+  </div>
+  <div class="field">
+    <%= f.label :Comentarios %><br>
+    <%= f.text_area :Comentarios %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="field">
+    <%= f.label :ID_Producto %><br>
+    <%= f.text_field :ID_Producto %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

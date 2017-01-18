@@ -1,0 +1,16 @@
+$("#mynewlist").modal('hide');
+$(".list_lista").val('');
+$(".list_fechaini").val('');
+$(".list_fechafin").val('');
+
+
+$("#container_listap").prepend('<%= j render @list %>'); //Prepend before append
+$("#list_<%= @list.id %>").hide().fadeIn(1000);
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

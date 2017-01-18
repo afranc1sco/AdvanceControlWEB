@@ -1,0 +1,15 @@
+$("#myupdatemensaje_<%= @mensaje.id %>").modal('hide');
+
+$("#mensaje_<%= @mensaje.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  $("#container_mensajes").prepend('<%= j render @mensaje %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

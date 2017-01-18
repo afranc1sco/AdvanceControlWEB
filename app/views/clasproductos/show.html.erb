@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @clasproducto.Descripcion %>
+</p>
+
+<p>
+  <strong>Nivelnum:</strong>
+  <%= @clasproducto.NivelNum %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @clasproducto.IdEmpresa %>
+</p>
+
+<%= link_to 'Edit', edit_clasproducto_path(@clasproducto) %> |
+<%= link_to 'Back', clasproductos_path %>

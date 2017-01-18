@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Relcliclas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Idcliente</th>
+      <th>Clas1</th>
+      <th>Clas2</th>
+      <th>Clas3</th>
+      <th>Clas4</th>
+      <th>Clas5</th>
+      <th>Idempresa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @relcliclas.each do |relclicla| %>
+      <tr>
+        <td><%= relclicla.IdCliente %></td>
+        <td><%= relclicla.Clas1 %></td>
+        <td><%= relclicla.Clas2 %></td>
+        <td><%= relclicla.Clas3 %></td>
+        <td><%= relclicla.Clas4 %></td>
+        <td><%= relclicla.Clas5 %></td>
+        <td><%= relclicla.IdEmpresa %></td>
+        <td><%= link_to 'Show', relclicla %></td>
+        <td><%= link_to 'Edit', edit_relclicla_path(relclicla) %></td>
+        <td><%= link_to 'Destroy', relclicla, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Relclicla', new_relclicla_path %>

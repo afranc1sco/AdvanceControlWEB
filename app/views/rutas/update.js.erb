@@ -1,0 +1,15 @@
+$("#myupdateruta_<%= @ruta.id %>").modal('hide');
+
+$("#ruta_<%= @ruta.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  $("#container_rutas").prepend('<%= j render @ruta %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cp:</strong>
+  <%= @codigopostal.CP %>
+</p>
+
+<p>
+  <strong>Colonia:</strong>
+  <%= @codigopostal.Colonia %>
+</p>
+
+<p>
+  <strong>Municipio:</strong>
+  <%= @codigopostal.Municipio %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @codigopostal.Estado %>
+</p>
+
+<p>
+  <strong>Ciudad:</strong>
+  <%= @codigopostal.Ciudad %>
+</p>
+
+<%= link_to 'Edit', edit_codigopostal_path(@codigopostal) %> |
+<%= link_to 'Back', cp_path %>

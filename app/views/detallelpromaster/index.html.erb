@@ -1,0 +1,106 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Añadiendo promociones</h1><br>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <!--<div class="row">
+    <div class="text-center">
+      <!- Button trigger modal ->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewrelclili">
+        Nueva Lista de Descuento
+      </button>
+    </div>
+  </div>-->
+
+  <br>
+  <br>
+  <div class="well center-block">
+    <h2 class="text-center"> Lista de Promociones </h2>
+
+  <table id="listapromo" class="display"><!--el id clientes es de datatables referenciado en clientes.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>id</th>
+      <th>Lista</th>
+      <th>Descripción</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_listapromo">
+      <% @Listapromo.each do |promocion| %>
+      <tr id="listaprom_<%= promocion.id %>">
+          <td><%= promocion.id %></td>
+          <td><%= promocion.Lista %></td>
+          <td><%= promocion.Descripcion %></td>
+
+          <td>
+              <!--Modal - create relclili-->
+              <%= form_for(@detallelpromast, remote: true, html: {class: "form-horizontal"}) do |f| %> <!--ajax remote: true-->
+
+                      <div class="field">
+                        <%= f.hidden_field :IdLm, value: params[:id]  %>
+                      </div>
+                      <div class="field">
+                        <%= f.hidden_field :IdPromo, value: promocion.id%>
+                      </div>
+                      <div class="field">
+                        <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+                      </div>
+
+                    </div>
+
+                    <%= submit_tag "Añadir", class: "btn btn-warning btn-xs", data: { disable_with: 'Creando' }%>
+            <%end%>
+          </td>
+          <td>
+
+          </td>
+
+      </tr>
+      <%end%>
+
+
+  </tbody>
+
+
+  </table>
+</div>
+
+    <br>
+    <br>
+    <div class="well center-block">
+    <h2 class="text-center"> Promociones agregadas al grupo <%= params[:id] %></h2>
+    <br>
+    <br>
+  <table id="detallelpromaster" class="display"><!--el id relclilis es de datatables referenciado en relclilis.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+
+
+      <th>ID</th>
+      <th>Lista</th>
+      <th>Descripción</th>
+      <th>Grupo</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_detallelpromaster">
+      <%= render @detallelpromaster %><!--carga todos los relmen-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+
+</div>
+</div>

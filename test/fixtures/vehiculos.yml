@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clave: MyText
+  modelo: MyText
+  placas: MyText
+  marcas: MyText
+  descripcion: MyText
+  status: MyText
+  numeroeco: MyText
+  asignado: false
+  poliza: MyText
+  telseguro: MyString
+  mesverifica: 2016-06-28 16:15:19
+  kilometraje: MyString
+  kilometrajesem: MyString
+  aseguradora: MyText
+  fechavencseguro: 2016-06-28 16:15:19
+  fechaultverif: 2016-06-28 16:15:19
+
+two:
+  clave: MyText
+  modelo: MyText
+  placas: MyText
+  marcas: MyText
+  descripcion: MyText
+  status: MyText
+  numeroeco: MyText
+  asignado: false
+  poliza: MyText
+  telseguro: MyString
+  mesverifica: 2016-06-28 16:15:19
+  kilometraje: MyString
+  kilometrajesem: MyString
+  aseguradora: MyText
+  fechavencseguro: 2016-06-28 16:15:19
+  fechaultverif: 2016-06-28 16:15:19

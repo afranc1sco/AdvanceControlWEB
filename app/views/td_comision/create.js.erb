@@ -1,0 +1,14 @@
+$("#mynewtdcomision").modal('hide');
+$(".tdcomision_comentarios").val('');
+
+
+$("#container_td_comision").prepend('<%= j render @tdcomision %>'); //Prepend before append
+$("#tdcomision_<%= @tdcomision.id %>").hide().fadeIn(1000);
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

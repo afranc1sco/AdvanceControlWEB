@@ -1,0 +1,37 @@
+<%= form_for(@catmarca) do |f| %>
+  <% if @catmarca.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@catmarca.errors.count, "error") %> prohibited this catmarca from being saved:</h2>
+
+      <ul>
+      <% @catmarca.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Clave %><br>
+    <%= f.text_field :Clave %>
+  </div>
+  <div class="field">
+    <%= f.label :Descripcion %><br>
+    <%= f.text_field :Descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :Status %><br>
+    <%= f.text_field :Status %>
+  </div>
+  <div class="field">
+    <%= f.label :TipoMarca %><br>
+    <%= f.text_field :TipoMarca %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

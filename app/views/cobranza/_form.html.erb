@@ -1,0 +1,65 @@
+<%= form_for(@cobran) do |f| %>
+  <% if @cobran.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cobran.errors.count, "error") %> prohibited this cobran from being saved:</h2>
+
+      <ul>
+      <% @cobran.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Cliente %><br>
+    <%= f.text_field :Cliente %>
+  </div>
+  <div class="field">
+    <%= f.label :Documento %><br>
+    <%= f.text_field :Documento %>
+  </div>
+  <div class="field">
+    <%= f.label :Saldo %><br>
+    <%= f.text_field :Saldo %>
+  </div>
+  <div class="field">
+    <%= f.label :Status %><br>
+    <%= f.text_field :Status %>
+  </div>
+  <div class="field">
+    <%= f.label :RutaId %><br>
+    <%= f.text_field :RutaId %>
+  </div>
+  <div class="field">
+    <%= f.label :UltPago %><br>
+    <%= f.text_field :UltPago %>
+  </div>
+  <div class="field">
+    <%= f.label :FechaPag %><br>
+    <%= f.text_field :FechaPag %>
+  </div>
+  <div class="field">
+    <%= f.label :FechaVence %><br>
+    <%= f.text_field :FechaVence %>
+  </div>
+  <div class="field">
+    <%= f.label :FolioInterno %><br>
+    <%= f.text_field :FolioInterno %>
+  </div>
+  <div class="field">
+    <%= f.label :TipoDoc %><br>
+    <%= f.text_field :TipoDoc %>
+  </div>
+  <div class="field">
+    <%= f.label :DiaO %><br>
+    <%= f.text_field :DiaO %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

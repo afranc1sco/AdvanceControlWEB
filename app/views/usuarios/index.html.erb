@@ -1,0 +1,112 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Usuarios</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewusuario">
+        Nuevo usuario
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="usuarios" class="display"><!--el id usuarios es de datatables referenciado en usuarios.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>ID</th>
+      <th>Usuario</th>
+      <th>Email</th>
+      <th>Nombre</th>
+      <th>Perfil</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_usuarios">
+      <%= render @usuarios %><!--carga todos los usuarios-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@usuario, remote: true, :url => {:action => 'create'}, html: {class: "form-horizontal usuario-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewusuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar usuario</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Nombre, "Nombre:", class: "control-label col-md-2" %>
+              <div class="col-md-7">
+              <%= f.text_field :Nombre, class: "form-control usuario_nombre ",autofocus: true, minlength: "7", required: "true"  %>
+            </div>
+
+          </div>
+          <div class="well center-block">
+            <div class="form-group">
+              <h3 class="col-md-5">Datos de Sesión:</h3>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :empresamadre_id, "Empresa:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.select :empresamadre_id, options_for_select(Empresamadre.all.map{|e|[e.Empresa, e.id]}), class: "form-control" %>
+              </div>
+            </div>
+
+          <div class="form-group">
+            <%= f.label :usuario, "Usuario:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+              <%= f.text_field :usuario, class: "form-control usuario_usuario", minlength: "5", required: "true" %>
+            </div>
+
+              <%= f.label :email, "Email:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.email_field :email, class: "form-control usuario_email", minlength: "7", required: "true" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password, "Password:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+              <%= f.password_field :password, autocomplete: "off", class: "form-control usuario_password", minlength: "8", required: "true" %>
+            </div>
+              <%= f.label :password_confirmation, "Password Confirmation:", class: "control-label col-md-4" %>
+            <div class="col-md-3">
+              <%= f.password_field :password_confirmation, autocomplete: "off", equalTo:"#usuario_password", class: "form-control usuario_password_confirmation ", minlength: "8", required: "true" %>
+            </div>
+          </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewusuarioclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", usuarios_path(format:"csv") %> |
+  <%= link_to "Excel", usuarios_path(format:"xls") %>
+</p>

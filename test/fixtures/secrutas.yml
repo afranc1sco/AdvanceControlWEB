@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Rutad: MyString
+  Lunes: MyString
+  Martes: MyString
+  Miercoles: MyString
+  Jueves: MyString
+  Viernes: MyString
+  Sabado: MyString
+  Domingo: MyString
+  IdEmpresa: MyString
+
+two:
+  Rutad: MyString
+  Lunes: MyString
+  Martes: MyString
+  Miercoles: MyString
+  Jueves: MyString
+  Viernes: MyString
+  Sabado: MyString
+  Domingo: MyString
+  IdEmpresa: MyString

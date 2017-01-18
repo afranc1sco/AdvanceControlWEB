@@ -1,0 +1,22 @@
+
+<tr id="detalle_<%= detalleve.id %>">
+  <td><%= detalleve.ruta.Ruta %></td>
+  <td><%= @ventas.where(:Documento => detalleve.Docto).first.CodCliente %></td>
+  <td><%= detalleve.Docto %></td>
+  <td><%= detalleve.Articulo %></td>
+  <td><%= detalleve.Descripcion %></td>
+  <td><%= detalleve.Pza%></td>
+  <td><% if detalleve.Tipo == 0%>
+        Cajas
+      <%else%>
+        Piezas
+      <%end%>
+  </td>
+  <td><%= detalleve.Precio%></td>
+  <td><%= detalleve.IVA %></td>
+  <td><%= detalleve.Precio + detalleve.IVA%></td>
+  <td><%= detalleve.DescMon%></td>
+  <td><%= (detalleve.Precio + detalleve.IVA) - detalleve.DescMon %></td>
+
+
+</tr>

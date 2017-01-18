@@ -1,0 +1,376 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Productos</h1>
+<style>
+.container {
+  width: 100%;
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewproducto">
+        Nuevo producto
+      </button>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="productos" class="display"><!--el id productos es de datatables referenciado en productos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Producto</th>
+      <th>Sector</th>
+      <th>Codbarras</th>
+      <th>Vbase</th>
+      <th>Iva</th>
+      <th>Ban envase</th>
+      <th>Unimed</th>
+      <th>Foto</th>
+      <th>Acciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_productos">
+      <%= render @productos %><!--carga todos los productos-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@producto, remote: true, html: {class: "form-horizontal producto-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewproducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar producto</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <%= f.label :Clave, "Clave:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= f.text_field :Clave, class: "form-control producto_clave",autofocus: true, minlength: "1", required: "true"   %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Producto, "Producto:", class: "control-label col-md-3"  %>
+            <div class="col-md-9">
+              <%= f.text_field :Producto, class: "form-control producto_producto", minlength: "3", required: "true"   %>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+
+            <%= f.label :CodBarras, "Codigo de Barras:", class: "control-label col-md-3"  %>
+            <div class="col-md-9">
+              <%= f.text_field :CodBarras, class: "form-control producto_codbarras" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div id="marca"><%= render 'marca'  %></div><!--f:f es para que el parcial funcione con el formulario-->
+
+          </div>
+          <div class="form-group">
+
+            <%= f.label :IVA, "IVA: %", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.number_field :IVA, class: "form-control producto_iva" %>
+            </div>
+
+            <%= f.label :IEPS, "IEPS: %", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.number_field :IEPS, class: "form-control producto_ieps" %>
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+            <div id="unidadmedida"><%= render 'unidadmedida'  %></div><!--f:f es para que el parcial funcione con el formulario-->
+
+            </div>
+            <%= f.label :VBase, "Precio Base: $", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.number_field :VBase, class: "form-control producto_vbase" %>
+            </div>
+
+          </div>
+          <div class="form-group">
+            <%= f.fields_for :productosxpza do |productosxpza| %>
+              <%= productosxpza.label :PzaXCja,"PzaXCja:", class: "control-label col-md-3" %>
+              <div class="col-md-3">
+                <%= productosxpza.text_field :PzaXCja, class:"form-control producto_pzaxcja", minlength: "1", required: "true"  %>
+              </div>
+
+              <%= productosxpza.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+            <%end%>
+
+            <%= f.label :Ban_Envase, "Es envase:", class: "control-label col-md-3"  %>
+            <div class="col-md-1">
+              <%= f.check_box :Ban_Envase, class: "producto_ban_envase" %>
+            </div>
+
+          </div>
+          <div class="form-group">
+            <%= f.label :UniMedEq, "Unidad Medida Eq:", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.select :UniMedEq, options_for_select(@unidadmedidas.map{|e|[e.Abreviatura, e.Clave]}), class: "dropdown"  %>
+            </div>
+          </div>
+          <div class="form-group">
+
+            <%= f.label :Equivalente, "Valor Eq:", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.number_field :Equivalente, class: "form-control producto_equivalente" %>
+            </div>
+
+            <label class="control-label col-md-3">Utiliza Envase:</label>
+            <div class="col-md-1">
+              <input type="checkbox" id='showAreaBox' name='envase' class="producto_Utl.Env">
+            </div>
+
+          </div>
+
+          <div class="form-group">
+
+              <div id="sector"><%= render 'sector'  %></div><!--f:f es para que el parcial funcione con el formulario-->
+
+            <%= f.label :Granel, "granel:", class: "control-label col-md-2"  %>
+            <div class="col-md-1">
+              <%= f.check_box :Granel, class:"producto_granel" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+
+            <%= f.label :Cover, "Foto:", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.file_field :cover, class:"producto_cover"%>
+            </div>
+
+          </div>
+            <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+            <%= f.hidden_field :Status, value: "A" %>
+
+
+
+
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewproductoclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+
+
+<!-- Modal create action -->
+<%= form_for(@catgrupo, remote: true, html: {class: "form-horizontal "}) do |c| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewcategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar categoria</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <%= c.label :Clave, "Clave:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= c.text_field :Clave, class: "form-control catgrupo_clave",autofocus: true, minlength: "1", required: "true"   %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= c.label :Descripcion, "Descripcion:", class: "control-label col-md-3"  %>
+            <div class="col-md-9">
+              <%= c.text_field :Descripcion, class: "form-control catgrupo_descripcion", minlength: "3", required: "true"   %>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <%= c.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-2"%>
+            <div class="col-md-1">
+              <%= c.check_box :Status,{checked: true} %>
+            </div>
+          </div>
+            <%= c.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+            <%= c.hidden_field :TipoGrupo, value: "P" %>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewcategoryclose">Cerrar</button>
+          <%= c.submit "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+
+
+<!-- Modal create action -->
+<%= form_for(@catunidadmed, remote: true, html: {class: "form-horizontal "}) do |m| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewunimed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar unidad de medida</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <%= m.label :Clave, "Clave:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= m.text_field :Clave, class: "form-control unimed_clave",autofocus: true, minlength: "1", required: "true"   %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= m.label :UnidadMedida, "UnidadMedida:", class: "control-label col-md-3"  %>
+            <div class="col-md-9">
+              <%= m.text_field :UnidadMedida, class: "form-control unimed_unidadmedida", minlength: "3", required: "true"   %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= m.label :Abreviatura, "Abreviatura:", class: "control-label col-md-3"  %>
+            <div class="col-md-9">
+              <%= m.text_field :Abreviatura, class: "form-control unimed_abreviatura", minlength: "3", required: "true"   %>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <%= m.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-2"%>
+            <div class="col-md-1">
+              <%= m.check_box :Status,{checked: true} %>
+            </div>
+          </div>
+            <%= m.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewunimedclose">Cerrar</button>
+          <%= m.submit "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<!-- Modal create action -->
+<%= form_for(@catmarca, remote: true, html: {class: "form-horizontal "}) do |mk| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewmarca" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Marca</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <%= mk.label :Clave, "Clave:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= mk.text_field :Clave, class: "form-control catmarca_clave",autofocus: true, minlength: "1", required: "true"   %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= mk.label :Descripcion, "Descripcion:", class: "control-label col-md-3"  %>
+            <div class="col-md-9">
+              <%= mk.text_field :Descripcion, class: "form-control catmarca_descripcion", minlength: "3", required: "true"   %>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <%= mk.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-2"%>
+            <div class="col-md-1">
+              <%= mk.check_box :Status,{checked: true} %>
+            </div>
+          </div>
+            <%= mk.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+            <%= mk.hidden_field :TipoMarca, value: "P" %>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewcategoryclose">Cerrar</button>
+          <%= mk.submit "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<p>
+  Download:
+  <%= link_to "CSV", productos_path(format:"csv") %> |
+  <%= link_to "Excel", productos_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>
+
+
+<div class="modal fade" id="myimportdata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar Datos</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Nota: El formato excel a exportar debe ser .xlsx ó .csv
+        </p>
+        <%= form_tag import_productos_path, multipart: true do %>
+          <%= file_field_tag :file %>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="myimportdataclose">Close</button>
+        <%= submit_tag "Importar", class: "btn btn-primary", data: { disable_with: 'Importando' } %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Productos eliminados ó inhabilitados<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, productos_inactivos_path, class: "btn btn-danger btn-xs"%>

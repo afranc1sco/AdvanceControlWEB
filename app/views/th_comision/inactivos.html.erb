@@ -1,0 +1,43 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Comisiones inactivas</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+
+
+  <br>
+  <br>
+
+
+
+  <table id="th_comision" class="display"><!--el id th_comision es de datatables referenciado en th_comision.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>ID_Comisión</th>
+      <th>ID_Producto</th>
+      <th>Status</th>
+      <th>Comentarios</th>
+      <th>Producto</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_th_comision">
+      <%= render @th_comision %><!--carga todos los th_comision-->
+</tbody>
+
+
+</table>
+
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", th_comision_path(format:"csv") %> |
+  <%= link_to "Excel", th_comision_path(format:"xls") %>
+</p>
+<%= link_to 'Volver a comisiones', th_comision_path, class: "btn btn-primary btn-lg" %>

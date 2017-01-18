@@ -1,0 +1,33 @@
+<%= form_for(@stoc) do |f| %>
+  <% if @stoc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stoc.errors.count, "error") %> prohibited this stoc from being saved:</h2>
+
+      <ul>
+      <% @stoc.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Articulo %><br>
+    <%= f.text_field :Articulo %>
+  </div>
+  <div class="field">
+    <%= f.label :Stock %><br>
+    <%= f.text_field :Stock %>
+  </div>
+  <div class="field">
+    <%= f.label :Ruta %><br>
+    <%= f.text_field :Ruta %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

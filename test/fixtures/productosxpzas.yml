@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  producto: MyString
+  pzaxcja: 1
+  idempresa: MyString
+
+two:
+  producto: MyString
+  pzaxcja: 1
+  idempresa: MyString

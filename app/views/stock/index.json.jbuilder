@@ -1,0 +1,1 @@
+json.array! @stock, partial: 'stock/stoc', as: :stoc

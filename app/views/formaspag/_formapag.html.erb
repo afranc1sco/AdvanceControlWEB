@@ -1,0 +1,64 @@
+<tr id="formapag_<%= formapag.id %>">
+  <td><%=formapag.Clave%>
+
+    <!--Modal - update formapag-->
+<%= form_for(formapag, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{formapag.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdateformapag_<%= formapag.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar formapag</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="field">
+            <%= f.label :Forma,"Descripción:" %><br>
+            <%= f.text_field :Forma, class: "form-control ", minlength: "7", required: "true"  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-3"%>
+            <div class="col-md-1">
+              <%= f.check_box :Status %>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= formapag.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<script>
+  $(".formulario-validado-update<%=formapag.id%>").validate();
+
+</script>
+</td>
+  <td><%=formapag.Forma%></td>
+
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateformapag_<%= formapag.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <% if formapag.Status == true%>
+          <%= link_to 'Eliminar', formapag, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+        <%else%>
+          <%= link_to 'Habilitar', formapag, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+        <%end%>
+      </td>
+
+
+<td class="no" >
+</td>
+</tr>

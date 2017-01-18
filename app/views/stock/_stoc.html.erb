@@ -1,0 +1,29 @@
+<tr id="stoc_<%= stoc.id %>">
+
+    <%= form_for(stoc, :method => :put, remote: true, html: {class: "form-horizontal "}) do |f| %><!--ajax-->
+
+    <%= f.hidden_field :IdStock %>
+
+      <td>
+        <input id="f_cajas" type="number" value="<%= (stoc.Stock / stoc.producto.productosxpza.PzaXCja) %>" name="f_cajas"/>
+      </td>
+
+    <td>
+        <input id="f_piezas" type="number" value="<%= (stoc.Stock % stoc.producto.productosxpza.PzaXCja)%>" name="f_piezas"/> <!--le coloco el % (en sql es llamado operacion modulo) para que me traiga el resto que resulte de la division-->
+        <%= submit_tag "Ok", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+
+      </td>
+
+
+    <% end %>
+
+  <td><%=stoc.id%></td>
+  <td><%=stoc.Ruta%></td>
+  <td><%=stoc.producto.Clave%></td>
+  <td><%=stoc.producto.Producto%></td>
+  <td><%=stoc.producto.CodBarras%></td>
+  <td><%=stoc.producto.Sector%></td>
+  <td><%=stoc.Ruta%></td>
+
+
+</tr>

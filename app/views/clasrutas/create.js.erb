@@ -1,0 +1,6 @@
+$("#mynewclasruta").modal('hide');
+$(".clasruta_descripcion").val('');
+
+
+$("#container_clasrutas").prepend('<%= j render @clasruta %>'); //Prepend before append
+$("#clasruta_<%= @clasruta.id %>").hide().fadeIn(1000);

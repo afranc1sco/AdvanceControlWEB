@@ -1,0 +1,81 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Promociones inactivas</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#mygrupo">
+        Grupos
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="listapromo" class="display"><!--el id listapromo es de datatables referenciado en listapromo.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Caduca</th>
+      <th>Inicio</th>
+      <th>Final</th>
+      <th>Estado</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_listapromo">
+      <%= render @listapromo %><!--carga todos los listapromo-->
+</tbody>
+
+
+</table>
+
+  <div class="modal fade" id="mygrupo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Administrando grupos</h4>
+        </div>
+        <div class="modal-body">
+
+          <table id="listapromomaster" class="display"><!--el id listapromo es de datatables referenciado en listapromo.coffe y display class es una clase de datatables-->
+          <thead>
+
+            <tr><!--active es para sombrear la fila-->
+              <th>ID</th>
+              <th>ListaMaster</th>
+              <th>Asignación</th>
+              <th>Acción</th>
+
+            </tr>
+          </thead>
+            <tbody id="container_listapromomaster">
+            <%= render @listapromomaster %>
+          </tbody>
+
+
+          </table>
+
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mygroupclouse">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Volver a promociones', listapromo_path, class: "btn btn-primary btn-lg" %>

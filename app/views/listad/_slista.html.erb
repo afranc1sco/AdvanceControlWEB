@@ -1,0 +1,119 @@
+<tr id="slista_<%= slista.id %>">
+  <td><%=slista.Lista%>
+
+    <!--Modal - update slista-->
+<%= form_for(slista, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{slista.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdateslista_<%= slista.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar Lista de Descuento</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Lista, "Nombre:", class: "control-label col-md-3" %>
+            <div class="col-md-7">
+              <%= f.text_field :Lista, class: "form-control",autofocus: true, minlength: "3", required: "true"   %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Caduca,"Caduca:", class: "control-label col-xs-3 col-sm-6 " %>
+            <div class="col-md-1">
+              <%= f.check_box :Caduca %>
+            </div>
+        </div>
+
+        <div class="well center-block">
+          <div class="form-group">
+            <h3 class="col-md-5">Tipo de Lista:</h3>
+          </div>
+
+          <div class="form-group">
+            <%= f.radio_button(:Tipo, "R", class:"col-xs-2 col-sm-1") %>
+            <%= f.label(:Tipo, "Aplica a crédito", class:"col-md-3 ") %>
+          </div>
+
+          <div class="form-group">
+            <%= f.radio_button(:Tipo, "N", class:"col-xs-2 col-sm-1") %>
+            <%= f.label(:Tipo, "Aplica a contado", class:"col-md-3") %>
+          </div>
+
+          <div class="form-group">
+            <%= f.radio_button(:Tipo, "T", class:"col-xs-2 col-sm-1") %>
+            <%= f.label(:Tipo, "Aplica para ambas opciones", class:"col-md-3") %>
+          </div>
+        </div>
+
+        <div class="well center-block">
+          <div class="form-group">
+            <h3 class="col-md-5">Rango de Fechas:</h3>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :FechaIni,"Fecha de inicio:", class: "control-label col-md-3" %>
+            <div class="col-md-3">
+              <%= f.text_field :FechaIni, class: "form-control datepicker",required: "true"   %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :FechaFin,"Fecha de fin:", class: "control-label col-md-3" %>
+            <div class="col-md-3">
+              <%= f.text_field :FechaFin, class: "form-control datepicker", required: "true"   %>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= slista.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+<script>
+  $(".formulario-validado-update<%=slista.id%>").validate();
+
+</script>
+
+</td>
+  <td>
+    <%if slista.Tipo == "R" %>
+      Crédito
+    <% elsif slista.Tipo == "N" %>
+      Contado
+    <% elsif slista.Tipo == "T" %>
+      Crédito y Contado
+    <%end%>
+</td>
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateslista_<%= slista.id %>">
+          Editar
+        </button>
+
+        <!--Destroy-->
+        <%= link_to 'Eliminar', slista, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+        <%= link_to 'Añadir productos', producto_detalle_path(slista), class:"btn btn-primary btn-xs boton"  %>
+<!--slista es para pasar el id-->
+        <%= link_to 'Añadir clientes', cliente_detalle_path(slista), class:"btn btn-primary btn-xs boton"  %>
+
+      </td>
+
+
+<td class="no" >
+
+</td>
+</tr>

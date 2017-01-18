@@ -1,0 +1,77 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Vehículos eliminados ó deshabilitados</h1>
+<style>
+.container {
+  width: 100%;
+}
+.modal-dialog{
+  width: 78%;
+}
+</style>
+
+<div class="container">
+
+
+  <br>
+  <br>
+
+
+
+  <table id="vehiculos" class="display"><!--el id vehiculos es de datatables referenciado en vehiculos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Marcas</th>
+      <th>Modelo</th>
+      <th>Placas</th>
+      <th>MesVerificación</th>
+      <th>Kilometraje</th>
+      <th>FechaVencSeguro</th>
+      <th>Acciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_vehiculos">
+      <%= render @vehiculos %><!--carga todos los vehiculos-->
+</tbody>
+
+
+</table>
+<p>
+  Download:
+  <%= link_to "CSV", vehiculos_path(format:"csv") %> |
+  <%= link_to "Excel", vehiculos_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>
+
+
+<div class="modal fade" id="myimportdata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar Datos</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Nota: El formato excel a exportar debe ser .xlsx ó .csv
+        </p>
+        <%= form_tag import_vehiculos_path, multipart: true do %>
+          <%= file_field_tag :file %>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="myimportdataclose">Close</button>
+        <%= submit_tag "Importar", class: "btn btn-primary", data: { disable_with: 'Importando' } %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Volver a vehículos', vehiculos_path, class: "btn btn-primary btn-lg" %>

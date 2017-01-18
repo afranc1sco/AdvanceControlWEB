@@ -1,0 +1,39 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Activos inactivos</h1>
+<style>
+.container {
+  width: 100%;
+}
+
+</style>
+<div class="container">
+  <br>
+  <br>
+
+
+
+  <table id="superior" class="display"><!--el id activos es de datatables referenciado en activos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Id</th>
+      <th>Descripción</th>
+      <th>Modelo</th>
+      <th>FechaAlta</th>
+      <th>Serie</th>
+      <th>CB</th>
+      <th>Imagen</th>
+      <th>Status</th>
+      <th>Acciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_activos">
+      <%= render @activos %><!--carga todos los activos-->
+</tbody>
+
+
+</table>
+</div>
+<%= link_to 'Volver a Activos', activos_path, class: "btn btn-primary btn-lg" %>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Clave:</strong>
+  <%= @mensaje.Clave %>
+</p>
+
+<p>
+  <strong>Enbasea:</strong>
+  <%= @mensaje.EnBaseA %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @mensaje.Descripcion %>
+</p>
+
+<p>
+  <strong>Mensaje:</strong>
+  <%= @mensaje.Mensaje %>
+</p>
+
+<p>
+  <strong>Fechainicio:</strong>
+  <%= @mensaje.FechaInicio %>
+</p>
+
+<p>
+  <strong>Fechafinal:</strong>
+  <%= @mensaje.FechaFinal %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @mensaje.Estado %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @mensaje.IdEmpresa %>
+</p>
+
+<%= link_to 'Edit', edit_mensaje_path(@mensaje) %> |
+<%= link_to 'Back', mensajes_path %>

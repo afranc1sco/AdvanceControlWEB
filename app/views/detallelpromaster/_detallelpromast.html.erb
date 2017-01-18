@@ -1,0 +1,18 @@
+<tr id="detallelpromast_<%= detallelpromast.id %>">
+  <td><%= detallelpromast.listaprom.id %></td>
+  <td><%= detallelpromast.listaprom.Lista %></td>
+  <td><%= detallelpromast.listaprom.Descripcion %></td>
+  <td><%= detallelpromast.listapromomast.ListaMaster%></td>
+    <td>
+
+        <!--Destroy-->
+        <%= link_to 'Quitar', detallelpromast, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+      </td>
+
+    <td>
+
+    </td>
+
+
+</tr>

@@ -1,0 +1,66 @@
+<tr id="encuesta_<%= encuesta.id %>">
+  <td><%=encuesta.Clave_Enc%>
+    <!--Modal - update encuesta-->
+<%= form_for(encuesta, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{encuesta.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdateencuesta_<%= encuesta.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar encuesta</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Desc_Enc, "Descripción:", class:"control-label col-md-3" %>
+            <div class="col-md-8">
+              <%= f.text_area :Desc_Enc, class: "form-control ", autofocus: true, required: "true", minlength: "7"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Tipo_Enc, "Tipo:", class: "control-label col-md-3"  %>
+            <div class="col-md-2">
+            <%= f.select :Tipo_Enc, ['Encuesta de Selección', 'Encuesta con Respuesta Abierta'], class: "form-control "%>
+            </div>
+
+          </div>
+
+
+          <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= encuesta.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+<script>
+  $(".formulario-validado-update<%=encuesta.id%>").validate();
+
+</script>
+  </td>
+  <td><%=encuesta.Desc_Enc%></td>
+  <td><%=encuesta.Tipo_Enc%></td>
+
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateencuesta_<%= encuesta.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <%= link_to 'Eliminar', encuesta, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+      </td>
+
+
+<td class="no" >
+</td>
+</tr>

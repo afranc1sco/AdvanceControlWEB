@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  IdCobranza: MyString
+  Abono: MyString
+  Fecha: MyString
+  RutaId: MyString
+  SaldoAnt: MyString
+  Saldo: MyString
+  FormaP: MyString
+  DiaO: MyString
+  Documento: MyString
+  Cliente: MyString
+  IdEmpresa: MyString
+  Cancelada: MyString
+
+two:
+  IdCobranza: MyString
+  Abono: MyString
+  Fecha: MyString
+  RutaId: MyString
+  SaldoAnt: MyString
+  Saldo: MyString
+  FormaP: MyString
+  DiaO: MyString
+  Documento: MyString
+  Cliente: MyString
+  IdEmpresa: MyString
+  Cancelada: MyString

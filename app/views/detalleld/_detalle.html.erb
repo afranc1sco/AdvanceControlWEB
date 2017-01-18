@@ -1,0 +1,91 @@
+<tr id="detalle_<%= detalle.id %>">
+  <td><%= detalle.Articulo %>
+       <!--Modal - update detalle-->
+    <%= form_for(detalle, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{detalle.id}"}) do |f| %><!--ajax-->
+      <div nohidden class="modal fade si" id="myupdatedetalle_<%= detalle.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Editando descuento al producto</h4>
+            </div>
+
+            <div class="modal-body">
+              <h4 class="text-center">Descuento para crédito y contado</h4><br>
+
+                <div class="form-group">
+                  <p class="control-label col-md-3">Producto Clave:</p>
+                  <div class="control-label col-md-1" style="font-weight: bold">
+                    <%= detalle.Articulo %>
+                  </div>
+                  <p class="control-label col-md-4">Nombre del Producto:</p>
+                  <div class="control-label col-md-4" style="font-weight: bold">
+                    <%= detalle.productos.Producto %>
+                  </div>
+                </div>
+
+                <div class="well center-block">
+                    <div class="form-group">
+                      <div class="col-md-5">
+                        <%= f.check_box(:Tipo, {}, "P", "R" )%><!--Agregarle valores a los check_box-->
+                        <%= f.label :Tipo,"Por porcentaje" %>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <%= f.label :Factor, "Descuento por porcentaje:", class:"control-label col-md-4" %>
+
+                      <div class="col-md-5">
+                        <div class="input-group">
+                          <%= f.number_field :Factor, class:"form-control", autofocus: true, required: "true" %>
+                          <div class="input-group-addon">%</div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <script>
+                  $(".formulario-validado-update<%=detalle.id%>").validate();
+
+                </script>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" id="myupdatebutton_<%= detalle.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+            </div>
+          </div>
+        </div>
+      </div>
+    <%end%>
+
+
+    <script>
+      $(".formulario-validado-update<%=detalle.id%>").validate();
+
+    </script>
+  </td>
+  <td><%= detalle.productos.Producto %></td>
+  <td><%= detalle.Factor %></td>
+  <td><%= detalle.productos.CodBarras %></td>
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatedetalle_<%= detalle.id %>">
+          Editar
+        </button>
+
+        <!--Destroy-->
+        <%= link_to 'Eliminar', detalle, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+      </td>
+
+
+<td class="no" >
+
+</td>
+
+
+</tr>

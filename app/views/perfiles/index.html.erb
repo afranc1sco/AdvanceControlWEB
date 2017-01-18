@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Perfiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Altas</th>
+      <th>Bajas</th>
+      <th>Modi</th>
+      <th>Listar</th>
+      <th>Modulo</th>
+      <th>Iduser</th>
+      <th>Aceso</th>
+      <th>Codigo</th>
+      <th>Usapw</th>
+      <th>Otro</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @perfiles.each do |perfil| %>
+      <tr>
+        <td><%= perfil.Altas %></td>
+        <td><%= perfil.Bajas %></td>
+        <td><%= perfil.Modi %></td>
+        <td><%= perfil.Listar %></td>
+        <td><%= perfil.Modulo %></td>
+        <td><%= perfil.IdUser %></td>
+        <td><%= perfil.Aceso %></td>
+        <td><%= perfil.Codigo %></td>
+        <td><%= perfil.usaPW %></td>
+        <td><%= perfil.Otro %></td>
+        <td><%= perfil.Descripcion %></td>
+        <td><%= link_to 'Show', perfil %></td>
+        <td><%= link_to 'Edit', edit_perfil_path(perfil) %></td>
+        <td><%= link_to 'Destroy', perfil, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Perfil', new_perfil_path %>

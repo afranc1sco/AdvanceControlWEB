@@ -1,0 +1,29 @@
+<%= form_for(@formapag) do |f| %>
+  <% if @formapag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@formapag.errors.count, "error") %> prohibited this formapag from being saved:</h2>
+
+      <ul>
+      <% @formapag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :forma %><br>
+    <%= f.text_field :forma %>
+  </div>
+  <div class="field">
+    <%= f.label :clave %><br>
+    <%= f.text_field :clave %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.check_box :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

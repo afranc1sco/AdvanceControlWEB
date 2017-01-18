@@ -1,0 +1,45 @@
+<canvas id="mybarChart"></canvas>
+
+
+<!-- Chart.js -->
+<script>
+<% if @rutas != nil%>
+  // Bar chart
+  var ctx = document.getElementById("mybarChart");
+  var mybarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        <% @rutas.each do |ruta| %>
+            "<%= ruta.Ruta %>"
+            <%= "," unless ruta == @rutas.last %>
+        <% end %>
+      ],
+      datasets: [{
+        label: 'Clientes',
+        backgroundColor: "#26B99A",
+        data: [
+          <% @rutas.each do |ruta| %>
+              "<%= ruta.relclirutas.where('relclirutas.Fecha >= ? AND relclirutas.Fecha <= ?',(params[:search].to_date).strftime('%Y-%m-%d'),(params[:search2].to_date).strftime('%Y-%m-%d')).count %>"
+              <%= "," unless ruta == @rutas.last %>
+
+
+
+          <% end %>
+        ]
+      }]
+    },
+
+
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+<%end%>
+</script>

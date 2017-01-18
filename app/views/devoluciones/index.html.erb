@@ -1,0 +1,14 @@
+<h2>Devoluciones</h2>
+<div class="well center-block">
+
+  <%= form_tag("/busqueda_devoluciones", method: 'get', remote: true, id:"search",class: "form-horizontal" ) do %>
+    <%= render 'partials/buscadorReportes/buscador_reportes' %>
+    <%= render 'partials/buscadorReportes/buscador_reportes2' %>
+    <%= render 'partials/buscadorReportes/buscador_reportes3' %>
+    <%= render 'partials/buscadorReportes/buscador_reportes4' %>
+    <%= render 'partials/buscadorReportes/buscador_reportes5' %>
+
+  <%end%>
+
+</div>
+<div id="devoluciones"><%= render 'devoluciones' %></div>

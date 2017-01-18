@@ -1,0 +1,8 @@
+<%= form_for(@producto, remote: true, html: {class: "form-horizontal producto-validado"}) do |f| %> <!--ajax remote: true-->
+  <%= f.label :UniMed, "Unidad Medida:", class: "control-label col-md-3"  %>
+  <div class="col-md-3">
+  <%= f.select :UniMed, options_for_select(@unidadmedidas.map{|e|[e.Abreviatura, e.Clave]}), :onchange => ("$(this).submit()"), class: "dropdown"  %>
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mynewunimed">
+    ...
+  </button>
+<%end%>

@@ -1,0 +1,84 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Formas de pago</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewformapag">
+        Nueva Forma de pago
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="formaspag" class="display"><!--el id formaspag es de datatables referenciado en formaspag.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Forma de pago</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_formaspag">
+      <%= render @formaspag %><!--carga todos los formaspag-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@formapag, remote: true, html: {class: "form-horizontal formapag-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewformapag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Forma de pago</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="field">
+            <%= f.label :Clave,"Clave:" %><br>
+            <%= f.text_field :Clave, class: "form-control formapag_clave",autofocus: true, minlength: "1", required: "true"   %>
+          </div>
+
+          <div class="field">
+            <%= f.label :Forma,"Descripción:" %><br>
+            <%= f.text_field :Forma, class: "form-control formapag_forma", minlength: "7", required: "true"   %>
+          </div>
+          <div class="form-group">
+            <%= f.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-3"%>
+            <div class="col-md-1">
+              <%= f.check_box :Status %>
+            </div>
+          </div>
+          <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewformapagclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", formaspag_path(format:"csv") %> |
+  <%= link_to "Excel", formaspag_path(format:"xls") %>
+</p>
+<%= link_to 'Formas de pago eliminados ó inhabilitados<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, formaspag_inactivos_path, class: "btn btn-danger btn-xs"%>

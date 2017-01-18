@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Clave</Data></Cell>
+        <Cell><Data ss:Type="String">Producto</Data></Cell>
+        <Cell><Data ss:Type="String">CodBarras</Data></Cell>
+        <Cell><Data ss:Type="String">Granel</Data></Cell>
+        <Cell><Data ss:Type="String">IVA</Data></Cell>
+        <Cell><Data ss:Type="String">UniMed</Data></Cell>
+        <Cell><Data ss:Type="String">VBase</Data></Cell>
+        <Cell><Data ss:Type="String">Equivalente</Data></Cell>
+        <Cell><Data ss:Type="String">Sector</Data></Cell>
+        <Cell><Data ss:Type="String">Ban_Envase</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+      </Row>
+
+      <% @productos.each do |producto| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= producto.Clave%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.Producto%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.CodBarras%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.Granel%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.IVA%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.UniMed%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.VBase%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.Equivalente%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.Sector%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.Ban_Envase%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= producto.IdEmpresa%></Data></Cell>
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

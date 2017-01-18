@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">email</Data></Cell>
+        <Cell><Data ss:Type="String">usuario</Data></Cell>
+        <Cell><Data ss:Type="String">empresa_id</Data></Cell>
+        </Row>
+
+      <% @usuarios.each do |usuario| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= usuario.Nombre%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= usuario.email%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= usuario.usuario%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= usuario.empresa_id%></Data></Cell>
+
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

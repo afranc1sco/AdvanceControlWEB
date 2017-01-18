@@ -1,0 +1,123 @@
+<tr id="cuota_<%= cuota.id %>">
+  <td><%=cuota.Clave%>
+    <!--Modal - update cuota-->
+  <%= form_for(cuota, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{cuota.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdatecuota_<%= cuota.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar cuota</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <%= f.label :Tipo, "Clasificación:", class: "control-label col-xs-7 col-sm-6 col-md-2 " %>
+            <div class="col-md-1">
+              <%= f.check_box :Tipo %>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <%= f.label :Producto, "Producto:", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.select :Producto, options_for_select(Producto.all.map{|e|[e.Producto, e.Clave]},selected: cuota.Producto) %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :UniMed, "Unidad Medida:", class: "control-label col-md-3"  %>
+            <div class="col-md-2">
+            <%= f.select :UniMed, ['PZA', 'CJ', 'KG'], class: "form-control "%>
+            </div>
+            <%= f.label :Cantidad, "Cuota:", class: "control-label col-md-1"  %>
+            <div class="col-md-3">
+              <%= f.number_field :Cantidad, class: "form-control", autofocus: true, required: "true", minlength: "1"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Descripcion, "Descripción:", class:"control-label col-md-3" %>
+            <div class="col-md-8">
+              <%= f.text_area :Descripcion, class: "form-control", required: "true", minlength: "7"  %>
+            </div>
+          </div>
+
+          <div class="well center-block">
+            <div class="form-group">
+              <h3 class="col-md-5">Periodo:</h3>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :FechaI,"Inicio:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaI, class: "form-control datepicker", required: "true", minlength: "9"  %>
+              </div>
+
+              <%= f.label :FechaF,"Fin:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaF, class: "form-control datepicker", required: "true", minlength: "9"  %>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <%= f.label :Activa,"Inactiva:", class: "control-label col-xs-7 col-sm-6 col-md-2"%>
+            <div class="col-md-1">
+              <%= f.check_box :Activa %>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= cuota.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%end%>
+  <script>
+    $(".formulario-validado-update<%=cuota.id%>").validate();
+
+  </script>
+</td>
+  <td><%=cuota.Producto%></td>
+  <td><%=cuota.Producto%></td>
+  <td><%=cuota.Descripcion%></td>
+  <td><%=cuota.UniMed%></td>
+  <td><%=cuota.Cantidad%></td>
+  <td><%=cuota.FechaI%></td>
+  <td><%=cuota.FechaF%></td>
+  <td>
+    <%if cuota.Activa == TRUE %>
+      Inactiva
+    <% elsif cuota.Activa == FALSE %>
+      Activa
+    <%end%>
+  </td>
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatecuota_<%= cuota.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <%= link_to 'Eliminar', cuota, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+      </td>
+
+
+<td class="no" >
+      </td>
+</tr>

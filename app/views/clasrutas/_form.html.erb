@@ -1,0 +1,29 @@
+<%= form_for(@clasruta) do |f| %>
+  <% if @clasruta.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@clasruta.errors.count, "error") %> prohibited this clasruta from being saved:</h2>
+
+      <ul>
+      <% @clasruta.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :IdCRutas %><br>
+    <%= f.text_field :IdCRutas %>
+  </div>
+  <div class="field">
+    <%= f.label :Descripcion %><br>
+    <%= f.text_field :Descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :NivelNum %><br>
+    <%= f.text_field :NivelNum %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

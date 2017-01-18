@@ -1,0 +1,105 @@
+<%if @cobranza_bitacora != nil%>
+<!--<p id="notice"><%= notice %></p>-->
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+
+  <br>
+  <br>
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Id</th>
+      <th>Ruta</th>
+      <th>Clave</th>
+      <th>Cliente</th>
+      <th>Nombre Corto</th>
+      <th>IdVendedor</th>
+      <th>Vendedor</th>
+      <th>Folio</th>
+      <th>Total</th>
+      <th>Fecha </th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_cobranza">
+      <% @cobranza_bitacora.each do |cb| %>
+      <tr id="cobran_<%= cb.id %>">
+        <td><%=cb.id%>
+
+          <div class="modal fade" id="mynewabono_<%= cb.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Pagos</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <table id="cob" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+                    <thead>
+
+                      <tr><!--active es para sombrear la fila-->
+                        <th>Abono</th>
+                        <th>Fecha</th>
+                        <th>Saldo Anterior</th>
+                        <th>Saldo</th>
+                        <th>Forma</th>
+                      </tr>
+                    </thead>
+                      <tbody id="container_abono_<%= cb.id %>">
+                        <%= render @detallecob.where(:IdCobranza => cb.id) %><!--carga todos los td_comision-->
+
+                      </tbody>
+                  </table>
+
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewabonoclose_<%= cb.id %>">Cerrar</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+        </td>
+
+
+
+        <td><%=cb.ruta.Ruta%></td>
+        <td><%=cb.Cliente%></td>
+        <td><%=cb.cliente.Nombre%></td>
+        <td><%=cb.cliente.NombreCorto%></td>
+        <td><%=cb.ruta.vendedores.IdVendedor%></td>
+        <td><%=cb.ruta.vendedores.Nombre%></td>
+        <td><%=cb.Documento%></td>
+        <td><%= cb.detallecob.sum(:Abono)%>  </td>
+        <td><%=cb.FechaReg.strftime("%d-%m-%Y")%></td>
+        <td>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mynewabono_<%= cb.id %>">
+            <i class="fa fa-money" aria-hidden="true">Abono</i>
+          </button>
+
+        </td>
+      <td></td>
+      </tr>
+
+      <% end %>
+
+</tbody>
+
+
+</table>
+</div >
+<%end%>

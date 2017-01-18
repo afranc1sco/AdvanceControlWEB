@@ -1,0 +1,2 @@
+module SecrutasHelper
+end

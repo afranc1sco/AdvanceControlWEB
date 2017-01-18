@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @cobran.Cliente %>
+</p>
+
+<p>
+  <strong>Documento:</strong>
+  <%= @cobran.Documento %>
+</p>
+
+<p>
+  <strong>Saldo:</strong>
+  <%= @cobran.Saldo %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @cobran.Status %>
+</p>
+
+<p>
+  <strong>Rutaid:</strong>
+  <%= @cobran.RutaId %>
+</p>
+
+<p>
+  <strong>Ultpago:</strong>
+  <%= @cobran.UltPago %>
+</p>
+
+<p>
+  <strong>Fechapag:</strong>
+  <%= @cobran.FechaPag %>
+</p>
+
+<p>
+  <strong>Fechavence:</strong>
+  <%= @cobran.FechaVence %>
+</p>
+
+<p>
+  <strong>Foliointerno:</strong>
+  <%= @cobran.FolioInterno %>
+</p>
+
+<p>
+  <strong>Tipodoc:</strong>
+  <%= @cobran.TipoDoc %>
+</p>
+
+<p>
+  <strong>Diao:</strong>
+  <%= @cobran.DiaO %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @cobran.IdEmpresa %>
+</p>
+
+<%= link_to 'Edit', edit_cobran_path(@cobran) %> |
+<%= link_to 'Back', cobranza_path %>

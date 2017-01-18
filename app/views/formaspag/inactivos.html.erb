@@ -1,0 +1,38 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Formas de pago inactivas</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <br>
+  <br>
+
+
+
+  <table id="formaspag" class="display"><!--el id formaspag es de datatables referenciado en formaspag.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Forma de pago</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_formaspag">
+      <%= render @formaspag %><!--carga todos los formaspag-->
+</tbody>
+
+
+</table>
+
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", formaspag_path(format:"csv") %> |
+  <%= link_to "Excel", formaspag_path(format:"xls") %>
+</p>
+<%= link_to 'Volver a Formas de pago', formaspag_path, class: "btn btn-primary btn-lg" %>

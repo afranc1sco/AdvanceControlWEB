@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Continuidad</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rutaid</th>
+      <th>Diao</th>
+      <th>Folvta</th>
+      <th>Folped</th>
+      <th>Foldevol</th>
+      <th>Folcob</th>
+      <th>Udiao</th>
+      <th>Ctenvo</th>
+      <th>Idempresa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @continuidad.each do |continuid| %>
+      <tr>
+        <td><%= continuid.RutaID %></td>
+        <td><%= continuid.DiaO %></td>
+        <td><%= continuid.FolVta %></td>
+        <td><%= continuid.FolPed %></td>
+        <td><%= continuid.FolDevol %></td>
+        <td><%= continuid.FolCob %></td>
+        <td><%= continuid.UDiaO %></td>
+        <td><%= continuid.CteNvo %></td>
+        <td><%= continuid.IdEmpresa %></td>
+        <td><%= link_to 'Show', continuid %></td>
+        <td><%= link_to 'Edit', edit_continuid_path(continuid) %></td>
+        <td><%= link_to 'Destroy', continuid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Continuid', new_continuid_path %>

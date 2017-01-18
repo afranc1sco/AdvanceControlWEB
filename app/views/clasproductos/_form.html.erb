@@ -1,0 +1,29 @@
+<%= form_for(@clasproducto) do |f| %>
+  <% if @clasproducto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@clasproducto.errors.count, "error") %> prohibited this clasproducto from being saved:</h2>
+
+      <ul>
+      <% @clasproducto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Descripcion %><br>
+    <%= f.text_field :Descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :NivelNum %><br>
+    <%= f.text_field :NivelNum %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

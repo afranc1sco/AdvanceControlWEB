@@ -1,0 +1,18 @@
+$("#myproductadder_<%= @detalle.Articulo %>").modal('hide');
+$(".detalle_tipo").val('');
+$(".detalle_factor").val('');
+
+
+$("#container_detalleld").prepend('<%= j render @detalle %>'); //Prepend before append
+$("#detalle_<%= @detalle.id %>").hide().fadeIn(1000);
+
+$("#producto_<%= @detalle.Articulo %>").fadeOut(500, function(){
+  $(this).remove();
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

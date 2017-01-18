@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Clave</Data></Cell>
+        <Cell><Data ss:Type="String">EnBaseA</Data></Cell>
+        <Cell><Data ss:Type="String">Descripcion</Data></Cell>
+        <Cell><Data ss:Type="String">Mensaje</Data></Cell>
+        <Cell><Data ss:Type="String">Estado</Data></Cell>
+        <Cell><Data ss:Type="String">FechaInicio</Data></Cell>
+        <Cell><Data ss:Type="String">FechaFinal</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+      </Row>
+
+      <% @mensajes.each do |mensaje| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= mensaje.Clave%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= mensaje.EnBaseA%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= mensaje.Descripcion%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= mensaje.Mensaje%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= mensaje.Estado%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= mensaje.FechaInicio%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= mensaje.FechaFinal%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= mensaje.IdEmpresa%></Data></Cell>
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

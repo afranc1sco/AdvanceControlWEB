@@ -1,0 +1,37 @@
+<%= form_for(@codigopostal) do |f| %>
+  <% if @codigopostal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@codigopostal.errors.count, "error") %> prohibited this codigopostal from being saved:</h2>
+
+      <ul>
+      <% @codigopostal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :CP %><br>
+    <%= f.text_field :CP %>
+  </div>
+  <div class="field">
+    <%= f.label :Colonia %><br>
+    <%= f.text_field :Colonia %>
+  </div>
+  <div class="field">
+    <%= f.label :Municipio %><br>
+    <%= f.text_field :Municipio %>
+  </div>
+  <div class="field">
+    <%= f.label :Estado %><br>
+    <%= f.text_field :Estado %>
+  </div>
+  <div class="field">
+    <%= f.label :Ciudad %><br>
+    <%= f.text_field :Ciudad %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

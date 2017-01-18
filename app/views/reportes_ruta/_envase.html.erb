@@ -1,0 +1,41 @@
+<% if @recarga != nil%>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Clave</th>
+      <th>Nombre</th>
+      <th>Articulo</th>
+      <th>Producto</th>
+      <th>Envase</th>
+      <th>Entregados</th>
+      <th>Devueltos</th>
+      <th>Saldo</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_recarg">
+      <% @envases.each do |envase| %>
+      <tr id="recarg_<%= recarg.id %>">
+        <td><%=envase.ruta.Ruta%></td>
+        <td><%=envase.Articulo%></td>
+        <td><%=envase.producto.Producto%></td>
+        <td><%=envase.Fecha.try(:strftime,"%d-%m-%Y")%></td>
+        <td><%=envase.Hora.try(:strftime,"%H:%M")%></td>
+        <td><%=envase.Cajas%></td>
+
+      <td></td>
+      </tr>
+
+      <% end %>
+
+</tbody>
+
+
+</table>
+
+<% end %>

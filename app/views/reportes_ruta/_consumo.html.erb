@@ -1,0 +1,39 @@
+<% if @consumo != nil%>
+
+
+
+  <table class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Odometro inicial</th>
+      <th>Odometro final</th>
+      <th>Kilometros recorridos</th>
+      <th>Tanque inicial</th>
+      <th>Tanque Final</th>
+      <th>Litros cargados</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_recarg">
+      <% @consumo.each do |consumo| %>
+      <tr>
+        <td><%=consumo.OdometroInicial%></td>
+        <td><%=consumo.OdometroFinal%></td>
+        <td><%=consumo.KmR%></td>
+        <td><%=consumo.TanqueInicial%></td>
+        <td><%=consumo.TanqueFinal%></td>
+        <td><%=consumo.LitrosCargados%></td>
+
+      <td></td>
+      </tr>
+
+      <% end %>
+
+</tbody>
+
+
+</table>
+
+<% end %>

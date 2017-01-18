@@ -1,0 +1,49 @@
+<%= form_for(@activo) do |f| %>
+  <% if @activo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activo.errors.count, "error") %> prohibited this activo from being saved:</h2>
+
+      <ul>
+      <% @activo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Descripcion %><br>
+    <%= f.text_field :Descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :Modelo %><br>
+    <%= f.text_field :Modelo %>
+  </div>
+  <div class="field">
+    <%= f.label :Fecha %><br>
+    <%= f.text_field :Fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :Imagen %><br>
+    <%= f.text_field :Imagen %>
+  </div>
+  <div class="field">
+    <%= f.label :Serie %><br>
+    <%= f.text_field :Serie %>
+  </div>
+  <div class="field">
+    <%= f.label :CB %><br>
+    <%= f.text_field :CB %>
+  </div>
+  <div class="field">
+    <%= f.label :Status %><br>
+    <%= f.text_field :Status %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

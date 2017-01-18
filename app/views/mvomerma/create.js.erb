@@ -1,0 +1,16 @@
+$("#mynewmvmerma").modal('hide');
+$(".mvmerma_clave").val('');
+$(".mvmerma_merma").val('');
+
+if (<%= @mvmerma.Status == true %>){
+  $("#container_mvomerma").prepend('<%= j render @mvmerma %>'); //Prepend before append
+  $("#mvmerma_<%= @mvmerma.id %>").hide().fadeIn(1000);
+}
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

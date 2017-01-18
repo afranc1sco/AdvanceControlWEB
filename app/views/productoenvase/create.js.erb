@@ -1,0 +1,17 @@
+$(".producto_clave").val('');
+$(".producto_producto").val('');
+$(".producto_codbarras").val('');
+$(".producto_iva").val('');
+$(".producto_ieps").val('');
+
+
+
+$("#container_productoenvase").prepend('<%= j render @productoenvas %>'); //Prepend before append
+$("#productoenvas_<%= @productoenvas.id %>").hide().fadeIn(1000);
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

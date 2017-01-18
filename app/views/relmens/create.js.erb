@@ -1,0 +1,23 @@
+$("#container_relmens").prepend('<%= j render @relmen %>'); //Prepend before append
+$("#relmen_<%= @relmen.id %>").hide().fadeIn(1000);
+
+$("#producto_<%= @relmen.CodProducto %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+});
+$("#cliente_<%= @relmen.CodCliente %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+});
+$("#ruta_<%= @relmen.CodRuta %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+});
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

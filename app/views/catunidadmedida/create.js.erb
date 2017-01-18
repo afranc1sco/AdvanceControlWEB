@@ -1,0 +1,13 @@
+$("#mynewunimed").modal('hide');
+$(".unimed_clave").val('');
+$(".unimed_unidadmedida").val('');
+$(".unimed_unimed_abreviatura").val('');
+
+$("#unidadmedida").html("<%= escape_javascript(render("productos/unidadmedida"))%>")
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

@@ -1,0 +1,1 @@
+json.partial! "catbancos/catbanco", catbanco: @catbanco

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  status: false
+  direccion: MyString
+  telefono: MyString
+  pdapw: MyString
+  numlicencia: MyString
+  metadiaria: MyString
+  metames: MyString
+  movil: MyString
+  vencelic: 2016-06-26 22:40:34
+  clave: MyString
+
+two:
+  nombre: MyString
+  status: false
+  direccion: MyString
+  telefono: MyString
+  pdapw: MyString
+  numlicencia: MyString
+  metadiaria: MyString
+  metames: MyString
+  movil: MyString
+  vencelic: 2016-06-26 22:40:34
+  clave: MyString

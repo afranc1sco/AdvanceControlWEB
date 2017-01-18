@@ -1,0 +1,45 @@
+<%= form_for(@ayudante) do |f| %>
+  <% if @ayudante.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ayudante.errors.count, "error") %> prohibited this ayudante from being saved:</h2>
+
+      <ul>
+      <% @ayudante.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :direccion %><br>
+    <%= f.text_field :direccion %>
+  </div>
+  <div class="field">
+    <%= f.label :telefono %><br>
+    <%= f.text_field :telefono %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.check_box :status %>
+  </div>
+  <div class="field">
+    <%= f.label :numlicencia %><br>
+    <%= f.text_field :numlicencia %>
+  </div>
+  <div class="field">
+    <%= f.label :vencelic %><br>
+    <%= f.datetime_select :vencelic %>
+  </div>
+  <div class="field">
+    <%= f.label :clave %><br>
+    <%= f.text_field :clave %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

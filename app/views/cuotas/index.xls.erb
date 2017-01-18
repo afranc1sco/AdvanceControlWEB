@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Descripcion</Data></Cell>
+        <Cell><Data ss:Type="String">Clave</Data></Cell>
+        <Cell><Data ss:Type="String">Activa</Data></Cell>
+        <Cell><Data ss:Type="String">Producto</Data></Cell>
+        <Cell><Data ss:Type="String">UniMed</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+
+      </Row>
+
+      <% @cuotas.each do |cuota| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= cuota.Descripcion%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cuota.Clave%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cuota.Activa%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cuota.Producto%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cuota.UniMed%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cuota.IdEmpresa%></Data></Cell>
+
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -1,0 +1,12 @@
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+
+$("#container_cobranza").prepend('<%= j render @cobran %>'); //Prepend before append
+$("#cobran<%= @cobran.id %>").hide().fadeIn(1000);
+
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

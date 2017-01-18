@@ -1,0 +1,118 @@
+<tr id="cobran_<%= cobran.id %>">
+  <td><%=cobran.id%>
+
+
+    <!-- Modal create action -->
+    <%= form_for(@detalleco, remote: true, html: {class: "form-horizontal formulario-validado-create#{cobran.id}"}) do |f| %> <!--ajax remote: true-->
+      <div class="modal fade" id="mynewabono_<%= cobran.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Aplicar pago</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                  <%= f.label :Cliente,"Cliente:", class: "control-label col-md-2"%>
+                  <div class="col-md-3">
+                    <%= f.text_field :Cliente, class: "form-control ", value: cobran.Cliente, disabled:true  %>
+                  </div>
+
+                  <%= f.label :Documento,"Documento:", class: "control-label col-md-2" %>
+                  <div class="col-md-3">
+                    <%= f.text_field :Documento, class: "form-control ", required: "true", value: cobran.Documento, disabled:true  %>
+                  </div>
+                  <%= f.hidden_field :IdCobranza, value: cobran.id %>
+                  <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+                  <%= f.hidden_field :Fecha, value: Time.now.strftime("%d-%m-%Y")%>
+                  <%= f.hidden_field :SaldoAnt, value: cobran.Saldo - cobran.detallecob.sum(:Abono), class: "form-control abono-saldoanterior_#{cobran.id}"%>
+                  <%= f.hidden_field :Documento, class: "form-control ", required: "true", value: cobran.Documento  %>
+                  <%= f.hidden_field :Cliente, class: "form-control ", value: cobran.Cliente  %>
+
+                </div>
+
+              <%if (cobran.Saldo - cobran.detallecob.sum(:Abono)) != 0 %>
+                <div class="form-group">
+                  <%= f.label :Abono,"Abono:", class: "control-label col-md-2 label-abono#{cobran.id}" %>
+                  <div class="col-md-3">
+                    <%= f.number_field :Abono, class: "form-control abono-abono#{cobran.id}", required: "true", max: (cobran.Saldo - cobran.detallecob.sum(:Abono)), min: 1 %>
+                  </div>
+
+                    <%= button_tag(type: "submit", class: "btn btn-success col-md-4", id:"btn#{cobran.id}", data: { disable_with: 'Creando' }) do %>
+                      <i class="fa fa-check" aria-hidden="true"></i> Aplicar pago
+                    <% end %>
+
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :FormaP, "Forma Pago:", class: "control-label col-md-3"  %>
+                  <div class="col-md-3">
+                    <%= f.select :FormaP, options_for_select(@Formaspago.map{|e|[e.Forma, e.IdFpag]}), class: "form-control" %>
+                  </div>
+                </div>
+              <%end%>
+
+
+
+                <table id="cob" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+                <thead>
+
+                  <tr><!--active es para sombrear la fila-->
+                    <th>Abono</th>
+                    <th>Fecha</th>
+                    <th>Saldo Anterior</th>
+                    <th>Saldo</th>
+                    <th>Forma</th>
+                  </tr>
+                </thead>
+                  <tbody id="container_abono_<%= cobran.id %>">
+                    <%= render @detallecob.where(:IdCobranza => cobran.id) %><!--carga todos los td_comision-->
+
+                  </tbody>
+              </table>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewabonoclose_<%= cobran.id %>">Cerrar</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <%end%>
+    </div>
+    <script>
+      $(".formulario-validado-create<%=cobran.id%>").validate();
+
+    </script>
+  </td>
+
+
+
+  <td><%=cobran.ruta.Ruta%></td>
+  <td><%=cobran.ruta.vendedores.Nombre%></td>
+  <td><%=cobran.Cliente%></td>
+  <td><%=cobran.cliente.Nombre%></td>
+  <td><%=cobran.cliente.NombreCorto%></td>
+  <td><%=cobran.Documento%></td>
+  <td><%=cobran.Saldo%></td>
+  <td class="CtaxCobrar_SaldoAbonos_<%=cobran.id%>">
+    <%if cobran.detallecob == nil%>
+    <%else%>
+      <%= cobran.detallecob.sum(:Abono)%>
+    <%end%>
+  </td>
+  <td class="CtaxCobrar_SaldoActual_<%=cobran.id%>"><%=cobran.Saldo - cobran.detallecob.sum(:Abono)%></td>
+  <td><%=cobran.FechaReg.strftime("%d-%m-%Y")%></td>
+  <td><%=cobran.FechaVence.strftime("%d-%m-%Y")%></td>
+  <td><%=cobran.TipoDoc%></td>
+  <td>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mynewabono_<%= cobran.id %>">
+      <i class="fa fa-money" aria-hidden="true">Abono</i>
+    </button>
+
+  </td>
+<td></td>
+</tr>

@@ -1,0 +1,13 @@
+<h2>Reporte de recarga</h2>
+<div class="well center-block">
+  <h2>Ruta y dia operativo</h2>
+
+    <%= form_tag("/busqueda_recarga", method: 'get', remote: true, id:"search",class: "form-horizontal" ) do %>
+      <%= render 'partials/buscadorReportes/buscador_reportes' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes4' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes5' %>
+
+    <%end%>
+
+</div>
+<div id="recarga_ruta"><%= render 'recarga_ruta' %></div>

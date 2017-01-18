@@ -1,0 +1,57 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Id: MyString
+  RutaId: MyString
+  VendedorId: MyString
+  CodCliente: MyString
+  Documento: MyString
+  Fecha: MyString
+  TipoVta: MyString
+  DiasCred: MyString
+  CreditoDispo: MyString
+  Saldo: MyString
+  Fvence: MyString
+  SubTotal: MyString
+  IVA: MyString
+  IEPS: MyString
+  TOTAL: MyString
+  EnLetra: MyString
+  Items: MyString
+  FormaPag: MyString
+  DocSalida: MyString
+  DiaO: MyString
+  Cancelada: MyString
+  Kg: MyString
+  ID_Ayudante1: MyString
+  ID_Ayudante2: MyString
+  VenAyunate: MyString
+  IdEmpresa: MyString
+
+two:
+  Id: MyString
+  RutaId: MyString
+  VendedorId: MyString
+  CodCliente: MyString
+  Documento: MyString
+  Fecha: MyString
+  TipoVta: MyString
+  DiasCred: MyString
+  CreditoDispo: MyString
+  Saldo: MyString
+  Fvence: MyString
+  SubTotal: MyString
+  IVA: MyString
+  IEPS: MyString
+  TOTAL: MyString
+  EnLetra: MyString
+  Items: MyString
+  FormaPag: MyString
+  DocSalida: MyString
+  DiaO: MyString
+  Cancelada: MyString
+  Kg: MyString
+  ID_Ayudante1: MyString
+  ID_Ayudante2: MyString
+  VenAyunate: MyString
+  IdEmpresa: MyString

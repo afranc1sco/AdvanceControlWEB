@@ -1,0 +1,151 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Empresas</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewempresamadre">
+        Nueva empresa
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="empresas" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Empresa</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_empresasmadre">
+      <%= render @empresasmadre %><!--carga todos los empresasmadre-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@empresamadre, remote: true, html: {class: "form-horizontal empresamadre-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewempresamadre" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar empresa</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :id, "Clave:", class: "control-label col-md-2 " %>
+            <div class="col-md-3">
+              <%= f.number_field :id, class: "form-control empresa_clave",autofocus: true, minlength: "1", required: "true"  %>
+            </div>
+              <%= f.label :Empresa, "Empresa:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Empresa, class: "form-control empresa_empresa",minlength: "4", required: "true"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :RFC, "RFC:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= f.text_field :RFC, class: "form-control empresa_RFC",minlength: "7", required: "true"  %>
+          </div>
+
+            <%= f.label :NombreComercial, "No.Comercial:", class: "control-label col-md-2 " %>
+            <div class="col-md-5">
+              <%= f.text_field :NombreComercial, class: "form-control empresa_Calle", minlength: "7", required: "true"  %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Telefono, "Teléfono:", class: "control-label col-md-2 " %>
+            <div class="col-md-3">
+              <%= f.text_field :Telefono, class: "form-control empresa_Telefono", minlength: "7", required: "true"  %>
+            </div>
+              <%= f.label :Contacto, "Contacto:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Contacto, class: "form-control empresa_Contacto",minlength: "4", required: "true"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <%= f.label :CP, "CP:", class: "control-label col-md-2" %>
+            <div class="col-md-3">
+              <%= f.text_field :CP, class: "form-control empresa_CP",minlength: "5", required: "true"  %>
+            </div>
+            <%= f.label :Email, "Email:", class: "control-label col-md-2 " %>
+            <div class="col-md-5">
+              <%= f.email_field :Email, class: "form-control empresa_Email", minlength: "7", required: "true"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :NoInterior, "No.Interior:", class: "control-label col-md-2 " %>
+            <div class="col-md-3">
+              <%= f.text_field :NoInterior, class: "form-control empresa_NoInterior", maxlength:"10" %>
+            </div>
+              <%= f.label :NoExterior, "No.Exterior:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :NoExterior, class: "form-control empresa_NoExterior", maxlength:"10" %>
+            </div>
+          </div>
+
+
+
+
+          <div class="form-group">
+            <%= f.label :Direccion, "Dirección:", class: "control-label col-md-2" %>
+            <div class="col-md-10">
+              <%= f.text_area :Direccion, class: "form-control empresa_Direccion",minlength: "10", required: "true"  %>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewempresamadreclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", empresasmadre_path(format:"csv") %> |
+  <%= link_to "Excel", empresasmadre_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>
+
+
+<div class="modal fade" id="myimportdata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar Datos</h4>
+      </div>
+
+    </div>
+  </div>
+</div>

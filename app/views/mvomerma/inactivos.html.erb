@@ -1,0 +1,39 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Motivos de Merma inactivos </h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+
+  <br>
+  <br>
+
+
+
+  <table id="mvomerma" class="display"><!--el id mvomerma es de datatables referenciado en mvomerma.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Motivo</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_mvomerma">
+      <%= render @mvomerma %><!--carga todos los mvomerma-->
+</tbody>
+
+
+</table>
+
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", mvomerma_path(format:"csv") %> |
+  <%= link_to "Excel", mvomerma_path(format:"xls") %>
+</p>
+<%= link_to 'Volver a Motivos de Merma', mvomerma_path, class: "btn btn-primary btn-lg" %>

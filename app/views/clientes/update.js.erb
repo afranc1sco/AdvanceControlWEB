@@ -1,0 +1,18 @@
+$("#myupdatecliente_<%= @cliente.id %>").modal('hide');
+
+$("#cliente_<%= @cliente.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+
+  if (<%= @cliente.Status == true %>){
+    $("#container_clientes").prepend('<%= j render @cliente %>');
+  }
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

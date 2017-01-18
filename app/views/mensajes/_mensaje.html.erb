@@ -1,0 +1,112 @@
+<tr id="mensaje_<%= mensaje.id %>">
+  <td><%=mensaje.ID%>
+    <!--Modal - update mensaje-->
+<%= form_for(mensaje, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{mensaje.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdatemensaje_<%= mensaje.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar Mensaje</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :EnBaseA, "En Base A:", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.select :EnBaseA, ['Producto','Ruta','Cliente','Promocion'], class: "form-control"%>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Descripcion,"Descripción:", class: "control-label col-md-3" %>
+            <div class="col-md-7">
+              <%= f.text_field :Descripcion, class: "form-control ", minlength: "7", required: "true"   %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Mensaje,"Mensaje:", class: "control-label col-md-3" %>
+            <div class="col-md-7">
+              <%= f.text_area :Mensaje, class: "form-control ", minlength: "7", required: "true"   %>
+            </div>
+          </div>
+
+
+          <div class="well center-block">
+            <div class="form-group">
+              <h3 class="col-md-5">Periodo:</h3>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :FechaInicio,"Inicio:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaInicio, class: "form-control datepicker", minlength: "7", required: "true"   %>
+              </div>
+
+              <%= f.label :FechaFinal,"Fin:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaFinal, class: "form-control datepicker", minlength: "7", required: "true"   %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Estado,"Inactiva:", class: "control-label col-xs-7 col-sm-6 col-md-2"%>
+            <div class="col-md-1">
+              <%= f.check_box :Estado %>
+            </div>
+          </div>
+
+          <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= mensaje.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+<script>
+  $(".formulario-validado-update<%=mensaje.id%>").validate();
+
+</script>
+</td>
+  <td><%=mensaje.Clave%></td>
+  <td><%=mensaje.EnBaseA%></td>
+  <td><%=mensaje.Descripcion%></td>
+  <td><%=mensaje.Mensaje%></td>
+  <td><%=mensaje.FechaInicio%></td>
+  <td><%=mensaje.FechaFinal%></td>
+  <td><%=mensaje.Estado%></td>
+
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatemensaje_<%= mensaje.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <%= link_to 'Eliminar', mensaje, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+        <%if mensaje.EnBaseA == "Producto" %>
+          <%= link_to 'Añadir Productos', mensaje_productos_path(mensaje), class:"btn btn-primary btn-xs boton"  %>
+        <% elsif mensaje.EnBaseA == "Ruta" %>
+          <%= link_to 'Añadir Rutas', mensaje_rutas_path(mensaje), class:"btn btn-primary btn-xs boton"  %>
+        <% elsif mensaje.EnBaseA == "Cliente" %>
+          <%= link_to 'Añadir Clientes', mensaje_clientes_path(mensaje), class:"btn btn-primary btn-xs boton"  %>
+        <%end%>
+
+      </td>
+
+
+<td class="no" >
+  </td>
+</tr>

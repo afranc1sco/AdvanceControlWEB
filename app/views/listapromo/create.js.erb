@@ -1,0 +1,12 @@
+$("#mynewlistaprom").modal('hide');
+$(".listaprom_clave").val('');
+$(".listaprom_descripcion").val('');
+$(".listaprom_mensaje").val('');
+$(".listaprom_fechainicio").val('');
+$(".listaprom_fechafinal").val('');
+
+
+$("#container_listapromo").prepend('<%= j render @listaprom %>'); //Prepend before append
+$("#listaprom_<%= @listaprom.id %>").hide().fadeIn(1000);
+//$("#myupdatelistaprom_<%= @listaprom.id %>").modal('show');
+$(window.location.replace("/listapromo/<%= @listaprom.id %>/edit"))

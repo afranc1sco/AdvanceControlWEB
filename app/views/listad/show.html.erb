@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lista:</strong>
+  <%= @slista.lista %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @slista.tipo %>
+</p>
+
+<p>
+  <strong>Caduca:</strong>
+  <%= @slista.caduca %>
+</p>
+
+<p>
+  <strong>Fechaini:</strong>
+  <%= @slista.fechaini %>
+</p>
+
+<p>
+  <strong>Fechafin:</strong>
+  <%= @slista.fechafin %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @slista.idempresa %>
+</p>
+
+<%= link_to 'Edit', edit_slista_path(@slista) %> |
+<%= link_to 'Back', listad_path %>

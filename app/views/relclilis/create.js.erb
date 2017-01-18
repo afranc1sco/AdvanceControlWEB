@@ -1,0 +1,18 @@
+$("#myclientadder_<%= @relclili.CodCliente %>").modal('hide');
+
+$("#container_relclilis").prepend('<%= j render @relclili %>'); //Prepend before append
+$("#relclili_<%= @relclili.id %>").hide().fadeIn(1000);
+$("#cliente_<%= @relclili.CodCliente %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

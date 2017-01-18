@@ -1,0 +1,1 @@
+json.partial! "reldaycli/reldayc", reldayc: @reldayc

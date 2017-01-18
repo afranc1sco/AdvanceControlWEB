@@ -1,0 +1,81 @@
+<%= form_for(@vehiculo) do |f| %>
+  <% if @vehiculo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vehiculo.errors.count, "error") %> prohibited this vehiculo from being saved:</h2>
+
+      <ul>
+      <% @vehiculo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :clave %><br>
+    <%= f.text_area :clave %>
+  </div>
+  <div class="field">
+    <%= f.label :modelo %><br>
+    <%= f.text_area :modelo %>
+  </div>
+  <div class="field">
+    <%= f.label :placas %><br>
+    <%= f.text_area :placas %>
+  </div>
+  <div class="field">
+    <%= f.label :marcas %><br>
+    <%= f.text_area :marcas %>
+  </div>
+  <div class="field">
+    <%= f.label :descripcion %><br>
+    <%= f.text_area :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_area :status %>
+  </div>
+  <div class="field">
+    <%= f.label :numeroeco %><br>
+    <%= f.text_area :numeroeco %>
+  </div>
+  <div class="field">
+    <%= f.label :asignado %><br>
+    <%= f.check_box :asignado %>
+  </div>
+  <div class="field">
+    <%= f.label :poliza %><br>
+    <%= f.text_area :poliza %>
+  </div>
+  <div class="field">
+    <%= f.label :telseguro %><br>
+    <%= f.text_field :telseguro %>
+  </div>
+  <div class="field">
+    <%= f.label :mesverifica %><br>
+    <%= f.datetime_select :mesverifica %>
+  </div>
+  <div class="field">
+    <%= f.label :kilometraje %><br>
+    <%= f.text_field :kilometraje %>
+  </div>
+  <div class="field">
+    <%= f.label :kilometrajesem %><br>
+    <%= f.text_field :kilometrajesem %>
+  </div>
+  <div class="field">
+    <%= f.label :aseguradora %><br>
+    <%= f.text_area :aseguradora %>
+  </div>
+  <div class="field">
+    <%= f.label :fechavencseguro %><br>
+    <%= f.datetime_select :fechavencseguro %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaultverif %><br>
+    <%= f.datetime_select :fechaultverif %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

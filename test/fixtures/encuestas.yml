@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Clave_Enc: MyString
+  Desc_Enc: MyString
+  Tipo_Enc: MyString
+  IdEmpresa: MyString
+
+two:
+  Clave_Enc: MyString
+  Desc_Enc: MyString
+  Tipo_Enc: MyString
+  IdEmpresa: MyString

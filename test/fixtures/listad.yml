@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lista: MyString
+  tipo: MyString
+  caduca: false
+  fechaini: 2016-07-22
+  fechafin: 2016-07-22
+  idempresa: MyString
+
+two:
+  lista: MyString
+  tipo: MyString
+  caduca: false
+  fechaini: 2016-07-22
+  fechafin: 2016-07-22
+  idempresa: MyString

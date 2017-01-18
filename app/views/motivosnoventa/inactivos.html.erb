@@ -1,0 +1,37 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Motivos No Venta inactivos</h1>
+<style>
+.container {
+}
+
+</style>
+
+  <br>
+  <br>
+
+
+
+  <table id="motivosnoventa" class="display"><!--el id motivosnoventa es de datatables referenciado en motivosnoventa.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Motivo</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_motivosnoventa">
+      <%= render @motivosnoventa %><!--carga todos los motivosnoventa-->
+</tbody>
+
+
+</table>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", formaspag_path(format:"csv") %> |
+  <%= link_to "Excel", formaspag_path(format:"xls") %>
+</p>
+<%= link_to 'Volver a motivos no venta', motivosnoventa_path, class: "btn btn-primary btn-lg" %>

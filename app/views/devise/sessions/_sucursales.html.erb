@@ -1,0 +1,6 @@
+<div class="form-group">
+   <%= label_tag :sucursal, "Sucursal:" %>
+   <div class="">
+    <%= select_tag :sucursal, options_for_select(@sucursales.map{|e| ["#{e.IdEmpresa} - #{e.Sucursal}", e.IdEmpresa]}) %>
+ </div>
+</div>

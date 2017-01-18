@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Configrutasp</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rutaid</th>
+      <th>Modelprinter</th>
+      <th>Velcom</th>
+      <th>Com</th>
+      <th>Server</th>
+      <th>Puerto</th>
+      <th>Servergps</th>
+      <th>Gps</th>
+      <th>Puertog</th>
+      <th>Pagocontado</th>
+      <th>Ctenvo</th>
+      <th>Cvectenvo</th>
+      <th>Idempresa</th>
+      <th>Sugerircant</th>
+      <th>Promoeq</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @configrutasp.each do |configruta| %>
+      <tr>
+        <td><%= configruta.RutaId %></td>
+        <td><%= configruta.ModelPrinter %></td>
+        <td><%= configruta.VelCom %></td>
+        <td><%= configruta.COM %></td>
+        <td><%= configruta.Server %></td>
+        <td><%= configruta.Puerto %></td>
+        <td><%= configruta.ServerGPS %></td>
+        <td><%= configruta.GPS %></td>
+        <td><%= configruta.PuertoG %></td>
+        <td><%= configruta.PagoContado %></td>
+        <td><%= configruta.CteNvo %></td>
+        <td><%= configruta.CveCteNvo %></td>
+        <td><%= configruta.IdEmpresa %></td>
+        <td><%= configruta.SugerirCant %></td>
+        <td><%= configruta.PromoEq %></td>
+        <td><%= link_to 'Show', configruta %></td>
+        <td><%= link_to 'Edit', edit_configruta_path(configruta) %></td>
+        <td><%= link_to 'Destroy', configruta, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Configruta', new_configruta_path %>

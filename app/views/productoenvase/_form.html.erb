@@ -1,0 +1,41 @@
+<%= form_for(@productoenvas) do |f| %>
+  <% if @productoenvas.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@productoenvas.errors.count, "error") %> prohibited this productoenvas from being saved:</h2>
+
+      <ul>
+      <% @productoenvas.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Producto %><br>
+    <%= f.text_field :Producto %>
+  </div>
+  <div class="field">
+    <%= f.label :Envase %><br>
+    <%= f.text_field :Envase %>
+  </div>
+  <div class="field">
+    <%= f.label :Cant_Base %><br>
+    <%= f.text_field :Cant_Base %>
+  </div>
+  <div class="field">
+    <%= f.label :Cant_Eq %><br>
+    <%= f.text_field :Cant_Eq %>
+  </div>
+  <div class="field">
+    <%= f.label :Status %><br>
+    <%= f.text_field :Status %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

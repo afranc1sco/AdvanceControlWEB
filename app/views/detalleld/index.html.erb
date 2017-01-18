@@ -1,0 +1,166 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Admn productos de la Lista de Descuentos</h1><br>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <!--<div class="row">
+    <div class="text-center">
+      <!- Button trigger modal ->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewdetalle">
+        Nueva Lista de Descuento
+      </button>
+    </div>
+  </div>-->
+
+  <br>
+  <br>
+  <div class="well center-block">
+    <h2 class="text-center"> Lista de Productos </h2>
+
+  <table id="productos" class="display"><!--el id productos es de datatables referenciado en productos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Producto</th>
+      <th>Codbarras</th>
+      <th>Sector</th>
+      <th>Vbase</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_productos">
+      <% @productos.each do |producto| %>
+
+         <tr id="producto_<%= producto.id %>">
+
+
+          <td><%= producto.Clave %>
+            <!--Modal - create detalle-->
+            <%= form_for(@detalle, remote: true, html: {class: "form-horizontal formulario-validado-create"}) do |f| %> <!--ajax remote: true-->
+
+            <div nohidden class="modal fade si" id="myproductadder_<%= producto.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Registrando descuento al producto <%= producto.id%></h4>
+                  </div>
+
+                  <div class="modal-body">
+
+                  <h4 class="text-center">Descuento para crédito y contado</h4><br>
+
+                    <div class="form-group">
+                      <p class="control-label col-md-3">Producto Clave:</p>
+                      <div class="control-label col-md-1" style="font-weight: bold">
+                        <%= producto.Clave %>
+                      </div>
+                      <p class="control-label col-md-4">Nombre del Producto:</p>
+                      <div class="control-label col-md-4" style="font-weight: bold">
+                        <%= producto.Producto %>
+                      </div>
+                    </div>
+
+                    <div class="well center-block">
+                        <div class="form-group">
+                          <div class="col-md-5">
+                            <%= f.check_box(:Tipo, {}, "P", "R")%><!--Agregarle valores a los check_box-->
+                            <%= f.label :Tipo,"Por porcentaje" %>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <%= f.label :Factor, "Descuento por porcentaje:", class:"control-label col-md-4" %>
+
+                          <div class="col-md-5">
+                            <div class="input-group">
+                              <%= f.number_field :Factor, class:"form-control detalle-factor", autofocus: true, required: "true" %>
+                              <div class="input-group-addon">%</div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                      <%= f.hidden_field :ListaId, value: params[:id]  %>
+                    </div>
+                    <div class="field">
+                      <%= f.hidden_field :Articulo, value: producto.id%>
+                    </div>
+                    <div class="field">
+                      <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+                    </div>
+
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" id="myupdatebutton_<%= producto.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <%= submit_tag "Create", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <%end%>
+        </td>
+          <td><%= producto.Producto %></td>
+          <td><%= producto.CodBarras %></td>
+          <td><%= producto.Sector %></td>
+          <td><%= producto.VBase %></td>
+          <td>
+            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myproductadder_<%= producto.id %>">
+            Añadir
+            </button>
+          </td>
+
+          <td>
+
+          </td>
+
+
+      </tr>
+      <%end%>
+
+
+  </tbody>
+
+
+  </table>
+</div>
+
+    <br>
+    <br>
+    <div class="well center-block">
+    <h2 class="text-center"> Productos Añadidos a la Lista</h2>
+    <br>
+    <br>
+  <table id="detalleld" class="display"><!--el id detalleld es de datatables referenciado en detalleld.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+
+
+      <th>Clave</th>
+      <th>Producto</th>
+      <th>Porcentaje de descuento</th>
+      <th>CodBarras</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_detalleld">
+      <%= render @detalleld %><!--carga todos los detalleld-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+
+</div>
+</div>

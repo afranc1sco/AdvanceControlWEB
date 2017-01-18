@@ -1,0 +1,15 @@
+$("#myupdateencuesta_<%= @encuesta.id %>").modal('hide');
+
+$("#encuesta_<%= @encuesta.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  $("#container_encuestas").prepend('<%= j render @encuesta %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

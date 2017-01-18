@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  motivo: MyString
+  clave: MyString
+  status: false
+
+two:
+  motivo: MyString
+  clave: MyString
+  status: false

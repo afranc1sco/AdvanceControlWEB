@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  MvoDev: MyString
+  Clave: MyString
+  Status: MyString
+
+two:
+  MvoDev: MyString
+  Clave: MyString
+  Status: MyString

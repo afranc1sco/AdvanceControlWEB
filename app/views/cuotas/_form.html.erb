@@ -1,0 +1,61 @@
+<%= form_for(@cuota) do |f| %>
+  <% if @cuota.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cuota.errors.count, "error") %> prohibited this cuota from being saved:</h2>
+
+      <ul>
+      <% @cuota.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Clave %><br>
+    <%= f.text_field :Clave %>
+  </div>
+  <div class="field">
+    <%= f.label :Descripcion %><br>
+    <%= f.text_field :Descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :UniMed %><br>
+    <%= f.text_field :UniMed %>
+  </div>
+  <div class="field">
+    <%= f.label :Cantidad %><br>
+    <%= f.text_field :Cantidad %>
+  </div>
+  <div class="field">
+    <%= f.label :FechaI %><br>
+    <%= f.datetime_select :FechaI %>
+  </div>
+  <div class="field">
+    <%= f.label :FechaF %><br>
+    <%= f.datetime_select :FechaF %>
+  </div>
+  <div class="field">
+    <%= f.label :Producto %><br>
+    <%= f.text_field :Producto %>
+  </div>
+  <div class="field">
+    <%= f.label :Tipo %><br>
+    <%= f.check_box :Tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :Activa %><br>
+    <%= f.check_box :Activa %>
+  </div>
+  <div class="field">
+    <%= f.label :NivelNum %><br>
+    <%= f.number_field :NivelNum %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ID_Comision: MyString
+  RangoIni: 1
+  RangoFin: 1
+  Angente: 1
+  Ayudante: 1
+  Tipo: 1
+  IdEmpresa: MyString
+
+two:
+  ID_Comision: MyString
+  RangoIni: 1
+  RangoFin: 1
+  Angente: 1
+  Ayudante: 1
+  Tipo: 1
+  IdEmpresa: MyString

@@ -1,0 +1,79 @@
+<tr id="catbanco_<%= catbanco.id %>">
+  <td><%=catbanco.Clave%>
+    <!--Modal - update mensaje-->
+<%= form_for(catbanco, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{catbanco.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdatecatbanco_<%= catbanco.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar catbanco</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Clave, "Clave:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= f.text_field :Clave, class: "form-control ",autofocus: true, minlength: "1"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Descripcion, "Descripción:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= f.text_field :Descripcion, class: "form-control ",autofocus: true, minlength: "1"  %>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <%= f.label :Status,"Activo:", class: "control-label col-xs-3 col-sm-6 col-md-1 " %>
+            <div class="col-md-1">
+              <%= f.check_box :Status,{checked: true} %>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= catbanco.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+<script>
+  $(".formulario-validado-update<%=catbanco.id%>").validate();
+
+</script>
+</td>
+  <td><%=catbanco.Descripcion%></td>
+  <td>
+    <%if catbanco.Status == true%>
+      Activo
+    <%else%>
+      Inactivo
+    <%end%>
+  </td>
+
+
+  <td>
+
+    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatecatbanco_<%= catbanco.id %>">
+      Editar
+    </button>
+    <!--Destroy-->
+    <% if catbanco.Status == TRUE%>
+      <%= link_to 'Eliminar', catbanco, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+    <%else%>
+      <%= link_to 'Habilitar', catbanco, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+    <%end%>
+
+  </td>
+
+
+<td class="no" >
+  </td>
+</tr>

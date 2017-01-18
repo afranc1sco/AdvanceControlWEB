@@ -1,0 +1,17 @@
+<tr id="listapromomast_<%= listapromomast.id %>">
+    <td><%= listapromomast.Id %></td>
+    <td><%= listapromomast.ListaMaster %></td>
+    <td>  <%= link_to '<i class="fa fa-gift" aria-hidden="true"></i> Promociones'.html_safe, detallelpromasterid_path(listapromomast), class:"btn btn-primary btn-xs boton", title:"Agregar promociones"   %>
+
+      <%= link_to '<i class="fa fa-user-plus" aria-hidden="true"></i> Clientes'.html_safe, clientes_promociones_path(listapromomast), class:"btn btn-success btn-xs boton", title:"Agregar clientes"   %>
+</td>
+
+    <td>
+
+        <!--Destroy-->
+        <%= link_to '<i class="fa fa-times" aria-hidden="true"></i> Eliminar'.html_safe, listapromomast, method: :delete, class: "btn btn-danger btn-xs", remote:true, title:"Eliminar"   %>
+
+
+      </td>
+
+</tr>

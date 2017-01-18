@@ -1,0 +1,1 @@
+json.array! @reldaycli, partial: 'reldaycli/reldayc', as: :reldayc

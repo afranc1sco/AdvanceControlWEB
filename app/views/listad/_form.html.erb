@@ -1,0 +1,41 @@
+<%= form_for(@slista) do |f| %>
+  <% if @slista.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@slista.errors.count, "error") %> prohibited this slista from being saved:</h2>
+
+      <ul>
+      <% @slista.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :lista %><br>
+    <%= f.text_field :lista %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo %><br>
+    <%= f.text_field :tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :caduca %><br>
+    <%= f.check_box :caduca %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaini %><br>
+    <%= f.date_select :fechaini %>
+  </div>
+  <div class="field">
+    <%= f.label :fechafin %><br>
+    <%= f.date_select :fechafin %>
+  </div>
+  <div class="field">
+    <%= f.label :idempresa %><br>
+    <%= f.text_field :idempresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

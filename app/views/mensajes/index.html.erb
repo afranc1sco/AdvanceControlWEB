@@ -1,0 +1,129 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Lista de Mensajes</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewmensaje">
+        Nuevo Mensaje
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="mensajes" class="display"><!--el id mensajes es de datatables referenciado en mensajes.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>ID</th>
+      <th>Clave</th>
+      <th>EnBaseA</th>
+      <th>Descripción</th>
+      <th>Mensaje</th>
+      <th>FechaInicio</th>
+      <th>FechaFinal</th>
+      <th>Estado</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_mensajes">
+      <%= render @mensajes %><!--carga todos los mensajes-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@mensaje, remote: true, html: {class: "form-horizontal formulario-validado-create"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewmensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Mensaje</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Clave, "Clave:", class: "control-label col-md-3" %>
+            <div class="col-md-7">
+              <%= f.text_field :Clave, class: "form-control mensaje_clave", autofocus: true, required: "true"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :EnBaseA, "En Base A:", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.select :EnBaseA, ['Producto','Ruta','Cliente','Promocion'], class: "form-control"%>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Descripcion,"Descripción:", class: "control-label col-md-3" %>
+            <div class="col-md-7">
+              <%= f.text_field :Descripcion, class: "form-control mensaje_descripcion", minlength: "7", required: "true"   %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Mensaje,"Mensaje:", class: "control-label col-md-3" %>
+            <div class="col-md-7">
+              <%= f.text_area :Mensaje, class: "form-control mensaje_mensaje", minlength: "7", required: "true"   %>
+            </div>
+          </div>
+
+
+          <div class="well center-block">
+            <div class="form-group">
+              <h3 class="col-md-5">Periodo:</h3>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :FechaInicio,"Inicio:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaInicio, class: "form-control datepicker mensaje_fechainicio", minlength: "7", required: "true"   %>
+              </div>
+
+              <%= f.label :FechaFinal,"Fin:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaFinal, class: "form-control datepicker mensaje_fechafinal", minlength: "7", required: "true"   %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Estado,"Inactiva:", class: "control-label col-xs-7 col-sm-6 col-md-2"%>
+            <div class="col-md-1">
+              <%= f.check_box :Estado %>
+            </div>
+          </div>
+
+          <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewmensajeclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", mensajes_path(format:"csv") %> |
+  <%= link_to "Excel", mensajes_path(format:"xls") %>
+</p>

@@ -1,0 +1,29 @@
+<%= form_for(@productosxpza) do |f| %>
+  <% if @productosxpza.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@productosxpza.errors.count, "error") %> prohibited this productosxpza from being saved:</h2>
+
+      <ul>
+      <% @productosxpza.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+<%= f.select :Producto, Producto.all.collect {|p| [ p.Clave ] } %>
+  </div>
+  <div class="field">
+    <%= f.select :IdEmpresa, Empresa.all.collect {|e| [ e.Empresa, e.IdEmpresa ] } %>
+
+  </div>
+  <div class="field">
+    <%= f.label :PzaXCja %><br>
+    <%= f.number_field :PzaXCja %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

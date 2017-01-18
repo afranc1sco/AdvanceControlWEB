@@ -1,0 +1,2 @@
+json.extract! cobran, :id, :Cliente, :Documento, :Saldo, :Status, :RutaId, :UltPago, :FechaPag, :FechaVence, :FolioInterno, :TipoDoc, :DiaO, :IdEmpresa, :created_at, :updated_at
+json.url cobran_url(cobran, format: :json)

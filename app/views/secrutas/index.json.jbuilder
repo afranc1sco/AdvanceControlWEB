@@ -1,0 +1,1 @@
+json.array! @secrutas, partial: 'secrutas/secruta', as: :secruta

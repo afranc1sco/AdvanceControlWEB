@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @ayudante.nombre %>
+</p>
+
+<p>
+  <strong>Direccion:</strong>
+  <%= @ayudante.direccion %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @ayudante.telefono %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @ayudante.status %>
+</p>
+
+<p>
+  <strong>Numlicencia:</strong>
+  <%= @ayudante.numlicencia %>
+</p>
+
+<p>
+  <strong>Vencelic:</strong>
+  <%= @ayudante.vencelic %>
+</p>
+
+<p>
+  <strong>Clave:</strong>
+  <%= @ayudante.clave %>
+</p>
+
+<%= link_to 'Edit', edit_ayudante_path(@ayudante) %> |
+<%= link_to 'Back', ayudantes_path %>

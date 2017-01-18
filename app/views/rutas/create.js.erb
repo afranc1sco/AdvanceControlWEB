@@ -1,0 +1,17 @@
+$("#mynewruta").modal('hide');
+$(".ruta_ruta").val('');
+$(".ruta_oficina").val('');
+$(".ruta_server").val('');
+
+
+
+$("#container_rutas").prepend('<%= j render @ruta %>'); //Prepend before append
+$("#ruta_<%= @ruta.id %>").hide().fadeIn(1000);
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

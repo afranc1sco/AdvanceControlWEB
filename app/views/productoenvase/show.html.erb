@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Producto:</strong>
+  <%= @productoenvas.Producto %>
+</p>
+
+<p>
+  <strong>Envase:</strong>
+  <%= @productoenvas.Envase %>
+</p>
+
+<p>
+  <strong>Cant base:</strong>
+  <%= @productoenvas.Cant_Base %>
+</p>
+
+<p>
+  <strong>Cant eq:</strong>
+  <%= @productoenvas.Cant_Eq %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @productoenvas.Status %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @productoenvas.IdEmpresa %>
+</p>
+
+<%= link_to 'Edit', edit_productoenvas_path(@productoenvas) %> |
+<%= link_to 'Back', productoenvase_path %>

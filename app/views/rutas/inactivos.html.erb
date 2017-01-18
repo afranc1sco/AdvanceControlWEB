@@ -1,0 +1,67 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Rutas inactivas</h1>
+<style>
+.container {
+}
+
+</style>
+
+
+  <table id="rutas" class="display"><!--el id rutas es de datatables referenciado en rutas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Ruta</th>
+      <th>Estado</th>
+      <th>Grupo</th>
+      <th>Vendedor</th>
+      <th>TipoRuta</th>
+      <th>Vendedor</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_rutas">
+      <%= render @rutas %><!--carga todos los rutas-->
+</tbody>
+
+
+</table>
+
+<p>
+  Download:
+  <%= link_to "CSV", rutas_path(format:"csv") %> |
+  <%= link_to "Excel", rutas_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>
+
+
+<div class="modal fade" id="myimportdata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar Datos</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Nota: El formato excel a exportar debe ser .xlsx ó .csv
+        </p>
+        <%= form_tag import_rutas_path, multipart: true do %>
+          <%= file_field_tag :file %>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="myimportdataclose">Cerrar</button>
+        <%= submit_tag "Importar", class: "btn btn-primary", data: { disable_with: 'Importando' } %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Volver a Rutas', rutas_path, class: "btn btn-primary btn-lg" %>

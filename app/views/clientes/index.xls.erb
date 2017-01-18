@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">IdCli</Data></Cell>
+        <Cell><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">NombreCorto</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Colonia</Data></Cell>
+        <Cell><Data ss:Type="String">Telefono</Data></Cell>
+        <Cell><Data ss:Type="String">Horario</Data></Cell>
+        <Cell><Data ss:Type="String">Credito</Data></Cell>
+        <Cell><Data ss:Type="String">LimiteCredito</Data></Cell>
+        <Cell><Data ss:Type="String">DiasCreedito</Data></Cell>
+        <Cell><Data ss:Type="String">Saldo</Data></Cell>
+        <Cell><Data ss:Type="String">VisitaObligada</Data></Cell>
+        <Cell><Data ss:Type="String">FirmaObligada</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+      </Row>
+
+      <% @clientes.each do |cliente| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= cliente.IdCli%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.Nombre%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.NombreCorto%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.Email%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.Colonia%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.Telefono%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.Horario%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.Credito%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.LimiteCredito%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.DiasCreedito%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.Saldo%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.VisitaObligada%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.FirmaObligada%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= cliente.IdEmpresa%></Data></Cell>
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

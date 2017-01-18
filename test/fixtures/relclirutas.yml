@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  IdCliente: MyString
+  IdRuta: MyString
+  IdEmpresa: MyString
+
+two:
+  IdCliente: MyString
+  IdRuta: MyString
+  IdEmpresa: MyString

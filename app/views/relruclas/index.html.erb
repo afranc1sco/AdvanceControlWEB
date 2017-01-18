@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Relruclas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rutaid</th>
+      <th>Clas1</th>
+      <th>Clas2</th>
+      <th>Clas3</th>
+      <th>Clas4</th>
+      <th>Clas5</th>
+      <th>Idempresa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @relruclas.each do |relrucla| %>
+      <tr>
+        <td><%= relrucla.RutaId %></td>
+        <td><%= relrucla.Clas1 %></td>
+        <td><%= relrucla.Clas2 %></td>
+        <td><%= relrucla.Clas3 %></td>
+        <td><%= relrucla.Clas4 %></td>
+        <td><%= relrucla.Clas5 %></td>
+        <td><%= relrucla.IdEmpresa %></td>
+        <td><%= link_to 'Show', relrucla %></td>
+        <td><%= link_to 'Edit', edit_relrucla_path(relrucla) %></td>
+        <td><%= link_to 'Destroy', relrucla, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Relrucla', new_relrucla_path %>

@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Secrutas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rutad</th>
+      <th>Lunes</th>
+      <th>Martes</th>
+      <th>Miercoles</th>
+      <th>Jueves</th>
+      <th>Viernes</th>
+      <th>Sabado</th>
+      <th>Domingo</th>
+      <th>Idempresa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @secrutas.each do |secruta| %>
+      <tr>
+        <td><%= secruta.Rutad %></td>
+        <td><%= secruta.Lunes %></td>
+        <td><%= secruta.Martes %></td>
+        <td><%= secruta.Miercoles %></td>
+        <td><%= secruta.Jueves %></td>
+        <td><%= secruta.Viernes %></td>
+        <td><%= secruta.Sabado %></td>
+        <td><%= secruta.Domingo %></td>
+        <td><%= secruta.IdEmpresa %></td>
+        <td><%= link_to 'Show', secruta %></td>
+        <td><%= link_to 'Edit', edit_secruta_path(secruta) %></td>
+        <td><%= link_to 'Destroy', secruta, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Secruta', new_secruta_path %>

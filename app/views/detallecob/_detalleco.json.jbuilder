@@ -1,0 +1,2 @@
+json.extract! detalleco, :id, :IdCobranza, :Abono, :Fecha, :RutaId, :SaldoAnt, :Saldo, :FormaP, :DiaO, :Documento, :Cliente, :IdEmpresa, :Cancelada, :created_at, :updated_at
+json.url detalleco_url(detalleco, format: :json)

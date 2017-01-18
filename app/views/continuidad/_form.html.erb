@@ -1,0 +1,53 @@
+<%= form_for(@continuid) do |f| %>
+  <% if @continuid.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@continuid.errors.count, "error") %> prohibited this continuid from being saved:</h2>
+
+      <ul>
+      <% @continuid.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :RutaID %><br>
+    <%= f.text_field :RutaID %>
+  </div>
+  <div class="field">
+    <%= f.label :DiaO %><br>
+    <%= f.text_field :DiaO %>
+  </div>
+  <div class="field">
+    <%= f.label :FolVta %><br>
+    <%= f.text_field :FolVta %>
+  </div>
+  <div class="field">
+    <%= f.label :FolPed %><br>
+    <%= f.text_field :FolPed %>
+  </div>
+  <div class="field">
+    <%= f.label :FolDevol %><br>
+    <%= f.text_field :FolDevol %>
+  </div>
+  <div class="field">
+    <%= f.label :FolCob %><br>
+    <%= f.text_field :FolCob %>
+  </div>
+  <div class="field">
+    <%= f.label :UDiaO %><br>
+    <%= f.text_field :UDiaO %>
+  </div>
+  <div class="field">
+    <%= f.label :CteNvo %><br>
+    <%= f.text_field :CteNvo %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

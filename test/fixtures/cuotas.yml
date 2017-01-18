@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Clave: MyString
+  Descripcion: MyString
+  UniMed: MyString
+  Cantidad: MyString
+  FechaI: 2016-08-12 23:43:12
+  FechaF: 2016-08-12 23:43:12
+  Producto: MyString
+  Tipo: false
+  Activa: false
+  NivelNum: 1
+  IdEmpresa: MyString
+
+two:
+  Clave: MyString
+  Descripcion: MyString
+  UniMed: MyString
+  Cantidad: MyString
+  FechaI: 2016-08-12 23:43:12
+  FechaF: 2016-08-12 23:43:12
+  Producto: MyString
+  Tipo: false
+  Activa: false
+  NivelNum: 1
+  IdEmpresa: MyString

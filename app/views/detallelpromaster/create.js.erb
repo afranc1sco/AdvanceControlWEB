@@ -1,0 +1,17 @@
+$("#container_detallelpromaster").prepend('<%= j render @detallelpromast %>'); //Prepend before append
+$("#detallelpromast_<%= @detallelpromast.id %>").hide().fadeIn(1000);
+
+$("#listaprom_<%= @detallelpromast.IdPromo %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

@@ -1,0 +1,111 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Administración de activos asignados al cliente <%=@cliente.Nombre%></h1><br>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <!--<div class="row">
+    <div class="text-center">
+      <!- Button trigger modal ->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewrelclili">
+        Nueva Lista de Descuento
+      </button>
+    </div>
+  </div>-->
+
+  <br>
+  <br>
+  <div class="well center-block">
+    <h2 class="text-center"> Lista de Activos </h2>
+
+  <table id="superior" class="display"><!--el id clientes es de datatables referenciado en clientes.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Id</th>
+      <th>Descripción</th>
+      <th>Modelo</th>
+      <th>Serie</th>
+      <th>Status</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_activos">
+      <% @activos.each do |activo| %>
+      <tr id="activo_<%= activo.id %>">
+          <td><%= activo.id %></td>
+          <td><%= activo.Descripcion %></td>
+          <td><%= activo.Modelo %></td>
+          <td><%= activo.Serie %></td>
+          <td><%= activo.Status %></td>
+
+          <td>
+              <!--Modal - create relclili-->
+              <%= form_for(@relactivo, remote: true, html: {class: "form-horizontal"}) do |f| %> <!--ajax remote: true-->
+
+                <%= f.hidden_field :Cliente, value: params[:id]  %>
+                <%= f.hidden_field :Activo, value: activo.id%>
+                <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+                <%= submit_tag "Añadir", class: "btn btn-warning btn-xs", data: { disable_with: 'Añadiendo' }%>
+            <%end%>
+
+
+          </td>
+          <td>
+
+          </td>
+
+      </tr>
+      <%end%>
+
+
+  </tbody>
+
+
+  </table>
+</div>
+
+    <br>
+    <br>
+    <div class="well center-block">
+    <h2 class="text-center"> Activos Añadidos al cliente</h2>
+    <br>
+    <br>
+  <table id="inferior" class="display"><!--el id relclilis es de datatables referenciado en relclilis.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+
+
+      <th>Id</th>
+      <th>Descripción</th>
+      <th>Cliente</th>
+      <th>Serie</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_relactivos">
+      <%= render @relactivos %><!--carga todos los relmen-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+
+
+</div>
+<div class="actions">
+  <div class="form-group">
+    <div class="col-md-12">
+    <%= link_to 'Volver a clientes', clientes_path, class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+</div>
+</div>

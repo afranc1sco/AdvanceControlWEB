@@ -1,0 +1,57 @@
+<%= form_for(@reldayc) do |f| %>
+  <% if @reldayc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reldayc.errors.count, "error") %> prohibited this reldayc from being saved:</h2>
+
+      <ul>
+      <% @reldayc.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :CodCli %><br>
+    <%= f.text_field :CodCli %>
+  </div>
+  <div class="field">
+    <%= f.label :Lunes %><br>
+    <%= f.text_field :Lunes %>
+  </div>
+  <div class="field">
+    <%= f.label :Martes %><br>
+    <%= f.text_field :Martes %>
+  </div>
+  <div class="field">
+    <%= f.label :Miercoles %><br>
+    <%= f.text_field :Miercoles %>
+  </div>
+  <div class="field">
+    <%= f.label :Jueves %><br>
+    <%= f.text_field :Jueves %>
+  </div>
+  <div class="field">
+    <%= f.label :Viernes %><br>
+    <%= f.text_field :Viernes %>
+  </div>
+  <div class="field">
+    <%= f.label :Sabado %><br>
+    <%= f.text_field :Sabado %>
+  </div>
+  <div class="field">
+    <%= f.label :Domingo %><br>
+    <%= f.text_field :Domingo %>
+  </div>
+  <div class="field">
+    <%= f.label :RutaId %><br>
+    <%= f.text_field :RutaId %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

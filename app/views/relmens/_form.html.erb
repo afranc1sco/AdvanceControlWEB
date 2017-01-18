@@ -1,0 +1,49 @@
+<%= form_for(@relmen) do |f| %>
+  <% if @relmen.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relmen.errors.count, "error") %> prohibited this relmen from being saved:</h2>
+
+      <ul>
+      <% @relmen.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :MenId %><br>
+    <%= f.text_field :MenId %>
+  </div>
+  <div class="field">
+    <%= f.label :CodCliente %><br>
+    <%= f.text_field :CodCliente %>
+  </div>
+  <div class="field">
+    <%= f.label :IdCliente %><br>
+    <%= f.text_field :IdCliente %>
+  </div>
+  <div class="field">
+    <%= f.label :CodProducto %><br>
+    <%= f.text_field :CodProducto %>
+  </div>
+  <div class="field">
+    <%= f.label :IdProducto %><br>
+    <%= f.text_field :IdProducto %>
+  </div>
+  <div class="field">
+    <%= f.label :CodRuta %><br>
+    <%= f.text_field :CodRuta %>
+  </div>
+  <div class="field">
+    <%= f.label :IdRuta %><br>
+    <%= f.text_field :IdRuta %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

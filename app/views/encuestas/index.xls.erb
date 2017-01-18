@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Clave_Enc</Data></Cell>
+        <Cell><Data ss:Type="String">Desc_Enc</Data></Cell>
+        <Cell><Data ss:Type="String">Tipo_Enc</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+      </Row>
+
+      <% @encuestas.each do |encuesta| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= encuesta.Clave_Enc%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= encuesta.Desc_Enc%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= encuesta.Tipo_Enc%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= encuesta.IdEmpresa%></Data></Cell>
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

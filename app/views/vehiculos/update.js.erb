@@ -1,0 +1,17 @@
+$("#myupdatevehiculo_<%= @vehiculo.id %>").modal('hide');
+
+$("#vehiculo_<%= @vehiculo.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  if (<%= @vehiculo.Status == "1" %>){
+  $("#container_vehiculos").prepend('<%= j render @vehiculo %>');
+}
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

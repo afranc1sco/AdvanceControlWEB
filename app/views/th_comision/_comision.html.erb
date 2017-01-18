@@ -1,0 +1,78 @@
+<tr id="comision_<%= comision.id %>">
+  <td><%=comision.ID_Comision%>
+
+    <!--Modal - update comision-->
+<%= form_for(comision, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{comision.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdatecomision_<%= comision.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar Detalle</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :ID_Producto, "Producto:", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.select :ID_Producto, options_for_select(Producto.all.map{|e|[e.Producto, e.Clave]},selected: comision.ID_Producto), class: "form-control" %>
+            </div>
+          </div>
+
+            <div class="form-group">
+              <%= f.label :Comentarios, "Descripción:", class:"control-label col-md-3" %>
+              <div class="col-md-8">
+                <%= f.text_area :Comentarios, class: "form-control ", autofocus: true, required: "true", minlength: "7" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :Status,"Activo:", class: "control-label col-xs-3 col-sm-6 col-md-3 " %>
+              <div class="col-md-1">
+                <%= f.check_box :Status, {}, "A", "I" %>
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= comision.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+<script>
+  $(".formulario-validado-update<%=comision.id%>").validate();
+
+</script>
+</td>
+  <td><%=comision.ID_Producto%></td>
+  <td><%=comision.Status%></td>
+  <td><%=comision.Comentarios%></td>
+  <td><%=comision.ID_Producto%></td>
+
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatecomision_<%= comision.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <% if comision.Status == "A"%>
+          <%= link_to 'Eliminar', comision, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+        <%else%>
+          <%= link_to 'Habilitar', comision, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+        <%end%>
+        <%= link_to 'Detalles', comision_detalle_path(comision), class:"btn btn-primary btn-xs boton"  %>
+
+      </td>
+
+
+<td class="no" >
+</td>
+</tr>

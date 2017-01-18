@@ -1,0 +1,280 @@
+
+    <!--Modal - update cliente-->
+<%= form_for(cliente, :method => :put, remote: true, html: {class: "form-horizontal formulario-validado-update#{cliente.id}"}) do |f| %><!--ajax-->
+  <div nohidden class="modal fade si" id="myupdatecliente_<%= cliente.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar cliente</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-md-12">
+                  <div class="panel with-nav-tabs panel-default">
+                      <div class="panel-heading">
+                              <ul class="nav nav-tabs">
+                                  <li class="active"><a href="#tab1default<%= cliente.id %>" data-toggle="tab">Datos Generales</a></li>
+                                  <li><a href="#tab2default<%= cliente.id %>" data-toggle="tab">Datos de Contacto</a></li>
+                                  <li><a href="#tab3default<%= cliente.id %>" data-toggle="tab">Datos de Venta</a></li>
+                                  <li><a href="#tab4default<%= cliente.id %>" data-toggle="tab">Clasificación</a></li>
+                              </ul>
+                      </div>
+                      <div class="panel-body">
+                          <div class="tab-content">
+                              <div class="tab-pane fade in active" id="tab1default<%= cliente.id %>">
+
+
+                              <div class="form-group">
+                                <%= f.label :Nombre, "Encargado:", class: "control-label col-md-2" %>
+                                <div class="col-md-7">
+                                  <%= f.text_field :Nombre, class: "form-control ",minlength: "5", required: "true"  %>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <%= f.label :NombreCorto, "Nombre Comercial:", class: "control-label col-md-2" %>
+                                <div class="col-md-7">
+                                  <%= f.text_field :NombreCorto, class: "form-control ",minlength: "5", required: "true"  %>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <h3 class="col-md-5">Dirección:</h3>
+                              </div>
+
+                              <div class="form-group">
+                                <%= f.label :Direccion, "Calle y N°:", class: "control-label col-md-2" %>
+                                <div class="col-md-10">
+                                  <%= f.text_field :Direccion, class: "form-control ",minlength: "10", required: "true"  %>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <%= f.label :CP, "C.P:", class: "control-label col-md-2" %>
+                                <div class="col-md-3">
+                                  <%= f.text_field :CP, class: "form-control " %>
+                                </div>
+                                  <%= f.label :Colonia, "Colonia:", class: "control-label col-md-2" %>
+                                <div class="col-md-5">
+                                  <%= f.text_field :Colonia, class: "form-control " %>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <%= f.label :Referencia, "Referencia:", class: "control-label col-md-2" %>
+                                <div class="col-md-10">
+                                  <%= f.text_field :Referencia, class: "form-control " %>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label :Status,"Activo:", class: "control-label col-xs-3 col-sm-6 col-md-1 " %>
+                                <div class="col-md-1">
+                                  <%= f.check_box :Status%>
+                                </div>
+                              </div>
+</div>
+                              <div class="tab-pane fade" id="tab2default<%= cliente.id %>">
+                                  <div class="form-group">
+                                    <%= f.label :Telefono, "Teléfono:", class: "control-label col-md-3" %>
+                                    <div class="col-md-9">
+                                      <%= f.text_field :Telefono, class: "form-control " %>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :Tel2, "Tel. Celular:", class: "control-label col-md-3" %>
+                                    <div class="col-md-9">
+                                      <%= f.text_field :Tel2, class: "form-control" %>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :Email, "Email:", class: "control-label col-md-3" %>
+                                    <div class="col-md-9">
+                                      <%= f.email_field :Email, class: "form-control",minlength: "5", required: "true" %>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :Horario, "Horario:", class: "control-label col-md-3" %>
+                                    <div class="col-md-9">
+                                      <%= f.text_field :Horario, class: "form-control" %>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="tab-pane fade" id="tab3default<%= cliente.id %>">
+
+                                <div class="form-group">
+                                  <%= f.label :Credito, "Credito:", class: "control-label col-xs-7 col-sm-6 col-md-3 " %>
+                                  <div class="col-md-1">
+                                    <%= f.check_box :Credito %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :LimiteCredito, "Limite Credito:", class: "control-label col-md-3" %>
+                                  <div class="col-md-8">
+                                    <%= f.text_field :LimiteCredito, class: "form-control" %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :DiasCreedito, "Dias Credito:", class: "control-label col-md-3" %>
+                                  <div class="col-md-8">
+                                    <%= f.text_field :DiasCreedito, class: "form-control" %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :DiasCreedito, "Credito Actual:", class: "control-label col-md-3" %>
+                                  <div class="col-md-8">
+                                    <% if cliente.detallecob.last != nil%>
+                                      <input type="text" name="CreditoActual" disabled="true" value="<%=cliente.LimiteCredito - cliente.detallecob.last.Saldo%>"><br>
+                                      <%else%>
+                                      <input type="text" name="CreditoActual" disabled="true" value="<%=cliente.LimiteCredito%>"><br>
+                                    <%end%>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :Saldo, "Saldo inicial:", class: "control-label col-md-3" %>
+                                  <div class="col-md-8">
+                                    <%= f.number_field :Saldo, class: "form-control" %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :Saldo, "Saldo Actual:", class: "control-label col-md-3" %>
+                                  <div class="col-md-8">
+
+                                    <input type="text" name="firstname" disabled="true" value="<% if cliente.detallecob.last != nil%><%=cliente.detallecob.last.Saldo%><%else%><%=cliente.Saldo%><%end%>"><br>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :VisitaObligada,"Visita Obligada:", class: "control-label col-xs-7 col-sm-6 col-md-3 " %>
+                                  <div class="col-md-1">
+                                    <%= f.check_box :VisitaObligada  %>
+
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.label :FirmaObligada,"Firma Obligada:", class: "control-label col-xs-7 col-sm-6 col-md-3" %>
+                                  <div class="col-md-1">
+                                    <%= f.check_box :FirmaObligada %>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="tab-pane fade" id="tab4default<%= cliente.id %>">
+                                <%= f.fields_for :relclicla do |relclicla| %>
+
+                                <div class="form-group">
+                                    <%= relclicla.label :Clas1, "Clasificación 1:", class: "control-label col-md-3" %>
+                                  <div class="col-md-3">
+                                    <%= relclicla.select :Clas1, options_for_select(@clas1.map{|e|[e.Descripcion, e.IdClasC]},selected: cliente.relclicla.Clas1), :prompt => "Por favor seleccione", class: "form-control" %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= relclicla.label :Clas2, "Clasificación 2:", class: "control-label col-md-3" %>
+                                  <div class="col-md-3">
+                                    <%= relclicla.select :Clas2, options_for_select(@clas2.map{|e|[e.Descripcion, e.IdClasC]},selected: cliente.relclicla.Clas2), :prompt => "Por favor seleccione",  class: "form-control" %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= relclicla.label :Clas3, "Clasificación 3:", class: "control-label col-md-3" %>
+                                  <div class="col-md-3">
+                                    <%= relclicla.select :Clas3, options_for_select(@clas3.map{|e|[e.Descripcion, e.IdClasC]},selected: cliente.relclicla.Clas3), :prompt => "Por favor seleccione", class: "form-control" %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= relclicla.label :Clas4, "Clasificación 4:", class: "control-label col-md-3" %>
+                                  <div class="col-md-3">
+                                    <%= relclicla.select :Clas4, options_for_select(@clas4.map{|e|[e.Descripcion, e.IdClasC]},selected: cliente.relclicla.Clas4), :prompt => "Por favor seleccione", class: "form-control" %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= relclicla.label :Clas5, "Clasificación 5:", class: "control-label col-md-3" %>
+                                  <div class="col-md-3">
+                                    <%= relclicla.select :Clas5, options_for_select(@clas5.map{|e|[e.Descripcion, e.IdClasC]},selected: cliente.relclicla.Clas5), :prompt => "Por favor seleccione", class: "form-control" %>
+                                  </div>
+                                </div>
+
+                                <%end%>
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="myupdatebutton_<%= cliente.id %>" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Actualizar", class: "btn btn-primary", data: { disable_with: 'Actualizando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+<script>
+  $(".formulario-validado-update<%=cliente.id%>").validate();
+
+</script>
+</td>
+  <td><%=cliente.Nombre%></td>
+  <td><%=cliente.NombreCorto%></td>
+  <td><%=cliente.Direccion%></td>
+  <td><%=cliente.Colonia%></td>
+  <td>
+    <% if cliente.Credito == true%>
+      <input type="checkbox" disabled="true" checked="true">
+    <%else%>
+      <input type="checkbox" disabled="true" >
+    <%end%>
+  </td>
+  <td><%=cliente.DiasCreedito%></td>
+  <td><%=cliente.LimiteCredito%></td>
+  <td>
+    <% if cliente.detallecob.last != nil%>
+        <%=cliente.detallecob.last.Saldo%>
+      <%else%>
+        <%=cliente.Saldo%>
+    <%end%>
+  </td>
+  <td>
+      <% cliente.relclirutas.each do |varias| %>
+        <%=varias.ruta.Ruta%>
+      <%end%>
+  </td>
+  <td>
+    <% if cliente.relclili != nil%>
+      <%=cliente.relclili.listapromomast.ListaMaster%>
+    <%end%>
+  </td>
+
+
+    <td>
+        <%= link_to '<i class="fa fa-gift" aria-hidden="true"></i> Activos'.html_safe, activos_cliente_path(cliente), class:"btn btn-primary btn-xs boton" %>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatecliente_<%= cliente.id %>">
+          Editar
+        </button>
+        <!--Destroy-->
+        <% if cliente.Status == true%>
+          <%= link_to 'Eliminar', cliente, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+        <%else%>
+          <%= link_to 'Habilitar', cliente, method: :delete, class: "btn btn-success btn-xs", remote:true %>
+        <%end%>
+      </td>
+
+
+<td class="no" >
+    </td>
+</tr>

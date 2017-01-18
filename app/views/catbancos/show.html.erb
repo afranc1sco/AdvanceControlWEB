@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Clave:</strong>
+  <%= @catbanco.Clave %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @catbanco.Descripcion %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @catbanco.Status %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @catbanco.IdEmpresa %>
+</p>
+
+<%= link_to 'Edit', edit_catbanco_path(@catbanco) %> |
+<%= link_to 'Back', catbancos_path %>

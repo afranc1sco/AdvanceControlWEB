@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lista:</strong>
+  <%= @list.lista %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @list.tipo %>
+</p>
+
+<p>
+  <strong>Fechaini:</strong>
+  <%= @list.fechaini %>
+</p>
+
+<p>
+  <strong>Fechafin:</strong>
+  <%= @list.fechafin %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @list.idempresa %>
+</p>
+
+<%= link_to 'Edit', edit_list_path(@list) %> |
+<%= link_to 'Back', listap_path %>

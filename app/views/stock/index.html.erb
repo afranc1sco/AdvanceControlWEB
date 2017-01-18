@@ -1,0 +1,19 @@
+<h2>Generación de stock</h2>
+<div class="well center-block">
+  <h2>Por favor selecciona la ruta </h2>
+  <%= form_for @stoc, html: {class: "form-horizontal"}, :url => {:action => 'obtener_ruta'} do |f| %>
+
+    <div class="form-group">
+      <%= f.label :Ruta, "Ruta:", class: "control-label col-md-2" %>
+      <div class="col-md-2">
+        <%= f.select :Ruta, options_for_select(@rutas.map{|e|[e.Ruta, e.IdRutas]},selected: params[:id]), class: "form-control" %>
+      </div>
+
+      <div class="col-md-3">
+        <%= submit_tag "Buscar", class: "btn btn-primary btn-lg btn-block"%>
+      </div>
+    </div>
+
+
+  <%end%>
+</div>

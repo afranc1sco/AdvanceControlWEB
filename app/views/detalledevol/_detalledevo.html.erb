@@ -1,0 +1,16 @@
+<tr id="detalle_<%= detalledevo.id %>">
+  <td><%= detalledevo.ruta.Ruta %></td>
+  <td><%= detalledevo.Docto %></td>
+  <td><%= detalledevo.SKU %></td>
+  <td><%= detalledevo.producto.Producto %></td>
+  <td><%= detalledevo.Pza %></td>
+  <td><% if detalledevo.Tipo == 0%>
+        Cajas
+      <%else%>
+        Piezas
+      <%end%>
+  </td>
+  <td><%= detalledevo.Motivo %></td>
+  <td><%= detalledevo.EDO %></td>
+
+</tr>

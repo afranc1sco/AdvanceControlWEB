@@ -1,0 +1,61 @@
+<%= form_for(@perfil) do |f| %>
+  <% if @perfil.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@perfil.errors.count, "error") %> prohibited this perfil from being saved:</h2>
+
+      <ul>
+      <% @perfil.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Altas %><br>
+    <%= f.text_field :Altas %>
+  </div>
+  <div class="field">
+    <%= f.label :Bajas %><br>
+    <%= f.text_field :Bajas %>
+  </div>
+  <div class="field">
+    <%= f.label :Modi %><br>
+    <%= f.text_field :Modi %>
+  </div>
+  <div class="field">
+    <%= f.label :Listar %><br>
+    <%= f.text_field :Listar %>
+  </div>
+  <div class="field">
+    <%= f.label :Modulo %><br>
+    <%= f.text_field :Modulo %>
+  </div>
+  <div class="field">
+    <%= f.label :IdUser %><br>
+    <%= f.text_field :IdUser %>
+  </div>
+  <div class="field">
+    <%= f.label :Aceso %><br>
+    <%= f.text_field :Aceso %>
+  </div>
+  <div class="field">
+    <%= f.label :Codigo %><br>
+    <%= f.text_field :Codigo %>
+  </div>
+  <div class="field">
+    <%= f.label :usaPW %><br>
+    <%= f.text_field :usaPW %>
+  </div>
+  <div class="field">
+    <%= f.label :Otro %><br>
+    <%= f.text_field :Otro %>
+  </div>
+  <div class="field">
+    <%= f.label :Descripcion %><br>
+    <%= f.text_field :Descripcion %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

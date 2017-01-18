@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Cliente: MyString
+  Activo: MyString
+  FechaAsignacion: MyString
+  IdEmpresa: MyString
+
+two:
+  Cliente: MyString
+  Activo: MyString
+  FechaAsignacion: MyString
+  IdEmpresa: MyString

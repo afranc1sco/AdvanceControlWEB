@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Lista</Data></Cell>
+        <Cell><Data ss:Type="String">Tipo</Data></Cell>
+        <Cell><Data ss:Type="String">Caduca</Data></Cell>
+        <Cell><Data ss:Type="String">FechaIni</Data></Cell>
+        <Cell><Data ss:Type="String">FechaFin</Data></Cell>
+        <Cell><Data ss:Type="String">IdEmpresa</Data></Cell>
+      </Row>
+
+      <% @listad.each do |slista| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= slista.Lista%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= slista.Tipo%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= slista.Caduca%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= slista.FechaIni%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= slista.FechaFin%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= slista.IdEmpresa%></Data></Cell>
+        </Row>
+      <%end%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -1,0 +1,45 @@
+<%= form_for(@relrucla) do |f| %>
+  <% if @relrucla.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relrucla.errors.count, "error") %> prohibited this relrucla from being saved:</h2>
+
+      <ul>
+      <% @relrucla.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :RutaId %><br>
+    <%= f.text_field :RutaId %>
+  </div>
+  <div class="field">
+    <%= f.label :Clas1 %><br>
+    <%= f.text_field :Clas1 %>
+  </div>
+  <div class="field">
+    <%= f.label :Clas2 %><br>
+    <%= f.text_field :Clas2 %>
+  </div>
+  <div class="field">
+    <%= f.label :Clas3 %><br>
+    <%= f.text_field :Clas3 %>
+  </div>
+  <div class="field">
+    <%= f.label :Clas4 %><br>
+    <%= f.text_field :Clas4 %>
+  </div>
+  <div class="field">
+    <%= f.label :Clas5 %><br>
+    <%= f.text_field :Clas5 %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

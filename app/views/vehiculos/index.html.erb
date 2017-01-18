@@ -1,0 +1,260 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Vehículos</h1>
+<style>
+.container {
+  width: 100%;
+}
+.modal-dialog{
+  width: 78%;
+}
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewvehiculo">
+        Nuevo Vehículo
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="vehiculos" class="display"><!--el id vehiculos es de datatables referenciado en vehiculos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Marcas</th>
+      <th>Modelo</th>
+      <th>Placas</th>
+      <th>MesVerificación</th>
+      <th>Kilometraje</th>
+      <th>FechaVencSeguro</th>
+      <th>Acciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_vehiculos">
+      <%= render @vehiculos %><!--carga todos los vehiculos-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@vehiculo, remote: true, html: {class: "form-horizontal vehiculo-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewvehiculo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Vehículo</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Clave, "Clave:", class: "control-label col-md-2" %>
+            <div class="col-md-3">
+              <%= f.text_field :Clave, class: "form-control vehiculo-clave", maxlength: "20",autofocus: true, required: "true"  %>
+            </div>
+
+            <%= f.label :Descripcion, "Descripción:", class:"control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.text_field :Descripcion, class: "form-control vehiculo-descripcion", maxlength: "40", required: "true" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+
+            <div id="marca_vehiculo"><%= render 'marca_vehiculo'  %></div><!--f:f es para que el parcial funcione con el formulario-->
+
+            <%= f.label :Modelo, "Modelo(Tipo):", class:"control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.text_field :Modelo, class: "form-control vehiculo-modelo", maxlength: "20", required: "true" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Modelo_year, "Modelo(Año):", class:"control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.number_field :Modelo_year, class: "form-control vehiculo-modelo_year", maxlength: "4", required: "true" %>
+            </div>
+
+              <%= f.label :Placas, "Placa:", class:"control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.text_field :Placas, class: "form-control vehiculo-placas", maxlength: "10", required: "true" %>
+            </div>
+
+
+          </div>
+
+        <div class="form-group">
+          <%= f.label :Kilometraje, "KMs Ult Servicio:", class:"control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= f.number_field :Kilometraje, class: "form-control vehiculo-kilometraje", maxlength: "7", required: "true"  %>
+          </div>
+
+          <%= f.label :NumeroEco, "N° Economico:", class:"control-label col-md-2" %>
+          <div class="col-md-3">
+           <%= f.text_field :NumeroEco, class: "form-control vehiculo-numeroeco", maxlength: "15", required: "true" %>
+         </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <%= f.label :Aseguradora, "Aseguradora:", class:"control-label col-md-2"  %>
+       <div class="col-md-3">
+         <%= f.text_field :Aseguradora, class: "form-control vehiculo-aseguradora", maxlength: "40" %>
+       </div>
+
+          <%= f.label :Poliza, "Poliza:", class:"control-label col-md-2" , class:"control-label col-md-2"  %>
+        <div class="col-md-3">
+          <%= f.text_field :Poliza, class: "form-control vehiculo-poliza", maxlength: "20" %>
+        </div>
+
+
+      </div>
+
+      <div class="form-group">
+        <%= f.label :FechaVencSeguro, "Venc Seguro:", class:"control-label col-md-2"  %>
+        <div class="col-md-3">
+          <%= f.text_field :FechaVencSeguro, class: "form-control  vehiculo-fechavencseguro datepicker", maxlength: "10", required: "true"  %>
+        </div>
+
+          <%= f.label :TelSeguro, "Tel Aseguradora:", class:"control-label col-md-2"  %>
+        <div class="col-md-3">
+          <%= f.text_field :TelSeguro, class: "form-control vehiculo-telseguro", maxlength: "20" %>
+        </div>
+      </div>
+
+
+
+        <div class="form-group">
+          <%= f.label :MesVerifica, "Fecha de Verificación:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= f.text_field :MesVerifica, class: "form-control datepicker vehiculo-mesverifica " %>
+          </div>
+
+          <%= f.label :KilometrajeSem, "KMs Ult Servicio:", class:"control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= f.text_field :KilometrajeSem, class: "form-control vehiculo-kilometrajesem", maxlength: "7", required: "true"  %>
+          </div>
+        </div>
+
+
+        <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        <div class="form-group">
+          <%= f.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-3"%>
+          <div class="col-md-1">
+            <%= f.check_box :Status,{checked: true} %>
+          </div>
+        </div>
+
+
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewvehiculoclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<!-- Modal create action -->
+<%= form_for(@catmarca, remote: true, html: {class: "form-horizontal "}) do |mk| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewmarca" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Marca</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <%= mk.label :Clave, "Clave:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= mk.text_field :Clave, class: "form-control catgrupo_clave",autofocus: true, minlength: "1", required: "true"   %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= mk.label :Descripcion, "Descripcion:", class: "control-label col-md-3"  %>
+            <div class="col-md-9">
+              <%= mk.text_field :Descripcion, class: "form-control catgrupo_descripcion", minlength: "3", required: "true"   %>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <%= mk.label :Status,"Activo:", class: "control-label col-xs-7 col-sm-6 col-md-2"%>
+            <div class="col-md-1">
+              <%= mk.check_box :Status,{checked: true} %>
+            </div>
+          </div>
+            <%= mk.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+            <%= mk.hidden_field :TipoMarca, value: "V" %>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewcategoryclose">Cerrar</button>
+          <%= mk.submit "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+</div>
+
+
+<p>
+  Download:
+  <%= link_to "CSV", vehiculos_path(format:"csv") %> |
+  <%= link_to "Excel", vehiculos_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>
+
+
+<div class="modal fade" id="myimportdata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar Datos</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Nota: El formato excel a exportar debe ser .xlsx ó .csv
+        </p>
+        <%= form_tag import_vehiculos_path, multipart: true do %>
+          <%= file_field_tag :file %>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="myimportdataclose">Close</button>
+        <%= submit_tag "Importar", class: "btn btn-primary", data: { disable_with: 'Importando' } %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Vehículos eliminados ó inhabilitados<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, vehiculos_inactivos_path, class: "btn btn-danger btn-xs"%>

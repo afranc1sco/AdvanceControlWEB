@@ -1,0 +1,15 @@
+<h2>Producto promoción</h2>
+<div class="well center-block">
+  <h2>Ruta y dia operativo</h2>
+
+    <%= form_tag("/busqueda_producto_obsequio", method: 'get', remote: true, id:"search",class: "form-horizontal" ) do %>
+      <%= render 'partials/buscadorReportes/buscador_reportes' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes2' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes3' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes4' %>
+      <%= render 'partials/buscadorReportes/buscador_reportes5' %>
+
+    <%end%>
+
+</div>
+<div id="productoObsequio"><%= render 'productoObsequio' %></div>

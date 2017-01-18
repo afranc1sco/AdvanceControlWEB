@@ -1,0 +1,18 @@
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+$("#myupdateempresa_<%= @empresa.id %>").modal('hide');
+
+$("#empresa_<%= @empresa.id %>").fadeOut(500, function(){
+  $(".empresa_empresaed").val('');
+  $(this).remove();
+  $(".child").remove();
+
+  $("#container_empresas").prepend('<%= j render @empresa %>');
+
+});
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

@@ -1,0 +1,29 @@
+<%= form_for(@motivonoventa) do |f| %>
+  <% if @motivonoventa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@motivonoventa.errors.count, "error") %> prohibited this motivonoventa from being saved:</h2>
+
+      <ul>
+      <% @motivonoventa.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Motivo %><br>
+    <%= f.text_field :Motivo %>
+  </div>
+  <div class="field">
+    <%= f.label :Clave %><br>
+    <%= f.text_field :Clave %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.check_box :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

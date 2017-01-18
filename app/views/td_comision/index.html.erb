@@ -1,0 +1,108 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Detalle de la Comisión</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewtdcomision">
+        Nuevo Detalle para la Comisión
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="td_comision" class="display"><!--el id td_comision es de datatables referenciado en td_comision.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Rango inicial</th>
+      <th>Rango final</th>
+      <th>Unidad de medida</th>
+      <th>Comisión del agente</th>
+      <th>Comisión del ayudante</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_td_comision">
+      <%= render @td_comision %><!--carga todos los td_comision-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@tdcomision, remote: true, html: {class: "form-horizontal formulario-validado-create"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewtdcomision" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Detalle</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <%= f.label :Tipo, "Unidad de Medida:", class: "control-label col-md-4"  %>
+            <div class="col-md-4">
+              <%= f.select :Tipo, [['Cajas', 0], ['Piezas', 1]] %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :RangoIni, "Rango Inicial:", class: "control-label col-md-4"  %>
+            <div class="col-md-4">
+              <%= f.number_field :RangoIni, class:"form-control tdcomision_rangoini", autofocus: true, required: "true"   %>
+            </div>
+          </div>
+
+            <div class="form-group">
+              <%= f.label :RangoFin, "Rango Final:", class:"control-label col-md-4" %>
+              <div class="col-md-4">
+                <%= f.number_field :RangoFin, class: "form-control tdcomision_rangofin", required: "true"  %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :Angente, "Comisión del Agente:", class: "control-label col-md-4"  %>
+              <div class="col-md-4">
+                <%= f.number_field :Angente, class:"form-control tdcomision_angente", step: "any", required: "true"   %>
+              </div>
+            </div>
+
+              <div class="form-group">
+                <%= f.label :Ayudante, "Comisión del Ayudante:", class:"control-label col-md-4" %>
+                <div class="col-md-4">
+                  <%= f.number_field :Ayudante, class: "form-control tdcomision_ayudante", step: "any", required: "true"  %>
+                </div>
+              </div>
+
+            <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+            <%= f.hidden_field :ID_Comision, value: params[:id]  %>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewtdcomisionclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<div class="actions">
+  <div class="form-group">
+    <div class="col-md-12">
+    <%= link_to 'Volver a comisión', th_comision_path, class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+</div>

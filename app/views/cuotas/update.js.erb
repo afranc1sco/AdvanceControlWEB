@@ -1,0 +1,15 @@
+$("#myupdatecuota_<%= @cuota.id %>").modal('hide');
+
+$("#cuota_<%= @cuota.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+  $("#container_cuotas").prepend('<%= j render @cuota %>');
+
+});
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

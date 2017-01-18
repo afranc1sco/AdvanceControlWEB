@@ -1,0 +1,3925 @@
+USE [Izt_AdvanceControl_2016]
+GO
+/****** Object:  Table [dbo].[Activos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Activos](
+	[IdActivos] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [nvarchar](255) NULL,
+	[Modelo] [nvarchar](255) NULL,
+	[Fecha] [datetime] NULL,
+	[Imagen] [image] NULL,
+	[Serie] [nvarchar](50) NULL,
+	[CB] [nvarchar](50) NULL,
+	[Status] [nvarchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Activos] PRIMARY KEY CLUSTERED 
+(
+	[IdActivos] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Ayudantes]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING OFF
+GO
+CREATE TABLE [dbo].[Ayudantes](
+	[Nombre] [varchar](max) NOT NULL,
+	[Direccion] [varchar](max) NULL,
+	[Telefono] [varchar](50) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+SET ANSI_PADDING ON
+ALTER TABLE [dbo].[Ayudantes] ADD [IdEmpresa] [varchar](50) NULL
+ALTER TABLE [dbo].[Ayudantes] ADD [Status] [bit] NULL
+ALTER TABLE [dbo].[Ayudantes] ADD [NumLicencia] [varchar](255) NULL
+ALTER TABLE [dbo].[Ayudantes] ADD [VenceLic] [datetime] NULL
+ALTER TABLE [dbo].[Ayudantes] ADD [Clave] [varchar](50) NULL
+ALTER TABLE [dbo].[Ayudantes] ADD [id_ayudante] [int] IDENTITY(1,1) NOT NULL
+ CONSTRAINT [PK_ayudantes] PRIMARY KEY CLUSTERED 
+(
+	[id_ayudante] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[BitacoraCuotas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BitacoraCuotas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CuoId] [int] NULL,
+	[Fecha] [datetime] NULL,
+	[RutaId] [int] NULL,
+	[Valor] [numeric](18, 2) NULL,
+ CONSTRAINT [PK_BitacoraCuotas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[BitacoraTiempos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[BitacoraTiempos](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Codigo] [varchar](50) NULL,
+	[Descripcion] [varchar](255) NULL,
+	[HI] [datetime] NULL,
+	[HF] [datetime] NULL,
+	[HT] [varchar](20) NULL,
+	[TS] [varchar](20) NULL,
+	[Visita] [bit] NULL,
+	[Programado] [bit] NULL,
+	[DiaO] [int] NULL,
+	[RutaId] [int] NULL,
+	[Cerrado] [bit] NULL,
+	[IdV] [int] NULL,
+	[Tip] [nvarchar](10) NULL,
+	[latitude] [float] NULL,
+	[longitude] [float] NULL,
+	[pila] [tinyint] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_BitacoraTiempos] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Cancelaciones]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cancelaciones](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodigoDKL] [nvarchar](50) NULL,
+	[Docto] [numeric](18, 0) NULL,
+	[Tipo] [nvarchar](50) NULL,
+	[DiaO] [int] NULL,
+	[Llave] [nvarchar](50) NULL,
+	[RutaId] [int] NULL,
+ CONSTRAINT [PK_Cancelaciones] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[CargaRuta]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CargaRuta](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Articulo] [varchar](50) NULL,
+	[Fecha] [datetime] NULL,
+	[RutaId] [int] NULL,
+	[Tipo] [bit] NULL,
+	[Stock] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_CargaRuta] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ClasClientes]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ClasClientes](
+	[IdClasC] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [nvarchar](max) NULL,
+	[NivelNum] [int] NULL,
+ CONSTRAINT [PK_ClasClientes] PRIMARY KEY CLUSTERED 
+(
+	[IdClasC] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[ClasProductos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ClasProductos](
+	[IdClasP] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [nvarchar](max) NULL,
+	[NivelNum] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ClasProductos] PRIMARY KEY CLUSTERED 
+(
+	[IdClasP] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ClasRutas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ClasRutas](
+	[IdCRutas] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](max) NULL,
+	[NivelNum] [int] NULL,
+ CONSTRAINT [PK_ClasRutas] PRIMARY KEY CLUSTERED 
+(
+	[IdCRutas] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Clientes]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Clientes](
+	[IdCli] [varchar](50) NOT NULL,
+	[Nombre] [varchar](255) NULL,
+	[NombreCorto] [varchar](100) NULL,
+	[Direccion] [varchar](255) NULL,
+	[Referencia] [nvarchar](510) NULL,
+	[Telefono] [nvarchar](50) NULL,
+	[CP] [char](5) NULL,
+	[Credito] [bit] NULL,
+	[LimiteCredito] [money] NULL,
+	[Status] [bit] NULL,
+	[DiasCreedito] [int] NULL,
+	[Colonia] [varchar](100) NULL,
+	[Tel2] [nvarchar](50) NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[VisitaObligada] [bit] NULL,
+	[FirmaObligada] [bit] NULL,
+	[MotivoBajaId] [int] NULL,
+	[Saldo] [money] NULL,
+	[Horario] [nvarchar](50) NULL,
+	[idclasc] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Clientes] PRIMARY KEY CLUSTERED 
+(
+	[IdCli] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Cobranza]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Cobranza](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Cliente] [varchar](50) NULL,
+	[Documento] [nvarchar](50) NULL,
+	[Saldo] [money] NULL,
+	[Status] [int] NULL,
+	[RutaId] [int] NULL,
+	[UltPago] [nvarchar](50) NULL,
+	[FechaReg] [datetime] NULL,
+	[FechaVence] [datetime] NULL,
+	[FolioInterno] [int] NULL,
+	[TipoDoc] [nvarchar](50) NULL,
+	[DiaO] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Cobranza] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[cobranzaduplicados]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[cobranzaduplicados](
+	[id] [int] NOT NULL,
+	[Cliente] [varchar](50) NULL,
+	[Documento] [nvarchar](50) NULL,
+	[Saldo] [money] NULL,
+	[Status] [int] NULL,
+	[RutaId] [int] NULL,
+	[UltPago] [nvarchar](50) NULL,
+	[FechaReg] [datetime] NULL,
+	[FechaVence] [datetime] NULL,
+	[FolioInterno] [int] NULL,
+	[TipoDoc] [nvarchar](50) NULL,
+	[DiaO] [int] NULL,
+	[DUPLICADO] [int] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[CodesOp]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CodesOp](
+	[Codi] [nvarchar](50) NOT NULL,
+	[Operacion] [nvarchar](max) NULL,
+	[Tipo] [bit] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+	[EsRecarga] [bit] NULL,
+ CONSTRAINT [PK_CodesOp_1] PRIMARY KEY CLUSTERED 
+(
+	[Codi] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Comisiones]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Comisiones](
+	[IdRow] [int] IDENTITY(1,1) NOT NULL,
+	[Comision] [nvarchar](50) NULL,
+	[Activa] [bit] NULL,
+	[Tipo] [numeric](18, 0) NULL,
+	[Factor] [nvarchar](50) NULL,
+	[Niveles] [numeric](18, 0) NULL,
+	[Clave] [nvarchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Comisiones] PRIMARY KEY CLUSTERED 
+(
+	[IdRow] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ConfigRutasP]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ConfigRutasP](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RutaId] [int] NULL,
+	[ModelPrinter] [nvarchar](50) NULL,
+	[VelCom] [nvarchar](50) NULL,
+	[COM] [nvarchar](50) NULL,
+	[Server] [varchar](255) NULL,
+	[Puerto] [int] NULL,
+	[ServerGPS] [nvarchar](50) NULL,
+	[GPS] [bit] NULL,
+	[PuertoG] [nvarchar](50) NULL,
+	[PagoContado] [bit] NULL,
+	[CteNvo] [bit] NULL,
+	[CveCteNvo] [bit] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+	[SugerirCant] [bit] NULL,
+	[PromoEq] [bit] NULL,
+ CONSTRAINT [PK_ConfigRutasP] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Configuracion]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Configuracion](
+	[Clave] [int] IDENTITY(1,1) NOT NULL,
+	[EliminarClasRutas] [bit] NULL,
+	[EliminarClasClientes] [bit] NULL,
+	[EliminarClasProductos] [bit] NULL,
+	[PrimerLineaTickets] [nvarchar](max) NULL,
+	[SegundaLinea] [nvarchar](max) NULL,
+	[TercerLinea] [nvarchar](max) NULL,
+	[CuartaLinea] [nvarchar](max) NULL,
+	[MensajeFinal] [nvarchar](max) NULL,
+	[HabilitarTdV] [bit] NULL,
+	[MensajeTdV] [nvarchar](max) NULL,
+	[Pedidos] [int] NULL,
+	[Ventas] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Configuracion] PRIMARY KEY CLUSTERED 
+(
+	[Clave] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ConfiguracionGral]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ConfiguracionGral](
+	[ID_Config] [varchar](5) NOT NULL,
+	[Nombre] [varchar](50) NOT NULL,
+	[Descripcion] [varchar](max) NULL,
+	[Valor] [varchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ConfiguracionGral] PRIMARY KEY CLUSTERED 
+(
+	[ID_Config] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ContadorNC]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ContadorNC](
+	[Idrow] [int] IDENTITY(1,1) NOT NULL,
+	[Ruta] [nvarchar](100) NULL,
+	[Contador] [nvarchar](500) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ContadorNC] PRIMARY KEY CLUSTERED 
+(
+	[Idrow] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Continuidad]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Continuidad](
+	[RutaID] [int] NOT NULL,
+	[DiaO] [int] NULL,
+	[FolVta] [int] NULL,
+	[FolPed] [int] NULL,
+	[FolDevol] [int] NULL,
+	[FolCob] [int] NULL,
+	[UDiaO] [int] NULL,
+	[CteNvo] [varchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Continuidad] PRIMARY KEY CLUSTERED 
+(
+	[RutaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[CP]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CP](
+	[CP] [int] NULL,
+	[Colonia] [varchar](100) NULL,
+	[Municipio] [varchar](75) NULL,
+	[Estado] [varchar](50) NULL,
+	[Ciudad] [varchar](75) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[CTiket]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CTiket](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Linea1] [varchar](255) NULL,
+	[Linea2] [varchar](255) NULL,
+	[Linea3] [varchar](255) NULL,
+	[Linea4] [varchar](255) NULL,
+	[Mensaje] [varchar](255) NULL,
+	[Tdv] [bit] NULL,
+	[LOGO] [image] NULL,
+	[MLiq] [bit] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_CTiket] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Cuotas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Cuotas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Clave] [nvarchar](50) NULL,
+	[Descripcion] [nvarchar](max) NULL,
+	[UniMed] [nvarchar](50) NULL,
+	[Cantidad] [nvarchar](50) NULL,
+	[FechaI] [datetime] NULL,
+	[FechaF] [datetime] NULL,
+	[Producto] [varchar](50) NULL,
+	[Tipo] [bit] NULL,
+	[Activa] [bit] NULL,
+	[NivelNum] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Cuotas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetalleCob]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetalleCob](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdCobranza] [int] NULL,
+	[Abono] [money] NULL,
+	[Fecha] [datetime] NULL,
+	[RutaId] [int] NULL,
+	[SaldoAnt] [money] NULL,
+	[Saldo] [money] NULL,
+	[FormaP] [int] NULL,
+	[DiaO] [int] NULL,
+	[Documento] [nvarchar](50) NULL,
+	[Cliente] [nvarchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+	[Cancelada] [bit] NULL,
+ CONSTRAINT [PK_DetalleCob] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetalleCobduplicados]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DetalleCobduplicados](
+	[Id] [int] NOT NULL,
+	[IdCobranza] [int] NULL,
+	[Abono] [money] NULL,
+	[Fecha] [datetime] NULL,
+	[RutaId] [int] NULL,
+	[SaldoAnt] [money] NULL,
+	[Saldo] [money] NULL,
+	[FormaP] [int] NULL,
+	[DiaO] [int] NULL,
+	[Documento] [nvarchar](50) NULL,
+	[Cliente] [nvarchar](50) NULL,
+	[DUPLICADO] [int] NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[DetalleDevol]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetalleDevol](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SKU] [nvarchar](50) NULL,
+	[Pza] [int] NULL,
+	[KG] [numeric](18, 2) NULL,
+	[Precio] [money] NULL,
+	[Importe] [money] NULL,
+	[EDO] [bit] NULL,
+	[Motivo] [nvarchar](max) NULL,
+	[IVA] [money] NULL,
+	[IEPS] [money] NULL,
+	[Devol] [int] NULL,
+	[Docto] [int] NULL,
+	[RutaId] [int] NULL,
+	[Tipo] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_DetalleDevol] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetalleLD]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetalleLD](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ListaId] [int] NULL,
+	[Articulo] [varchar](50) NULL,
+	[Factor] [decimal](18, 4) NULL,
+	[Minimo] [decimal](18, 4) NULL,
+	[Maximo] [decimal](18, 4) NULL,
+	[Tipo] [char](1) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_DetalleLD] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetalleLP]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetalleLP](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ListaId] [int] NULL,
+	[Articulo] [varchar](50) NULL,
+	[PrecioMin] [nvarchar](50) NULL,
+	[PrecioMax] [nvarchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_DetalleLP] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetalleLProMaster]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetalleLProMaster](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdLm] [int] NULL,
+	[IdPromo] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_DetalleLProMaster] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetallePedidos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetallePedidos](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SKU] [varchar](50) NULL,
+	[Pza] [int] NULL,
+	[KG] [numeric](18, 2) NULL,
+	[Precio] [money] NULL,
+	[Importe] [money] NULL,
+	[IVA] [money] NULL,
+	[IEPS] [money] NULL,
+	[Docto] [int] NULL,
+	[DesctoPor] [numeric](18, 2) NULL,
+	[DesctoV] [numeric](18, 2) NULL,
+	[RutaId] [int] NULL,
+	[Vendedo] [int] NULL,
+	[Descripcion] [varchar](255) NULL,
+	[Tipo] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_DetallePedidos] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetallePromo]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetallePromo](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Articulo] [varchar](50) NULL,
+	[PromoId] [int] NULL,
+	[Cantidad] [numeric](18, 0) NULL,
+	[Tipo] [bit] NULL,
+	[TipoProm] [nvarchar](50) NULL,
+	[Monto] [nvarchar](50) NULL,
+	[Volumen] [nchar](10) NULL,
+	[TipMed] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+	[Nivel] [int] NULL,
+ CONSTRAINT [PK_DetallePromo] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetalleSalidas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetalleSalidas](
+	[IDSalida] [int] NULL,
+	[Articulo] [varchar](50) NULL,
+	[Cantidad] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DetalleVet]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DetalleVet](
+	[Articulo] [varchar](50) NULL,
+	[Descripcion] [nvarchar](max) NULL,
+	[Precio] [money] NULL,
+	[Pza] [int] NULL,
+	[Kg] [numeric](18, 2) NULL,
+	[DescPorc] [nvarchar](50) NULL,
+	[DescMon] [numeric](18, 2) NULL,
+	[Tipo] [int] NULL,
+	[Docto] [int] NULL,
+	[Importe] [money] NULL,
+	[IVA] [money] NULL,
+	[IEPS] [money] NULL,
+	[RutaId] [int] NULL,
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_DetalleVet] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_DetalleVet] UNIQUE NONCLUSTERED 
+(
+	[Articulo] ASC,
+	[Docto] ASC,
+	[RutaId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DevEnvases]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DevEnvases](
+	[RutaId] [int] NULL,
+	[DiaO] [int] NULL,
+	[CodCli] [varchar](50) NULL,
+	[Docto] [int] NULL,
+	[Articulo] [varchar](50) NULL,
+	[Cantidad] [int] NULL,
+	[Devuelto] [int] NULL,
+	[Tipo] [nvarchar](100) NULL,
+	[Envase] [varchar](50) NULL,
+	[Status] [char](1) NULL,
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_DevEnvases] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Devoluciones]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Devoluciones](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodCliente] [varchar](50) NULL,
+	[Devol] [int] NULL,
+	[Fecha] [datetime] NULL,
+	[Status] [numeric](18, 0) NULL,
+	[Ruta] [int] NULL,
+	[Vendedor] [int] NULL,
+	[Items] [int] NULL,
+	[KG] [numeric](18, 2) NULL,
+	[IVA] [money] NULL,
+	[IEPS] [money] NULL,
+	[Subtotal] [money] NULL,
+	[Total] [money] NULL,
+	[EnLetras] [varchar](255) NULL,
+	[DiaO] [int] NULL,
+	[Docto] [int] NULL,
+	[Cancelada] [bit] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Devoluciones] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Dias]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Dias](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Dia] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Dias] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[DiasO]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DiasO](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[DiaO] [int] NOT NULL,
+	[Fecha] [date] NULL,
+	[RutaId] [int] NOT NULL,
+	[VProg] [numeric](18, 0) NULL,
+	[Ve] [numeric](18, 0) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_DiasO] PRIMARY KEY CLUSTERED 
+(
+	[DiaO] ASC,
+	[RutaId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DiasOperativos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DiasOperativos](
+	[Clave] [int] IDENTITY(1,1) NOT NULL,
+	[Dia] [int] NULL,
+	[RutaId] [int] NULL,
+	[Ventas] [int] NULL,
+	[VentasCre] [int] NULL,
+	[Devoluciones] [int] NULL,
+	[Pedidos] [int] NULL,
+ CONSTRAINT [PK_DiasOperativos] PRIMARY KEY CLUSTERED 
+(
+	[Clave] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Empresas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Empresas](
+	[IdEmpresa] [varchar](50) NOT NULL,
+	[Empresa] [varchar](255) NULL,
+ CONSTRAINT [PK_Empresas] PRIMARY KEY CLUSTERED 
+(
+	[IdEmpresa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Encuestas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Encuestas](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Clave_Enc] [varchar](50) NOT NULL,
+	[Desc_Enc] [varchar](50) NULL,
+	[Tipo_Enc] [varchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Encuestas] PRIMARY KEY CLUSTERED 
+(
+	[Clave_Enc] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[FormasPag]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[FormasPag](
+	[IdFpag] [int] IDENTITY(1,1) NOT NULL,
+	[Forma] [nvarchar](max) NULL,
+	[Clave] [nvarchar](max) NULL,
+	[Status] [bit] NULL,
+ CONSTRAINT [PK_FormasPag] PRIMARY KEY CLUSTERED 
+(
+	[IdFpag] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[HistoricoActivo]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[HistoricoActivo](
+	[consec] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[IdActivos] [int] NOT NULL,
+	[IdCli] [varchar](50) NULL,
+	[FechaAsignacion] [datetime] NULL,
+	[FechaDevol] [datetime] NULL,
+	[Status] [int] NULL,
+	[Comentario] [varchar](200) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_HistoricoActivo] PRIMARY KEY CLUSTERED 
+(
+	[consec] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Liquidacion]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Liquidacion](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SKU] [nvarchar](50) NULL,
+	[Producto] [nvarchar](max) NULL,
+	[InvIP] [numeric](18, 2) NULL,
+	[InvIK] [numeric](18, 2) NULL,
+	[SutidoP] [numeric](18, 2) NULL,
+	[SurtidoK] [numeric](18, 2) NULL,
+	[DevolucionP] [numeric](18, 2) NULL,
+	[DevolucionK] [numeric](18, 2) NULL,
+	[PromocionesP] [numeric](18, 2) NULL,
+	[PromocionesK] [numeric](18, 2) NULL,
+	[InvFP] [numeric](18, 2) NULL,
+	[InvFk] [numeric](18, 2) NULL,
+	[VtaTeoricaP] [numeric](18, 2) NULL,
+	[VtaTeoricaK] [numeric](18, 2) NULL,
+	[VtaRealP] [numeric](18, 2) NULL,
+	[VtaRealK] [numeric](18, 2) NULL,
+	[DiferenciaP] [numeric](18, 2) NULL,
+	[DiferenciaK] [numeric](18, 2) NULL,
+	[Importe] [numeric](18, 2) NULL,
+	[RutaId] [int] NULL,
+	[DiaO] [int] NULL,
+	[Fecha] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Liquidacion] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[ListaD]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ListaD](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Lista] [nvarchar](max) NULL,
+	[Tipo] [char](1) NULL,
+	[Caduca] [bit] NULL,
+	[FechaIni] [date] NULL,
+	[FechaFin] [date] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ListaDesc] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ListaP]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ListaP](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Lista] [nvarchar](max) NULL,
+	[Tipo] [bit] NULL,
+	[FechaIni] [datetime] NULL,
+	[FechaFin] [datetime] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ListaP] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ListaPromo]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ListaPromo](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Lista] [nvarchar](max) NULL,
+	[Descripcion] [nvarchar](max) NULL,
+	[Caduca] [bit] NULL,
+	[FechaI] [datetime] NULL,
+	[FechaF] [datetime] NULL,
+	[Grupo] [nvarchar](max) NULL,
+	[Activa] [bit] NULL,
+	[Tipo] [nvarchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ListaPromo] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ListaPromoMaster]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ListaPromoMaster](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ListaMaster] [nvarchar](max) NULL,
+	[Promociones] [nvarchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ListaPromoMaster] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Medidores]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Medidores](
+	[IdRow] [int] IDENTITY(1,1) NOT NULL,
+	[IdRuta] [int] NULL,
+	[DiaO] [int] NULL,
+	[OdometroInicial] [numeric](18, 0) NULL,
+	[OdometroFinal] [numeric](18, 0) NULL,
+	[TanqueInicial] [numeric](18, 2) NULL,
+	[TanqueFinal] [numeric](18, 2) NULL,
+	[LitrosCargados] [numeric](18, 0) NULL,
+	[GastoLitros] [numeric](18, 2) NULL,
+	[Rendimiento] [numeric](18, 2) NULL,
+	[KmR] [numeric](18, 2) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Medidores] PRIMARY KEY CLUSTERED 
+(
+	[IdRow] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Mensajes]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Mensajes](
+	[Clave] [nvarchar](50) NULL,
+	[EnBaseA] [nvarchar](max) NULL,
+	[Descripcion] [nvarchar](max) NULL,
+	[Mensaje] [varchar](255) NULL,
+	[FechaInicio] [datetime] NULL,
+	[FechaFinal] [datetime] NULL,
+	[Estado] [bit] NULL,
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Mensajes] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Mermas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Mermas](
+	[Id] [int] NOT NULL,
+	[Articulo] [varchar](50) NULL,
+	[Merma] [nvarchar](50) NULL,
+	[Fecha] [datetime] NULL,
+	[RutaId] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Mermas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[MotivosNoVenta]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MotivosNoVenta](
+	[IdMot] [int] IDENTITY(1,1) NOT NULL,
+	[Motivo] [nvarchar](max) NULL,
+	[Clave] [nvarchar](max) NULL,
+	[Status] [bit] NULL,
+ CONSTRAINT [PK_MotivosNoVenta] PRIMARY KEY CLUSTERED 
+(
+	[IdMot] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[MotivosSalida]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[MotivosSalida](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Motivo] [varchar](255) NULL,
+ CONSTRAINT [PK_MotivosSalida] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[MvoDev]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MvoDev](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MvoDev] [nvarchar](max) NULL,
+	[Clave] [nvarchar](50) NULL,
+	[Status] [bit] NULL,
+ CONSTRAINT [PK_MvoDev] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[MvoMerma]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MvoMerma](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Merma] [nvarchar](max) NULL,
+	[Clave] [nvarchar](50) NULL,
+	[Status] [bit] NULL,
+ CONSTRAINT [PK_MvoMerma] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[MvtosInv]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[MvtosInv](
+	[IdMovStock] [int] IDENTITY(1,1) NOT NULL,
+	[Movto] [nvarchar](max) NULL,
+	[Articulo] [varchar](50) NULL,
+	[stockant] [numeric](18, 0) NULL,
+	[Stockact] [numeric](18, 0) NULL,
+	[fecha] [datetime] NULL,
+	[RutaO] [int] NULL,
+	[RutaD] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_MvtosInv] PRIMARY KEY CLUSTERED 
+(
+	[IdMovStock] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Noventas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Noventas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Cliente] [varchar](50) NULL,
+	[MotivoId] [int] NULL,
+	[Fecha] [datetime] NULL,
+	[DiaO] [int] NULL,
+	[RutaId] [int] NULL,
+	[VendedorId] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Noventas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Opc_Enc]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Opc_Enc](
+	[Clave_Enc] [varchar](50) NOT NULL,
+	[Num_Preg] [int] NOT NULL,
+	[Num_Resp] [char](1) NOT NULL,
+	[Desc_Resp] [varchar](255) NULL,
+	[IdEmpresa] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[OperacionD]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OperacionD](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodCliente] [nvarchar](max) NULL,
+	[Cliente] [nvarchar](max) NULL,
+	[HoraI] [nvarchar](50) NULL,
+	[HoraF] [nvarchar](50) NULL,
+	[Traslado] [nvarchar](50) NULL,
+	[Servicio] [nvarchar](50) NULL,
+	[Operacion] [nvarchar](max) NULL,
+	[Programado] [bit] NULL,
+	[VentasContadoKg] [numeric](18, 2) NULL,
+	[VentasContado] [money] NULL,
+	[VentasCreditoKg] [numeric](18, 2) NULL,
+	[VentasCredito] [money] NULL,
+	[NoVenta] [nvarchar](max) NULL,
+	[DevBEKG] [numeric](18, 2) NULL,
+	[DevBe] [numeric](18, 2) NULL,
+	[DevMEKG] [numeric](18, 2) NULL,
+	[DevMe] [numeric](18, 2) NULL,
+	[DiaO] [int] NULL,
+	[Ruta] [int] NULL,
+	[ClaveRuta] [int] NULL,
+ CONSTRAINT [PK_OperacionD] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Pagos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pagos](
+	[Id] [int] NOT NULL,
+	[Cliente] [nvarchar](max) NULL,
+	[RutaId] [int] NULL,
+	[DiaO] [int] NULL,
+	[Pago] [money] NULL,
+ CONSTRAINT [PK_Pagos] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[PContado]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[PContado](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SKU] [nvarchar](50) NULL,
+	[RutaId] [int] NULL,
+	[Pz] [numeric](18, 2) NULL,
+	[Kg] [numeric](18, 2) NULL,
+	[DiaO] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_PContado] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[PedDiaSig]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[PedDiaSig](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[IdRuta] [int] NOT NULL,
+	[Articulo] [varchar](50) NOT NULL,
+	[Cantidad] [int] NOT NULL,
+	[Fecha] [date] NULL,
+	[Diao] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+	[Folio] [varchar](50) NULL,
+ CONSTRAINT [PK_PedDiaSig] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[PedDiaSigPzs]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[PedDiaSigPzs](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[IdRuta] [int] NOT NULL,
+	[Articulo] [varchar](50) NOT NULL,
+	[Cantidad] [int] NOT NULL,
+	[Fecha] [date] NULL,
+	[Diao] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+	[Folio] [varchar](50) NULL,
+ CONSTRAINT [PK_PedDiaSigPzs] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Pedidos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Pedidos](
+	[IdPedido] [int] IDENTITY(1,1) NOT NULL,
+	[Pedido] [int] NULL,
+	[Fecha] [datetime] NULL,
+	[CodCliente] [varchar](50) NULL,
+	[Tipo] [nvarchar](50) NULL,
+	[IVA] [money] NULL,
+	[IEPS] [money] NULL,
+	[Subt] [money] NULL,
+	[Total] [money] NULL,
+	[Items] [int] NULL,
+	[EnLetras] [varchar](255) NULL,
+	[Status] [int] NULL,
+	[Ruta] [int] NULL,
+	[Vendedor] [int] NULL,
+	[FechaVe] [datetime] NULL,
+	[DiaO] [int] NULL,
+	[DocSalida] [varchar](50) NULL,
+	[Cancelado] [bit] NULL,
+	[Kg] [numeric](18, 2) NULL,
+	[FechaEntrega] [datetime] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Pedidos] PRIMARY KEY CLUSTERED 
+(
+	[IdPedido] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Perfiles]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Perfiles](
+	[IdPerfiles] [int] IDENTITY(1,1) NOT NULL,
+	[Altas] [bit] NULL,
+	[Bajas] [bit] NULL,
+	[Modi] [bit] NULL,
+	[Listar] [bit] NULL,
+	[Modulo] [varchar](50) NULL,
+	[IdUser] [int] NULL,
+	[Aceso] [bit] NULL,
+	[Codigo] [int] NULL,
+	[usaPw] [bit] NULL,
+	[Otro] [bit] NULL,
+	[Descripcion] [varchar](50) NULL,
+ CONSTRAINT [PK_Perfiles] PRIMARY KEY CLUSTERED 
+(
+	[IdPerfiles] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[PreAbonos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PreAbonos](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Cuenta] [int] NULL,
+	[Abono] [numeric](18, 2) NULL,
+	[FormaP] [nvarchar](max) NULL,
+	[Referencia] [nvarchar](max) NULL,
+	[Observaciones] [nvarchar](max) NULL,
+ CONSTRAINT [PK_PreAbonos] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Preg_Enc]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Preg_Enc](
+	[Clave_Enc] [varchar](50) NOT NULL,
+	[Num_Preg] [int] NOT NULL,
+	[Des_Preg] [varchar](255) NOT NULL,
+	[Tipo_Preg] [varchar](50) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Preg_Enc] PRIMARY KEY CLUSTERED 
+(
+	[Clave_Enc] ASC,
+	[Num_Preg] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[PRegalado]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[PRegalado](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SKU] [nvarchar](50) NULL,
+	[RutaId] [int] NULL,
+	[Pz] [numeric](18, 2) NULL,
+	[Kg] [numeric](18, 2) NULL,
+	[DiaO] [int] NULL,
+	[Docto] [int] NULL,
+	[Cliente] [varchar](50) NULL,
+	[Cant] [int] NULL,
+	[Tipmed] [nvarchar](8) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_PRegalado] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ProductoEnvase]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProductoEnvase](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Producto] [varchar](50) NULL,
+	[Envase] [nvarchar](max) NULL,
+	[Cant_Base] [int] NULL,
+	[Cant_Eq] [int] NULL,
+	[Status] [char](1) NULL,
+	[IdEmpresa] [varchar](50) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ProductoNegado]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProductoNegado](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CodProd] [nvarchar](50) NULL,
+	[Fecha] [nvarchar](50) NULL,
+	[Pidieron] [numeric](18, 2) NULL,
+	[Habia] [numeric](18, 2) NULL,
+	[DiaO] [int] NULL,
+	[RutaId] [int] NULL,
+	[Docto] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ProductoNegado] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ProductoPaseado]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProductoPaseado](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodProd] [nvarchar](50) NULL,
+	[RutaId] [int] NOT NULL,
+	[DiaO] [int] NULL,
+	[Stock] [numeric](18, 2) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ProductoPaseado] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Productos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Productos](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Clave] [varchar](50) NOT NULL,
+	[Producto] [varchar](255) NULL,
+	[CodBarras] [varchar](50) NULL,
+	[Granel] [bit] NULL,
+	[IVA] [tinyint] NULL,
+	[IEPS] [tinyint] NULL,
+	[UniMed] [varchar](50) NULL,
+	[VBase] [money] NULL,
+	[Equivalente] [float] NULL,
+	[Sector] [varchar](50) NULL,
+	[Ban_Envase] [bit] NULL,
+	[Foto] [image] NULL,
+	[idclasp] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+	[Status] [char](1) NULL,
+ CONSTRAINT [PK_Productos] PRIMARY KEY CLUSTERED 
+(
+	[Clave] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ProductosXPzas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProductosXPzas](
+	[IDP] [int] IDENTITY(1,1) NOT NULL,
+	[Producto] [varchar](50) NOT NULL,
+	[PzaXCja] [int] NOT NULL,
+	[StockxP] [int] NULL,
+	[IdEmpresa] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_ProductosXPzas] PRIMARY KEY CLUSTERED 
+(
+	[Producto] ASC,
+	[IdEmpresa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Promociones]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Promociones](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Promocion] [nvarchar](max) NULL,
+	[FecInicio] [nvarchar](50) NULL,
+	[FecFinal] [nvarchar](50) NULL,
+	[IdLista] [int] NULL,
+ CONSTRAINT [PK_Promociones] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[PVendidos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[PVendidos](
+	[SKU] [nvarchar](50) NOT NULL,
+	[RutaId] [int] NULL,
+	[Pz] [numeric](18, 2) NULL,
+	[KG] [numeric](18, 2) NULL,
+	[DiaO] [int] NULL,
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Tipo] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_PVendidos] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RanComisiones]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RanComisiones](
+	[IdRow] [int] IDENTITY(1,1) NOT NULL,
+	[RangoA] [numeric](18, 2) NULL,
+	[RangoF] [numeric](18, 2) NULL,
+	[ComisionId] [int] NULL,
+	[Valor] [nvarchar](50) NULL,
+	[Nivel] [numeric](18, 0) NULL,
+	[Comision] [numeric](18, 2) NULL,
+ CONSTRAINT [PK_RanComisiones] PRIMARY KEY CLUSTERED 
+(
+	[IdRow] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Recarga]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Recarga](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[IdRuta] [int] NOT NULL,
+	[Articulo] [varchar](50) NOT NULL,
+	[Cantidad] [int] NOT NULL,
+	[Fecha] [datetime] NULL,
+	[Diao] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+	[Folio] [varchar](50) NULL,
+	[Hora] [datetime] NULL,
+ CONSTRAINT [PK_Recarga] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RegLicencias]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RegLicencias](
+	[Clave] [int] IDENTITY(1,1) NOT NULL,
+	[LicenciaMaster] [nvarchar](50) NULL,
+	[Empresa] [nvarchar](max) NULL,
+	[RFC] [nvarchar](max) NULL,
+	[Rew34] [int] NULL,
+	[LicPocK] [nvarchar](max) NULL,
+	[Rew35] [int] NULL,
+	[Email] [nvarchar](max) NULL,
+	[Re54] [nvarchar](50) NULL,
+	[Re55] [nvarchar](50) NULL,
+	[Re56] [nvarchar](50) NULL,
+	[Re57] [nvarchar](50) NULL,
+	[Ref56] [nvarchar](max) NULL,
+	[We34] [int] NULL,
+	[We35] [int] NULL,
+ CONSTRAINT [PK_RegLicencias] PRIMARY KEY CLUSTERED 
+(
+	[Clave] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[RegPC]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RegPC](
+	[Clave] [int] IDENTITY(1,1) NOT NULL,
+	[PC] [nvarchar](50) NULL,
+	[Licencia] [nvarchar](50) NULL,
+	[Status] [int] NULL,
+	[CodeVer] [nvarchar](max) NULL,
+ CONSTRAINT [PK_RegPC] PRIMARY KEY CLUSTERED 
+(
+	[Clave] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Rel_EncRut]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Rel_EncRut](
+	[Clave_Enc] [nvarchar](50) NULL,
+	[Id_Ruta] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelActivos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelActivos](
+	[IdRow] [int] IDENTITY(1,1) NOT NULL,
+	[Cliente] [varchar](50) NULL,
+	[Activo] [int] NULL,
+	[FechaAsignacion] [datetime] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelActivos] PRIMARY KEY CLUSTERED 
+(
+	[IdRow] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelCliClas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelCliClas](
+	[IdRcC] [int] IDENTITY(1,1) NOT NULL,
+	[IdCliente] [varchar](50) NULL,
+	[Clas1] [int] NULL,
+	[Clas2] [int] NULL,
+	[Clas3] [int] NULL,
+	[Clas4] [int] NULL,
+	[Clas5] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelCliClas] PRIMARY KEY CLUSTERED 
+(
+	[IdRcC] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelCliLis]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelCliLis](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodCliente] [varchar](50) NOT NULL,
+	[ListaP] [int] NULL,
+	[ListaD] [int] NULL,
+	[ListaPromo] [int] NULL,
+	[DiaVisita] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelClientesListas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelClirutas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelClirutas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdCliente] [varchar](50) NULL,
+	[IdRuta] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelTClientes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelCuoVend]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelCuoVend](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CuoId] [int] NULL,
+	[VendeId] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelCuoVend] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelDayCli]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelDayCli](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodCli] [varchar](50) NULL,
+	[Lunes] [int] NULL,
+	[Martes] [int] NULL,
+	[Miercoles] [int] NULL,
+	[Jueves] [int] NULL,
+	[Viernes] [int] NULL,
+	[Sabado] [int] NULL,
+	[Domingo] [int] NULL,
+	[RutaId] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelDayCli] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelMens]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelMens](
+	[IDRow] [int] IDENTITY(1,1) NOT NULL,
+	[MenId] [numeric](18, 0) NULL,
+	[CodCliente] [nvarchar](max) NULL,
+	[IdCliente] [int] NULL,
+	[CodProducto] [nvarchar](max) NULL,
+	[IdProducto] [int] NULL,
+	[CodRuta] [int] NULL,
+	[IdRuta] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelMens] PRIMARY KEY CLUSTERED 
+(
+	[IDRow] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelOperaciones]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelOperaciones](
+	[Id] [numeric](18, 0) NOT NULL,
+	[Folio] [int] NULL,
+	[RutaId] [int] NULL,
+	[DiaO] [int] NULL,
+	[CodCli] [varchar](50) NULL,
+	[Tipo] [nvarchar](50) NULL,
+	[Total] [money] NULL,
+	[Fecha] [datetime] NULL,
+	[IdK] [int] IDENTITY(1,1) NOT NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelOperaciones] PRIMARY KEY CLUSTERED 
+(
+	[IdK] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelProClas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelProClas](
+	[IdRelPClas] [int] IDENTITY(1,1) NOT NULL,
+	[ProductoId] [varchar](50) NULL,
+	[Clasif] [int] NULL,
+	[Nivel] [int] NULL,
+	[Dep_Clasif] [int] NULL,
+	[Dep_Nivel] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelProClas] PRIMARY KEY CLUSTERED 
+(
+	[IdRelPClas] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RelRuClas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RelRuClas](
+	[IdRelRClas] [int] IDENTITY(1,1) NOT NULL,
+	[RutaId] [int] NOT NULL,
+	[Clas1] [int] NOT NULL,
+	[Clas2] [int] NOT NULL,
+	[Clas3] [int] NOT NULL,
+	[Clas4] [int] NOT NULL,
+	[Clas5] [int] NOT NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_RelRuClas] PRIMARY KEY CLUSTERED 
+(
+	[IdRelRClas] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Res_Stock]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Res_Stock](
+	[IdStock] [int] IDENTITY(1,1) NOT NULL,
+	[Articulo] [varchar](50) NULL,
+	[Stock] [int] NULL,
+	[Ruta] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ResCuotas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ResCuotas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CuoId] [int] NULL,
+	[RutaId] [int] NULL,
+	[Valor] [numeric](18, 2) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_ResCuotas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Resp_Enc]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Resp_Enc](
+	[Clave_Enc] [varchar](50) NULL,
+	[Num_Pregunta] [int] NULL,
+	[IdRuta] [int] NULL,
+	[Des_Resp] [varchar](255) NULL,
+	[IdCliente] [varchar](50) NULL,
+	[Fecha] [datetime] NULL,
+	[DiaO] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Rutas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Rutas](
+	[IdRutas] [int] IDENTITY(1,1) NOT NULL,
+	[Ruta] [varchar](255) NOT NULL,
+	[Activa] [bit] NOT NULL,
+	[TipoRuta] [varchar](255) NOT NULL,
+	[VenSinStock] [int] NOT NULL CONSTRAINT [DF_Rutas_VenSinStock]  DEFAULT ((0)),
+	[Oficina] [varchar](255) NOT NULL,
+	[Sector] [varchar](255) NOT NULL,
+	[Vendedor] [int] NULL,
+	[Tipo] [int] NOT NULL CONSTRAINT [DF_Rutas_Tipo]  DEFAULT ((0)),
+	[id_ayudante1] [int] NULL CONSTRAINT [DF_Rutas_id_ayudante1]  DEFAULT ((0)),
+	[id_ayudante2] [int] NULL CONSTRAINT [DF_Rutas_id_ayudante2]  DEFAULT ((0)),
+	[VendedorAyudante] [bit] NOT NULL CONSTRAINT [DF_Rutas_VendedorAyudante]  DEFAULT ((0)),
+	[Foranea] [bit] NULL DEFAULT ((0)),
+	[vehiculo] [int] NULL,
+	[idcrutas] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Rutas] PRIMARY KEY CLUSTERED 
+(
+	[IdRutas] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RutasHistorico]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RutasHistorico](
+	[IdRutas] [int] NOT NULL,
+	[Ruta] [varchar](50) NOT NULL,
+	[Activa] [bit] NOT NULL,
+	[TipoRuta] [varchar](255) NOT NULL,
+	[VenSinStock] [int] NOT NULL,
+	[Oficina] [varchar](255) NOT NULL,
+	[Sector] [varchar](255) NOT NULL,
+	[Vendedor] [int] NULL,
+	[Tipo] [int] NOT NULL,
+	[id_ayudante1] [int] NULL,
+	[id_ayudante2] [int] NULL,
+	[VendedorAyudante] [bit] NOT NULL,
+	[Foranea] [bit] NULL,
+	[vehiculo] [int] NULL,
+	[empresa] [varchar](50) NULL,
+	[idcrutas] [int] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[SalidasAlmacen]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SalidasAlmacen](
+	[IDSalida] [int] IDENTITY(1,1) NOT NULL,
+	[Fecha] [datetime] NOT NULL,
+	[MotivoSalidaID] [int] NOT NULL,
+	[Estatus] [tinyint] NOT NULL,
+ CONSTRAINT [PK_SalidasAlmacen] PRIMARY KEY CLUSTERED 
+(
+	[IDSalida] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[SecRutas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[SecRutas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Rutad] [int] NULL,
+	[Lunes] [int] NULL,
+	[Martes] [int] NULL,
+	[Miercoles] [int] NULL,
+	[Jueves] [int] NULL,
+	[Viernes] [int] NULL,
+	[Sabado] [int] NULL,
+	[Domingo] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_SecRutas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[segmentos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[segmentos](
+	[idsegmento] [int] NOT NULL,
+	[segmento] [varchar](75) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idsegmento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Stock]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Stock](
+	[IdStock] [int] IDENTITY(1,1) NOT NULL,
+	[Articulo] [varchar](50) NULL,
+	[Stock] [int] NULL,
+	[Ruta] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Stock] PRIMARY KEY CLUSTERED 
+(
+	[IdStock] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[StockHistorico]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[StockHistorico](
+	[Articulo] [varchar](50) NULL,
+	[Stock] [int] NULL,
+	[RutaID] [int] NULL,
+	[Fecha] [date] NULL CONSTRAINT [DF_StockHistorico_Fecha]  DEFAULT (getdate()),
+	[IdEmpresa] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[StockPedidos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StockPedidos](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CodProd] [nvarchar](50) NULL,
+	[Stock] [int] NULL,
+	[RutaId] [int] NULL,
+	[Pedido] [int] NULL,
+	[Status] [int] NULL,
+ CONSTRAINT [PK_StockPedidos] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[T_Log]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_Log](
+	[IdEmpresa] [varchar](50) NULL,
+	[Fecha] [datetime] NULL,
+	[Ruta] [int] NULL,
+	[Modulo] [varchar](150) NULL,
+	[Evento] [varchar](max) NULL,
+	[Correcta] [bit] NULL,
+	[EnProceso] [bit] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[T_RepConCarga]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_RepConCarga](
+	[IdEmpresa] [varchar](50) NULL,
+	[Sector] [varchar](50) NULL,
+	[Presentacion] [varchar](50) NULL,
+	[Familia] [varchar](50) NULL,
+	[Marca] [varchar](50) NULL,
+	[Unidades] [varchar](50) NULL,
+	[IdProd] [varchar](50) NULL,
+	[Producto] [varchar](50) NULL,
+	[1401] [int] NULL,
+	[1405] [int] NULL,
+	[1407] [int] NULL,
+	[1409] [int] NULL,
+	[1411] [int] NULL,
+	[1431] [int] NULL,
+	[1433] [int] NULL,
+	[1437] [int] NULL,
+	[1439] [int] NULL,
+	[1441] [int] NULL,
+	[1741] [int] NULL,
+	[1501] [int] NULL,
+	[1503] [int] NULL,
+	[1505] [int] NULL,
+	[1507] [int] NULL,
+	[1531] [int] NULL,
+	[1533] [int] NULL,
+	[1535] [int] NULL,
+	[1539] [int] NULL,
+	[1541] [int] NULL,
+	[1543] [int] NULL,
+	[1601] [int] NULL,
+	[1603] [int] NULL,
+	[1605] [int] NULL,
+	[1607] [int] NULL,
+	[1609] [int] NULL,
+	[1611] [int] NULL,
+	[1631] [int] NULL,
+	[1633] [int] NULL,
+	[1635] [int] NULL,
+	[1637] [int] NULL,
+	[1639] [int] NULL,
+	[1701] [int] NULL,
+	[1703] [int] NULL,
+	[1705] [int] NULL,
+	[1707] [int] NULL,
+	[1731] [int] NULL,
+	[1733] [int] NULL,
+	[1735] [int] NULL,
+	[1737] [int] NULL,
+	[1739] [int] NULL,
+	[1901] [int] NULL,
+	[1903] [int] NULL,
+	[1905] [int] NULL,
+	[1907] [int] NULL,
+	[1909] [int] NULL,
+	[1933] [int] NULL,
+	[1935] [int] NULL,
+	[1937] [int] NULL,
+	[1939] [int] NULL,
+	[1941] [int] NULL,
+	[1943] [int] NULL,
+	[1445] [int] NULL,
+	[1545] [int] NULL,
+	[1641] [int] NULL,
+	[1743] [int] NULL,
+	[1945] [int] NULL,
+	[2406] [int] NULL,
+	[2108] [int] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[T_RepConPed]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_RepConPed](
+	[IdEmpresa] [varchar](50) NULL,
+	[Ruta] [varchar](50) NULL,
+	[1] [int] NULL,
+	[10] [int] NULL,
+	[11] [int] NULL,
+	[12] [int] NULL,
+	[13] [int] NULL,
+	[14] [int] NULL,
+	[15] [int] NULL,
+	[16] [int] NULL,
+	[17] [int] NULL,
+	[18] [int] NULL,
+	[19] [int] NULL,
+	[2] [int] NULL,
+	[20] [int] NULL,
+	[21] [int] NULL,
+	[22] [int] NULL,
+	[23] [int] NULL,
+	[24] [int] NULL,
+	[25] [int] NULL,
+	[26] [int] NULL,
+	[27] [int] NULL,
+	[28] [int] NULL,
+	[29] [int] NULL,
+	[31] [int] NULL,
+	[32] [int] NULL,
+	[33] [int] NULL,
+	[34] [int] NULL,
+	[35] [int] NULL,
+	[36] [int] NULL,
+	[37] [int] NULL,
+	[38] [int] NULL,
+	[39] [int] NULL,
+	[4] [int] NULL,
+	[40] [int] NULL,
+	[42] [int] NULL,
+	[43] [int] NULL,
+	[44] [int] NULL,
+	[45] [int] NULL,
+	[46] [int] NULL,
+	[48] [int] NULL,
+	[49] [int] NULL,
+	[5] [int] NULL,
+	[52] [int] NULL,
+	[6] [int] NULL,
+	[7] [int] NULL,
+	[75] [int] NULL,
+	[77] [int] NULL,
+	[8] [int] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[T_RepConPedPz]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_RepConPedPz](
+	[IdEmpresa] [varchar](50) NULL,
+	[Ruta] [varchar](50) NULL,
+	[1] [int] NULL,
+	[10] [int] NULL,
+	[11] [int] NULL,
+	[12] [int] NULL,
+	[13] [int] NULL,
+	[14] [int] NULL,
+	[15] [int] NULL,
+	[16] [int] NULL,
+	[17] [int] NULL,
+	[18] [int] NULL,
+	[19] [int] NULL,
+	[2] [int] NULL,
+	[20] [int] NULL,
+	[21] [int] NULL,
+	[22] [int] NULL,
+	[23] [int] NULL,
+	[24] [int] NULL,
+	[25] [int] NULL,
+	[26] [int] NULL,
+	[27] [int] NULL,
+	[28] [int] NULL,
+	[29] [int] NULL,
+	[31] [int] NULL,
+	[32] [int] NULL,
+	[33] [int] NULL,
+	[34] [int] NULL,
+	[35] [int] NULL,
+	[36] [int] NULL,
+	[37] [int] NULL,
+	[38] [int] NULL,
+	[39] [int] NULL,
+	[4] [int] NULL,
+	[40] [int] NULL,
+	[42] [int] NULL,
+	[43] [int] NULL,
+	[44] [int] NULL,
+	[45] [int] NULL,
+	[46] [int] NULL,
+	[48] [int] NULL,
+	[49] [int] NULL,
+	[5] [int] NULL,
+	[52] [int] NULL,
+	[6] [int] NULL,
+	[7] [int] NULL,
+	[75] [int] NULL,
+	[77] [int] NULL,
+	[8] [int] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[T_RepFidelidad]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_RepFidelidad](
+	[Ruta] [varchar](50) NULL,
+	[IdCliente] [varchar](50) NULL,
+	[Cliente] [varchar](50) NULL,
+	[Vendedor] [varchar](50) NULL,
+	[Status] [varchar](50) NULL,
+	[Jue 5/5/2016] [varchar](1) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[T_TempLiquidacionesAux]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_TempLiquidacionesAux](
+	[RutaId] [varchar](50) NULL,
+	[DiaO] [varchar](5) NULL,
+	[Fecha] [varchar](20) NULL,
+	[Clave] [varchar](15) NULL,
+	[VentaCajas] [int] NULL,
+	[VentaPiezas] [int] NULL,
+	[PromoCajas] [int] NULL,
+	[PromoPiezas] [int] NULL,
+	[TipoObse] [varchar](20) NULL,
+	[CantObse] [int] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[TD_Comision]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[TD_Comision](
+	[ID_Comision] [int] NOT NULL,
+	[ID_Detalle] [int] NOT NULL,
+	[RangoIni] [int] NULL,
+	[RangoFin] [int] NULL,
+	[Angente] [float] NULL,
+	[Ayudante] [float] NULL,
+	[Tipo] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_TD_Comision] PRIMARY KEY CLUSTERED 
+(
+	[ID_Comision] ASC,
+	[ID_Detalle] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Temporal]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Temporal](
+	[codigo] [varchar](50) NULL,
+	[nombre] [varchar](255) NULL,
+	[nombrecorto] [varchar](255) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[TH_Comision]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[TH_Comision](
+	[ID_Comision] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Producto] [int] NOT NULL,
+	[Status] [char](1) NULL,
+	[Comentarios] [varchar](max) NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_TH_Comision] PRIMARY KEY CLUSTERED 
+(
+	[ID_Comision] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[TH_SecVisitas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[TH_SecVisitas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodCli] [varchar](50) NOT NULL,
+	[RutaId] [int] NOT NULL,
+	[Secuencia] [int] NULL,
+	[Dia] [char](2) NULL,
+	[Fecha] [date] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_TH_SecVisitas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[TInvFis]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[TInvFis](
+	[IdRow] [int] IDENTITY(1,1) NOT NULL,
+	[Clave] [varchar](25) NOT NULL,
+	[Descripcion] [varchar](250) NULL,
+	[UniMed] [varchar](5) NULL,
+	[Stock_T] [int] NOT NULL,
+	[Stock_R] [int] NOT NULL,
+	[Fec_cad] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdRow] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Tmp_Stock]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Tmp_Stock](
+	[Articulo] [varchar](50) NULL,
+	[Stock] [int] NULL,
+	[Ruta] [int] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[TMP_StockEnvases]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[TMP_StockEnvases](
+	[Articulo] [varchar](50) NULL,
+	[Stock] [int] NULL,
+	[Ruta] [int] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[TmpCteLimCred]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[TmpCteLimCred](
+	[IdCli] [varchar](50) NULL,
+	[LimiteCredito] [money] NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Usuarios]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Usuarios](
+	[IdUsuario] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](max) NULL,
+	[IdPerfil] [int] NULL,
+	[empresa_id] [varchar](50) NULL,
+ CONSTRAINT [PK_Usuarios] PRIMARY KEY CLUSTERED 
+(
+	[IdUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Vehiculos]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Vehiculos](
+	[IdVehiculos] [int] IDENTITY(1,1) NOT NULL,
+	[Clave] [varchar](max) NULL,
+	[Modelo] [varchar](max) NULL,
+	[Placas] [varchar](max) NULL,
+	[Marcas] [varchar](max) NULL,
+	[Descripcion] [varchar](max) NULL,
+	[Status] [nvarchar](max) NULL,
+	[NumeroEco] [varchar](max) NULL,
+	[Asignado] [bit] NULL,
+	[Poliza] [varchar](max) NULL,
+	[TelSeguro] [varchar](50) NULL,
+	[MesVerifica] [datetime] NULL,
+	[Kilometraje] [varchar](50) NULL,
+	[KilometrajeSem] [varchar](50) NULL,
+	[Aseguradora] [varchar](max) NULL,
+	[FechaVencSeguro] [datetime] NULL,
+	[FechaUltVerif] [datetime] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Vehiculos] PRIMARY KEY CLUSTERED 
+(
+	[IdVehiculos] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Vendedores]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Vendedores](
+	[IdVendedor] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](255) NOT NULL,
+	[IdVehiculo] [varchar](255) NULL,
+	[Status] [bit] NOT NULL,
+	[Direccion] [varchar](255) NOT NULL,
+	[Telefono] [varchar](50) NOT NULL,
+	[PdaPw] [varchar](50) NOT NULL,
+	[NumLicencia] [varchar](255) NOT NULL,
+	[MetaDiaria] [varchar](50) NOT NULL,
+	[MetaMes] [varchar](50) NOT NULL,
+	[Movil] [varchar](50) NOT NULL,
+	[VenceLic] [datetime] NOT NULL,
+	[Clave] [varchar](255) NOT NULL,
+	[ID_Ayudante1] [int] NULL,
+	[ID_Ayudante2] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Vendedores] PRIMARY KEY CLUSTERED 
+(
+	[IdVendedor] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Venta]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Venta](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RutaId] [int] NULL,
+	[VendedorId] [int] NULL,
+	[CodCliente] [nvarchar](max) NULL,
+	[Documento] [int] NULL,
+	[Fecha] [datetime] NULL,
+	[TipoVta] [nvarchar](50) NULL,
+	[DiasCred] [int] NULL,
+	[CreditoDispo] [numeric](18, 2) NULL,
+	[Saldo] [numeric](18, 2) NULL,
+	[Fvence] [date] NULL,
+	[SubTotal] [money] NULL,
+	[IVA] [money] NULL,
+	[IEPS] [money] NULL,
+	[TOTAL] [money] NULL,
+	[EnLetra] [nvarchar](max) NULL,
+	[Items] [int] NULL,
+	[FormaPag] [int] NULL,
+	[DocSalida] [nvarchar](50) NULL,
+	[DiaO] [int] NULL,
+	[Cancelada] [bit] NULL,
+	[Kg] [numeric](18, 2) NULL,
+	[ID_Ayudante1] [int] NULL,
+	[ID_Ayudante2] [int] NULL,
+	[VenAyunate] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Venta] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Visitas]    Script Date: 11/08/2016 11:43:38 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Visitas](
+	[CodCliente] [nvarchar](50) NOT NULL,
+	[DiaO] [int] NOT NULL,
+	[FechaI] [datetime] NULL,
+	[EnSecuencia] [bit] NULL,
+	[FechaF] [datetime] NULL,
+	[Venta] [numeric](18, 0) NULL,
+	[Pedido] [numeric](18, 0) NULL,
+	[Devolucion] [numeric](18, 0) NULL,
+	[Cobranza] [numeric](18, 0) NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdCe] [numeric](18, 0) NULL,
+	[ruta] [int] NULL,
+	[IdEmpresa] [varchar](50) NULL,
+ CONSTRAINT [PK_Visitas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Activos]  WITH CHECK ADD  CONSTRAINT [FK_Activos_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Activos] CHECK CONSTRAINT [FK_Activos_Empresas]
+GO
+ALTER TABLE [dbo].[Ayudantes]  WITH CHECK ADD  CONSTRAINT [FK_Ayudantes_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Ayudantes] CHECK CONSTRAINT [FK_Ayudantes_Empresas]
+GO
+ALTER TABLE [dbo].[BitacoraCuotas]  WITH CHECK ADD  CONSTRAINT [FK_BitacoraCuotas_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[BitacoraCuotas] CHECK CONSTRAINT [FK_BitacoraCuotas_Rutas]
+GO
+ALTER TABLE [dbo].[BitacoraTiempos]  WITH CHECK ADD  CONSTRAINT [FK_BitacoraTiempos_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[BitacoraTiempos] CHECK CONSTRAINT [FK_BitacoraTiempos_Empresas]
+GO
+ALTER TABLE [dbo].[BitacoraTiempos]  WITH CHECK ADD  CONSTRAINT [FK_bitties_Diasrut] FOREIGN KEY([DiaO], [RutaId])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[BitacoraTiempos] CHECK CONSTRAINT [FK_bitties_Diasrut]
+GO
+ALTER TABLE [dbo].[Cancelaciones]  WITH CHECK ADD  CONSTRAINT [FK_Cancelaciones_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Cancelaciones] CHECK CONSTRAINT [FK_Cancelaciones_Rutas]
+GO
+ALTER TABLE [dbo].[CargaRuta]  WITH CHECK ADD  CONSTRAINT [FK_CargaRuta_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[CargaRuta] CHECK CONSTRAINT [FK_CargaRuta_Empresas]
+GO
+ALTER TABLE [dbo].[CargaRuta]  WITH CHECK ADD  CONSTRAINT [FK_CargaRuta_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[CargaRuta] CHECK CONSTRAINT [FK_CargaRuta_Rutas]
+GO
+ALTER TABLE [dbo].[Clientes]  WITH CHECK ADD FOREIGN KEY([idclasc])
+REFERENCES [dbo].[ClasClientes] ([IdClasC])
+GO
+ALTER TABLE [dbo].[Clientes]  WITH CHECK ADD FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+GO
+ALTER TABLE [dbo].[Clientes]  WITH CHECK ADD  CONSTRAINT [FK_Clientes_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Clientes] CHECK CONSTRAINT [FK_Clientes_Empresas]
+GO
+ALTER TABLE [dbo].[Cobranza]  WITH CHECK ADD  CONSTRAINT [FK_cob_cli] FOREIGN KEY([Cliente])
+REFERENCES [dbo].[Clientes] ([IdCli])
+GO
+ALTER TABLE [dbo].[Cobranza] CHECK CONSTRAINT [FK_cob_cli]
+GO
+ALTER TABLE [dbo].[Cobranza]  WITH CHECK ADD  CONSTRAINT [FK_Cobranza_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Cobranza] CHECK CONSTRAINT [FK_Cobranza_Empresas]
+GO
+ALTER TABLE [dbo].[Cobranza]  WITH CHECK ADD  CONSTRAINT [FK_Cobranza_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Cobranza] CHECK CONSTRAINT [FK_Cobranza_Rutas]
+GO
+ALTER TABLE [dbo].[CodesOp]  WITH CHECK ADD  CONSTRAINT [FK_CodesOp_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[CodesOp] CHECK CONSTRAINT [FK_CodesOp_Empresas]
+GO
+ALTER TABLE [dbo].[Comisiones]  WITH CHECK ADD  CONSTRAINT [FK_Comisiones_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Comisiones] CHECK CONSTRAINT [FK_Comisiones_Empresas]
+GO
+ALTER TABLE [dbo].[ConfigRutasP]  WITH CHECK ADD  CONSTRAINT [FK_ConfigRutasP_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ConfigRutasP] CHECK CONSTRAINT [FK_ConfigRutasP_Empresas]
+GO
+ALTER TABLE [dbo].[ConfigRutasP]  WITH CHECK ADD  CONSTRAINT [FK_ConfigRutasP_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[ConfigRutasP] CHECK CONSTRAINT [FK_ConfigRutasP_Rutas]
+GO
+ALTER TABLE [dbo].[Configuracion]  WITH CHECK ADD  CONSTRAINT [FK_Configuracion_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Configuracion] CHECK CONSTRAINT [FK_Configuracion_Empresas]
+GO
+ALTER TABLE [dbo].[ConfiguracionGral]  WITH CHECK ADD  CONSTRAINT [FK_ConfiguracionGral_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ConfiguracionGral] CHECK CONSTRAINT [FK_ConfiguracionGral_Empresas]
+GO
+ALTER TABLE [dbo].[ContadorNC]  WITH CHECK ADD  CONSTRAINT [FK_ContadorNC_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ContadorNC] CHECK CONSTRAINT [FK_ContadorNC_Empresas]
+GO
+ALTER TABLE [dbo].[CTiket]  WITH CHECK ADD  CONSTRAINT [FK_CTiket_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[CTiket] CHECK CONSTRAINT [FK_CTiket_Empresas]
+GO
+ALTER TABLE [dbo].[Cuotas]  WITH CHECK ADD  CONSTRAINT [FK_Cuotas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Cuotas] CHECK CONSTRAINT [FK_Cuotas_Empresas]
+GO
+ALTER TABLE [dbo].[Cuotas]  WITH CHECK ADD  CONSTRAINT [FK_Cuotas_Productos] FOREIGN KEY([Producto])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[Cuotas] CHECK CONSTRAINT [FK_Cuotas_Productos]
+GO
+ALTER TABLE [dbo].[DetalleCob]  WITH CHECK ADD  CONSTRAINT [FK_detalle_cob] FOREIGN KEY([IdCobranza])
+REFERENCES [dbo].[Cobranza] ([id])
+GO
+ALTER TABLE [dbo].[DetalleCob] CHECK CONSTRAINT [FK_detalle_cob]
+GO
+ALTER TABLE [dbo].[DetalleCob]  WITH CHECK ADD  CONSTRAINT [FK_DetalleCob_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetalleCob] CHECK CONSTRAINT [FK_DetalleCob_Empresas]
+GO
+ALTER TABLE [dbo].[DetalleCob]  WITH CHECK ADD  CONSTRAINT [FK_DetalleCob_FormasPag] FOREIGN KEY([FormaP])
+REFERENCES [dbo].[FormasPag] ([IdFpag])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetalleCob] CHECK CONSTRAINT [FK_DetalleCob_FormasPag]
+GO
+ALTER TABLE [dbo].[DetalleDevol]  WITH CHECK ADD  CONSTRAINT [FK_DetalleDevol_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetalleDevol] CHECK CONSTRAINT [FK_DetalleDevol_Empresas]
+GO
+ALTER TABLE [dbo].[DetalleDevol]  WITH CHECK ADD  CONSTRAINT [FK_DetalleDevol_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[DetalleDevol] CHECK CONSTRAINT [FK_DetalleDevol_Rutas]
+GO
+ALTER TABLE [dbo].[DetalleLD]  WITH CHECK ADD  CONSTRAINT [FK_DetalleLD_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetalleLD] CHECK CONSTRAINT [FK_DetalleLD_Empresas]
+GO
+ALTER TABLE [dbo].[DetalleLD]  WITH CHECK ADD  CONSTRAINT [FK_detalleld_list] FOREIGN KEY([ListaId])
+REFERENCES [dbo].[ListaD] ([id])
+GO
+ALTER TABLE [dbo].[DetalleLD] CHECK CONSTRAINT [FK_detalleld_list]
+GO
+ALTER TABLE [dbo].[DetalleLD]  WITH CHECK ADD  CONSTRAINT [FK_DetalleLD_Productos] FOREIGN KEY([Articulo])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[DetalleLD] CHECK CONSTRAINT [FK_DetalleLD_Productos]
+GO
+ALTER TABLE [dbo].[DetalleLP]  WITH CHECK ADD  CONSTRAINT [FK_DetalleLP_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetalleLP] CHECK CONSTRAINT [FK_DetalleLP_Empresas]
+GO
+ALTER TABLE [dbo].[DetalleLP]  WITH CHECK ADD  CONSTRAINT [FK_detallelp_list] FOREIGN KEY([ListaId])
+REFERENCES [dbo].[ListaP] ([id])
+GO
+ALTER TABLE [dbo].[DetalleLP] CHECK CONSTRAINT [FK_detallelp_list]
+GO
+ALTER TABLE [dbo].[DetalleLP]  WITH CHECK ADD  CONSTRAINT [FK_DetalleLP_Productos] FOREIGN KEY([Articulo])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[DetalleLP] CHECK CONSTRAINT [FK_DetalleLP_Productos]
+GO
+ALTER TABLE [dbo].[DetalleLProMaster]  WITH CHECK ADD  CONSTRAINT [FK_DetalleLProMaster_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetalleLProMaster] CHECK CONSTRAINT [FK_DetalleLProMaster_Empresas]
+GO
+ALTER TABLE [dbo].[DetallePedidos]  WITH CHECK ADD  CONSTRAINT [FK_DetallePedidos_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetallePedidos] CHECK CONSTRAINT [FK_DetallePedidos_Empresas]
+GO
+ALTER TABLE [dbo].[DetallePromo]  WITH CHECK ADD  CONSTRAINT [FK_DetallePromo_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetallePromo] CHECK CONSTRAINT [FK_DetallePromo_Empresas]
+GO
+ALTER TABLE [dbo].[DetallePromo]  WITH CHECK ADD  CONSTRAINT [FK_DetallePromo_Productos] FOREIGN KEY([Articulo])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[DetallePromo] CHECK CONSTRAINT [FK_DetallePromo_Productos]
+GO
+ALTER TABLE [dbo].[DetalleSalidas]  WITH CHECK ADD  CONSTRAINT [FK_DetalleSalidas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetalleSalidas] CHECK CONSTRAINT [FK_DetalleSalidas_Empresas]
+GO
+ALTER TABLE [dbo].[DetalleSalidas]  WITH CHECK ADD  CONSTRAINT [FK_DetalleSalidas_Productos] FOREIGN KEY([Articulo])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[DetalleSalidas] CHECK CONSTRAINT [FK_DetalleSalidas_Productos]
+GO
+ALTER TABLE [dbo].[DetalleVet]  WITH CHECK ADD  CONSTRAINT [FK_DetalleVet_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DetalleVet] CHECK CONSTRAINT [FK_DetalleVet_Empresas]
+GO
+ALTER TABLE [dbo].[DetalleVet]  WITH CHECK ADD  CONSTRAINT [FK_DetalleVet_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[DetalleVet] CHECK CONSTRAINT [FK_DetalleVet_Rutas]
+GO
+ALTER TABLE [dbo].[DevEnvases]  WITH CHECK ADD  CONSTRAINT [FK_DevEnvases_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[DevEnvases] CHECK CONSTRAINT [FK_DevEnvases_Empresas]
+GO
+ALTER TABLE [dbo].[DevEnvases]  WITH CHECK ADD  CONSTRAINT [FK_DevEnvases_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[DevEnvases] CHECK CONSTRAINT [FK_DevEnvases_Rutas]
+GO
+ALTER TABLE [dbo].[Devoluciones]  WITH CHECK ADD  CONSTRAINT [FK_dev_DiasO] FOREIGN KEY([DiaO], [Ruta])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[Devoluciones] CHECK CONSTRAINT [FK_dev_DiasO]
+GO
+ALTER TABLE [dbo].[Devoluciones]  WITH CHECK ADD  CONSTRAINT [FK_Devoluciones_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Devoluciones] CHECK CONSTRAINT [FK_Devoluciones_Empresas]
+GO
+ALTER TABLE [dbo].[DiasO]  WITH CHECK ADD  CONSTRAINT [FK_DiasO_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[DiasO] CHECK CONSTRAINT [FK_DiasO_Rutas]
+GO
+ALTER TABLE [dbo].[DiasOperativos]  WITH CHECK ADD  CONSTRAINT [FK_diop_DiasO] FOREIGN KEY([Dia], [RutaId])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[DiasOperativos] CHECK CONSTRAINT [FK_diop_DiasO]
+GO
+ALTER TABLE [dbo].[Encuestas]  WITH CHECK ADD  CONSTRAINT [FK_Encuestas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Encuestas] CHECK CONSTRAINT [FK_Encuestas_Empresas]
+GO
+ALTER TABLE [dbo].[Liquidacion]  WITH CHECK ADD  CONSTRAINT [FK_Liquidacion_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Liquidacion] CHECK CONSTRAINT [FK_Liquidacion_Rutas]
+GO
+ALTER TABLE [dbo].[ListaD]  WITH CHECK ADD  CONSTRAINT [FK_ListaD_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ListaD] CHECK CONSTRAINT [FK_ListaD_Empresas]
+GO
+ALTER TABLE [dbo].[ListaP]  WITH CHECK ADD  CONSTRAINT [FK_ListaP_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ListaP] CHECK CONSTRAINT [FK_ListaP_Empresas]
+GO
+ALTER TABLE [dbo].[ListaPromo]  WITH CHECK ADD  CONSTRAINT [FK_ListaPromo_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ListaPromo] CHECK CONSTRAINT [FK_ListaPromo_Empresas]
+GO
+ALTER TABLE [dbo].[ListaPromoMaster]  WITH CHECK ADD  CONSTRAINT [FK_ListaPromoMaster_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ListaPromoMaster] CHECK CONSTRAINT [FK_ListaPromoMaster_Empresas]
+GO
+ALTER TABLE [dbo].[Medidores]  WITH CHECK ADD  CONSTRAINT [FK_Medidores_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Medidores] CHECK CONSTRAINT [FK_Medidores_Empresas]
+GO
+ALTER TABLE [dbo].[Medidores]  WITH CHECK ADD  CONSTRAINT [FK_Medidores_Rutas] FOREIGN KEY([DiaO], [IdRuta])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[Medidores] CHECK CONSTRAINT [FK_Medidores_Rutas]
+GO
+ALTER TABLE [dbo].[Mensajes]  WITH CHECK ADD  CONSTRAINT [FK_Mensajes_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Mensajes] CHECK CONSTRAINT [FK_Mensajes_Empresas]
+GO
+ALTER TABLE [dbo].[Mermas]  WITH CHECK ADD  CONSTRAINT [FK_Mermas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Mermas] CHECK CONSTRAINT [FK_Mermas_Empresas]
+GO
+ALTER TABLE [dbo].[Mermas]  WITH CHECK ADD  CONSTRAINT [FK_Mermas_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Mermas] CHECK CONSTRAINT [FK_Mermas_Rutas]
+GO
+ALTER TABLE [dbo].[MvtosInv]  WITH CHECK ADD  CONSTRAINT [FK_MvtosInv_Productos] FOREIGN KEY([Articulo])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[MvtosInv] CHECK CONSTRAINT [FK_MvtosInv_Productos]
+GO
+ALTER TABLE [dbo].[MvtosInv]  WITH CHECK ADD  CONSTRAINT [FK_MvtosInv_Rutas1] FOREIGN KEY([RutaD])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[MvtosInv] CHECK CONSTRAINT [FK_MvtosInv_Rutas1]
+GO
+ALTER TABLE [dbo].[Noventas]  WITH CHECK ADD  CONSTRAINT [FK_novebta_cli] FOREIGN KEY([Cliente])
+REFERENCES [dbo].[Clientes] ([IdCli])
+GO
+ALTER TABLE [dbo].[Noventas] CHECK CONSTRAINT [FK_novebta_cli]
+GO
+ALTER TABLE [dbo].[Noventas]  WITH CHECK ADD  CONSTRAINT [FK_noventa_Vendedores] FOREIGN KEY([VendedorId])
+REFERENCES [dbo].[Vendedores] ([IdVendedor])
+GO
+ALTER TABLE [dbo].[Noventas] CHECK CONSTRAINT [FK_noventa_Vendedores]
+GO
+ALTER TABLE [dbo].[Noventas]  WITH CHECK ADD  CONSTRAINT [FK_Noventas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Noventas] CHECK CONSTRAINT [FK_Noventas_Empresas]
+GO
+ALTER TABLE [dbo].[Noventas]  WITH CHECK ADD  CONSTRAINT [FK_Noventas_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Noventas] CHECK CONSTRAINT [FK_Noventas_Rutas]
+GO
+ALTER TABLE [dbo].[Opc_Enc]  WITH CHECK ADD  CONSTRAINT [FK_Opc_Enc_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Opc_Enc] CHECK CONSTRAINT [FK_Opc_Enc_Empresas]
+GO
+ALTER TABLE [dbo].[Opc_Enc]  WITH CHECK ADD  CONSTRAINT [FK_opce_encues] FOREIGN KEY([Clave_Enc])
+REFERENCES [dbo].[Encuestas] ([Clave_Enc])
+GO
+ALTER TABLE [dbo].[Opc_Enc] CHECK CONSTRAINT [FK_opce_encues]
+GO
+ALTER TABLE [dbo].[OperacionD]  WITH CHECK ADD  CONSTRAINT [FK_opd_DiasO] FOREIGN KEY([DiaO], [Ruta])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[OperacionD] CHECK CONSTRAINT [FK_opd_DiasO]
+GO
+ALTER TABLE [dbo].[Pagos]  WITH CHECK ADD  CONSTRAINT [FK_pagos_DiasO] FOREIGN KEY([DiaO], [RutaId])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[Pagos] CHECK CONSTRAINT [FK_pagos_DiasO]
+GO
+ALTER TABLE [dbo].[PContado]  WITH CHECK ADD  CONSTRAINT [FK_pcontado_DiasO] FOREIGN KEY([DiaO], [RutaId])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[PContado] CHECK CONSTRAINT [FK_pcontado_DiasO]
+GO
+ALTER TABLE [dbo].[PContado]  WITH CHECK ADD  CONSTRAINT [FK_PContado_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PContado] CHECK CONSTRAINT [FK_PContado_Empresas]
+GO
+ALTER TABLE [dbo].[PedDiaSig]  WITH CHECK ADD  CONSTRAINT [FK_PedDiaSig_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PedDiaSig] CHECK CONSTRAINT [FK_PedDiaSig_Empresas]
+GO
+ALTER TABLE [dbo].[PedDiaSig]  WITH CHECK ADD  CONSTRAINT [FK_PedDiaSig_Rutas] FOREIGN KEY([IdRuta])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PedDiaSig] CHECK CONSTRAINT [FK_PedDiaSig_Rutas]
+GO
+ALTER TABLE [dbo].[PedDiaSig]  WITH CHECK ADD  CONSTRAINT [FK_pediasig_Productos] FOREIGN KEY([Articulo])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[PedDiaSig] CHECK CONSTRAINT [FK_pediasig_Productos]
+GO
+ALTER TABLE [dbo].[PedDiaSigPzs]  WITH CHECK ADD  CONSTRAINT [FK_PedDiaSigPzs_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PedDiaSigPzs] CHECK CONSTRAINT [FK_PedDiaSigPzs_Empresas]
+GO
+ALTER TABLE [dbo].[PedDiaSigPzs]  WITH CHECK ADD  CONSTRAINT [FK_PedDiaSigPzs_Rutas] FOREIGN KEY([IdRuta])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PedDiaSigPzs] CHECK CONSTRAINT [FK_PedDiaSigPzs_Rutas]
+GO
+ALTER TABLE [dbo].[Pedidos]  WITH CHECK ADD  CONSTRAINT [FK_pedidos_DiasO] FOREIGN KEY([DiaO], [Ruta])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[Pedidos] CHECK CONSTRAINT [FK_pedidos_DiasO]
+GO
+ALTER TABLE [dbo].[Pedidos]  WITH CHECK ADD  CONSTRAINT [FK_Pedidos_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Pedidos] CHECK CONSTRAINT [FK_Pedidos_Empresas]
+GO
+ALTER TABLE [dbo].[Preg_Enc]  WITH CHECK ADD  CONSTRAINT [FK_Preg_Enc_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Preg_Enc] CHECK CONSTRAINT [FK_Preg_Enc_Empresas]
+GO
+ALTER TABLE [dbo].[Preg_Enc]  WITH CHECK ADD  CONSTRAINT [FK_preg_encu] FOREIGN KEY([Clave_Enc])
+REFERENCES [dbo].[Encuestas] ([Clave_Enc])
+GO
+ALTER TABLE [dbo].[Preg_Enc] CHECK CONSTRAINT [FK_preg_encu]
+GO
+ALTER TABLE [dbo].[PRegalado]  WITH CHECK ADD  CONSTRAINT [FK_prega_cli] FOREIGN KEY([Cliente])
+REFERENCES [dbo].[Clientes] ([IdCli])
+GO
+ALTER TABLE [dbo].[PRegalado] CHECK CONSTRAINT [FK_prega_cli]
+GO
+ALTER TABLE [dbo].[PRegalado]  WITH CHECK ADD  CONSTRAINT [FK_PRegalado_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PRegalado] CHECK CONSTRAINT [FK_PRegalado_Empresas]
+GO
+ALTER TABLE [dbo].[ProductoEnvase]  WITH CHECK ADD  CONSTRAINT [FK_ProductoEnvase_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ProductoEnvase] CHECK CONSTRAINT [FK_ProductoEnvase_Empresas]
+GO
+ALTER TABLE [dbo].[ProductoEnvase]  WITH CHECK ADD  CONSTRAINT [FK_ProductoEnvase_Productos] FOREIGN KEY([Producto])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[ProductoEnvase] CHECK CONSTRAINT [FK_ProductoEnvase_Productos]
+GO
+ALTER TABLE [dbo].[ProductoNegado]  WITH CHECK ADD  CONSTRAINT [FK_ProductoNegado_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ProductoNegado] CHECK CONSTRAINT [FK_ProductoNegado_Empresas]
+GO
+ALTER TABLE [dbo].[ProductoNegado]  WITH CHECK ADD  CONSTRAINT [FK_ProductoNegado_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[ProductoNegado] CHECK CONSTRAINT [FK_ProductoNegado_Rutas]
+GO
+ALTER TABLE [dbo].[ProductoPaseado]  WITH CHECK ADD  CONSTRAINT [FK_ProductoPaseado_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ProductoPaseado] CHECK CONSTRAINT [FK_ProductoPaseado_Empresas]
+GO
+ALTER TABLE [dbo].[ProductoPaseado]  WITH CHECK ADD  CONSTRAINT [FK_ProductoPaseado_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[ProductoPaseado] CHECK CONSTRAINT [FK_ProductoPaseado_Rutas]
+GO
+ALTER TABLE [dbo].[Productos]  WITH CHECK ADD FOREIGN KEY([idclasp])
+REFERENCES [dbo].[ClasProductos] ([IdClasP])
+GO
+ALTER TABLE [dbo].[Productos]  WITH CHECK ADD  CONSTRAINT [FK_Productos_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Productos] CHECK CONSTRAINT [FK_Productos_Empresas]
+GO
+ALTER TABLE [dbo].[ProductosXPzas]  WITH CHECK ADD  CONSTRAINT [FK_ProductosXPzas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ProductosXPzas] CHECK CONSTRAINT [FK_ProductosXPzas_Empresas]
+GO
+ALTER TABLE [dbo].[ProductosXPzas]  WITH CHECK ADD  CONSTRAINT [FK_ProductosXPzas_Productos] FOREIGN KEY([Producto])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[ProductosXPzas] CHECK CONSTRAINT [FK_ProductosXPzas_Productos]
+GO
+ALTER TABLE [dbo].[PVendidos]  WITH CHECK ADD  CONSTRAINT [FK_PVendidos_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PVendidos] CHECK CONSTRAINT [FK_PVendidos_Empresas]
+GO
+ALTER TABLE [dbo].[PVendidos]  WITH CHECK ADD  CONSTRAINT [FK_PVendidos_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[PVendidos] CHECK CONSTRAINT [FK_PVendidos_Rutas]
+GO
+ALTER TABLE [dbo].[Recarga]  WITH CHECK ADD  CONSTRAINT [FK_Recarga_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Recarga] CHECK CONSTRAINT [FK_Recarga_Empresas]
+GO
+ALTER TABLE [dbo].[Recarga]  WITH CHECK ADD  CONSTRAINT [FK_Recarga_Rutas] FOREIGN KEY([IdRuta])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Recarga] CHECK CONSTRAINT [FK_Recarga_Rutas]
+GO
+ALTER TABLE [dbo].[Rel_EncRut]  WITH CHECK ADD  CONSTRAINT [FK_Rel_EncRut_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Rel_EncRut] CHECK CONSTRAINT [FK_Rel_EncRut_Empresas]
+GO
+ALTER TABLE [dbo].[Rel_EncRut]  WITH CHECK ADD  CONSTRAINT [FK_Rel_EncRut_Rutas] FOREIGN KEY([Id_Ruta])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Rel_EncRut] CHECK CONSTRAINT [FK_Rel_EncRut_Rutas]
+GO
+ALTER TABLE [dbo].[RelActivos]  WITH CHECK ADD  CONSTRAINT [FK_RelActivos_Activos] FOREIGN KEY([Activo])
+REFERENCES [dbo].[Activos] ([IdActivos])
+GO
+ALTER TABLE [dbo].[RelActivos] CHECK CONSTRAINT [FK_RelActivos_Activos]
+GO
+ALTER TABLE [dbo].[RelActivos]  WITH CHECK ADD  CONSTRAINT [FK_RelActivos_Clientes] FOREIGN KEY([Cliente])
+REFERENCES [dbo].[Clientes] ([IdCli])
+GO
+ALTER TABLE [dbo].[RelActivos] CHECK CONSTRAINT [FK_RelActivos_Clientes]
+GO
+ALTER TABLE [dbo].[RelActivos]  WITH CHECK ADD  CONSTRAINT [FK_RelActivos_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelActivos] CHECK CONSTRAINT [FK_RelActivos_Empresas]
+GO
+ALTER TABLE [dbo].[RelCliClas]  WITH CHECK ADD  CONSTRAINT [FK_RelCliClas_Clientes] FOREIGN KEY([IdCliente])
+REFERENCES [dbo].[Clientes] ([IdCli])
+GO
+ALTER TABLE [dbo].[RelCliClas] CHECK CONSTRAINT [FK_RelCliClas_Clientes]
+GO
+ALTER TABLE [dbo].[RelCliClas]  WITH CHECK ADD  CONSTRAINT [FK_RelCliClas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelCliClas] CHECK CONSTRAINT [FK_RelCliClas_Empresas]
+GO
+ALTER TABLE [dbo].[RelCliLis]  WITH CHECK ADD  CONSTRAINT [FK_RelCliLis_Clientes] FOREIGN KEY([CodCliente])
+REFERENCES [dbo].[Clientes] ([IdCli])
+GO
+ALTER TABLE [dbo].[RelCliLis] CHECK CONSTRAINT [FK_RelCliLis_Clientes]
+GO
+ALTER TABLE [dbo].[RelCliLis]  WITH CHECK ADD  CONSTRAINT [FK_RelCliLis_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelCliLis] CHECK CONSTRAINT [FK_RelCliLis_Empresas]
+GO
+ALTER TABLE [dbo].[RelClirutas]  WITH CHECK ADD  CONSTRAINT [FK_RelClirutas_Clientes] FOREIGN KEY([IdCliente])
+REFERENCES [dbo].[Clientes] ([IdCli])
+GO
+ALTER TABLE [dbo].[RelClirutas] CHECK CONSTRAINT [FK_RelClirutas_Clientes]
+GO
+ALTER TABLE [dbo].[RelClirutas]  WITH CHECK ADD  CONSTRAINT [FK_RelClirutas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelClirutas] CHECK CONSTRAINT [FK_RelClirutas_Empresas]
+GO
+ALTER TABLE [dbo].[RelClirutas]  WITH CHECK ADD  CONSTRAINT [FK_RelClirutas_Rutas] FOREIGN KEY([IdRuta])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[RelClirutas] CHECK CONSTRAINT [FK_RelClirutas_Rutas]
+GO
+ALTER TABLE [dbo].[RelCuoVend]  WITH CHECK ADD  CONSTRAINT [FK_RelCuoVend_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelCuoVend] CHECK CONSTRAINT [FK_RelCuoVend_Empresas]
+GO
+ALTER TABLE [dbo].[RelCuoVend]  WITH CHECK ADD  CONSTRAINT [FK_RelCuoVend_Vendedores] FOREIGN KEY([VendeId])
+REFERENCES [dbo].[Vendedores] ([IdVendedor])
+GO
+ALTER TABLE [dbo].[RelCuoVend] CHECK CONSTRAINT [FK_RelCuoVend_Vendedores]
+GO
+ALTER TABLE [dbo].[RelDayCli]  WITH CHECK ADD  CONSTRAINT [FK_RelDayCli_Clientes] FOREIGN KEY([CodCli])
+REFERENCES [dbo].[Clientes] ([IdCli])
+GO
+ALTER TABLE [dbo].[RelDayCli] CHECK CONSTRAINT [FK_RelDayCli_Clientes]
+GO
+ALTER TABLE [dbo].[RelDayCli]  WITH CHECK ADD  CONSTRAINT [FK_RelDayCli_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelDayCli] CHECK CONSTRAINT [FK_RelDayCli_Empresas]
+GO
+ALTER TABLE [dbo].[RelMens]  WITH CHECK ADD  CONSTRAINT [FK_RelMens_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelMens] CHECK CONSTRAINT [FK_RelMens_Empresas]
+GO
+ALTER TABLE [dbo].[RelMens]  WITH CHECK ADD  CONSTRAINT [FK_RelMens_Rutas] FOREIGN KEY([CodRuta])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[RelMens] CHECK CONSTRAINT [FK_RelMens_Rutas]
+GO
+ALTER TABLE [dbo].[RelOperaciones]  WITH CHECK ADD  CONSTRAINT [FK_RelOperaciones_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelOperaciones] CHECK CONSTRAINT [FK_RelOperaciones_Empresas]
+GO
+ALTER TABLE [dbo].[RelOperaciones]  WITH CHECK ADD  CONSTRAINT [FK_RelOperaciones_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[RelOperaciones] CHECK CONSTRAINT [FK_RelOperaciones_Rutas]
+GO
+ALTER TABLE [dbo].[RelProClas]  WITH CHECK ADD  CONSTRAINT [FK_RelProClas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelProClas] CHECK CONSTRAINT [FK_RelProClas_Empresas]
+GO
+ALTER TABLE [dbo].[RelProClas]  WITH CHECK ADD  CONSTRAINT [FK_RelProClas_Productos] FOREIGN KEY([ProductoId])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[RelProClas] CHECK CONSTRAINT [FK_RelProClas_Productos]
+GO
+ALTER TABLE [dbo].[RelRuClas]  WITH CHECK ADD  CONSTRAINT [FK_RelRuClas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RelRuClas] CHECK CONSTRAINT [FK_RelRuClas_Empresas]
+GO
+ALTER TABLE [dbo].[RelRuClas]  WITH CHECK ADD  CONSTRAINT [FK_RelRuClas_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[RelRuClas] CHECK CONSTRAINT [FK_RelRuClas_Rutas]
+GO
+ALTER TABLE [dbo].[ResCuotas]  WITH CHECK ADD  CONSTRAINT [FK_ResCuotas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ResCuotas] CHECK CONSTRAINT [FK_ResCuotas_Empresas]
+GO
+ALTER TABLE [dbo].[ResCuotas]  WITH CHECK ADD  CONSTRAINT [FK_ResCuotas_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[ResCuotas] CHECK CONSTRAINT [FK_ResCuotas_Rutas]
+GO
+ALTER TABLE [dbo].[Resp_Enc]  WITH CHECK ADD  CONSTRAINT [FK_Resp_Enc_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Resp_Enc] CHECK CONSTRAINT [FK_Resp_Enc_Empresas]
+GO
+ALTER TABLE [dbo].[Resp_Enc]  WITH CHECK ADD  CONSTRAINT [FK_Resp_Enc_Rutas] FOREIGN KEY([IdRuta])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Resp_Enc] CHECK CONSTRAINT [FK_Resp_Enc_Rutas]
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD FOREIGN KEY([idcrutas])
+REFERENCES [dbo].[ClasRutas] ([IdCRutas])
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD FOREIGN KEY([vehiculo])
+REFERENCES [dbo].[Vehiculos] ([IdVehiculos])
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD FOREIGN KEY([vehiculo])
+REFERENCES [dbo].[Vehiculos] ([IdVehiculos])
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD FOREIGN KEY([vehiculo])
+REFERENCES [dbo].[Vehiculos] ([IdVehiculos])
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD  CONSTRAINT [FK_Rutas_Ayudantes] FOREIGN KEY([id_ayudante1])
+REFERENCES [dbo].[Ayudantes] ([id_ayudante])
+GO
+ALTER TABLE [dbo].[Rutas] CHECK CONSTRAINT [FK_Rutas_Ayudantes]
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD  CONSTRAINT [FK_Rutas_Ayudantes1] FOREIGN KEY([id_ayudante2])
+REFERENCES [dbo].[Ayudantes] ([id_ayudante])
+GO
+ALTER TABLE [dbo].[Rutas] CHECK CONSTRAINT [FK_Rutas_Ayudantes1]
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD  CONSTRAINT [FK_Rutas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+GO
+ALTER TABLE [dbo].[Rutas] CHECK CONSTRAINT [FK_Rutas_Empresas]
+GO
+ALTER TABLE [dbo].[Rutas]  WITH CHECK ADD  CONSTRAINT [FK_Rutas_Vendedores] FOREIGN KEY([Vendedor])
+REFERENCES [dbo].[Vendedores] ([IdVendedor])
+GO
+ALTER TABLE [dbo].[Rutas] CHECK CONSTRAINT [FK_Rutas_Vendedores]
+GO
+ALTER TABLE [dbo].[SecRutas]  WITH CHECK ADD  CONSTRAINT [FK_SecRutas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[SecRutas] CHECK CONSTRAINT [FK_SecRutas_Empresas]
+GO
+ALTER TABLE [dbo].[SecRutas]  WITH CHECK ADD  CONSTRAINT [FK_SecRutas_Rutas] FOREIGN KEY([Rutad])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[SecRutas] CHECK CONSTRAINT [FK_SecRutas_Rutas]
+GO
+ALTER TABLE [dbo].[Stock]  WITH CHECK ADD  CONSTRAINT [FK_Stock_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Stock] CHECK CONSTRAINT [FK_Stock_Empresas]
+GO
+ALTER TABLE [dbo].[Stock]  WITH CHECK ADD  CONSTRAINT [FK_stock_Productos] FOREIGN KEY([Articulo])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[Stock] CHECK CONSTRAINT [FK_stock_Productos]
+GO
+ALTER TABLE [dbo].[Stock]  WITH CHECK ADD  CONSTRAINT [FK_Stock_Rutas] FOREIGN KEY([Ruta])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Stock] CHECK CONSTRAINT [FK_Stock_Rutas]
+GO
+ALTER TABLE [dbo].[StockHistorico]  WITH CHECK ADD  CONSTRAINT [FK_StockHistorico_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[StockHistorico] CHECK CONSTRAINT [FK_StockHistorico_Empresas]
+GO
+ALTER TABLE [dbo].[StockHistorico]  WITH CHECK ADD  CONSTRAINT [FK_StockHistorico_Productos] FOREIGN KEY([Articulo])
+REFERENCES [dbo].[Productos] ([Clave])
+GO
+ALTER TABLE [dbo].[StockHistorico] CHECK CONSTRAINT [FK_StockHistorico_Productos]
+GO
+ALTER TABLE [dbo].[StockPedidos]  WITH CHECK ADD  CONSTRAINT [FK_StockPedidos_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[StockPedidos] CHECK CONSTRAINT [FK_StockPedidos_Rutas]
+GO
+ALTER TABLE [dbo].[TD_Comision]  WITH CHECK ADD  CONSTRAINT [FK_TD_Comision_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[TD_Comision] CHECK CONSTRAINT [FK_TD_Comision_Empresas]
+GO
+ALTER TABLE [dbo].[TD_Comision]  WITH NOCHECK ADD  CONSTRAINT [FK_TD_Comision_TH_Comision] FOREIGN KEY([ID_Comision])
+REFERENCES [dbo].[TH_Comision] ([ID_Comision])
+GO
+ALTER TABLE [dbo].[TD_Comision] CHECK CONSTRAINT [FK_TD_Comision_TH_Comision]
+GO
+ALTER TABLE [dbo].[TH_Comision]  WITH CHECK ADD  CONSTRAINT [FK_TH_Comision_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[TH_Comision] CHECK CONSTRAINT [FK_TH_Comision_Empresas]
+GO
+ALTER TABLE [dbo].[TH_SecVisitas]  WITH CHECK ADD  CONSTRAINT [FK_TH_SecVisitas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[TH_SecVisitas] CHECK CONSTRAINT [FK_TH_SecVisitas_Empresas]
+GO
+ALTER TABLE [dbo].[TH_SecVisitas]  WITH CHECK ADD  CONSTRAINT [FK_TH_SecVisitas_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[TH_SecVisitas] CHECK CONSTRAINT [FK_TH_SecVisitas_Rutas]
+GO
+ALTER TABLE [dbo].[Usuarios]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_empresa] FOREIGN KEY([empresa_id])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+GO
+ALTER TABLE [dbo].[Usuarios] CHECK CONSTRAINT [FK_Usuario_empresa]
+GO
+ALTER TABLE [dbo].[Vehiculos]  WITH CHECK ADD  CONSTRAINT [FK_Vehiculos_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Vehiculos] CHECK CONSTRAINT [FK_Vehiculos_Empresas]
+GO
+ALTER TABLE [dbo].[Vendedores]  WITH CHECK ADD  CONSTRAINT [FK_Vendedores_Ayudantes] FOREIGN KEY([ID_Ayudante1])
+REFERENCES [dbo].[Ayudantes] ([id_ayudante])
+GO
+ALTER TABLE [dbo].[Vendedores] CHECK CONSTRAINT [FK_Vendedores_Ayudantes]
+GO
+ALTER TABLE [dbo].[Vendedores]  WITH CHECK ADD  CONSTRAINT [FK_Vendedores_Ayudantes1] FOREIGN KEY([ID_Ayudante2])
+REFERENCES [dbo].[Ayudantes] ([id_ayudante])
+GO
+ALTER TABLE [dbo].[Vendedores] CHECK CONSTRAINT [FK_Vendedores_Ayudantes1]
+GO
+ALTER TABLE [dbo].[Vendedores]  WITH CHECK ADD  CONSTRAINT [FK_Vendedores_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Vendedores] CHECK CONSTRAINT [FK_Vendedores_Empresas]
+GO
+ALTER TABLE [dbo].[Venta]  WITH CHECK ADD  CONSTRAINT [FK_ven_fpag] FOREIGN KEY([FormaPag])
+REFERENCES [dbo].[FormasPag] ([IdFpag])
+GO
+ALTER TABLE [dbo].[Venta] CHECK CONSTRAINT [FK_ven_fpag]
+GO
+ALTER TABLE [dbo].[Venta]  WITH CHECK ADD  CONSTRAINT [FK_Venta_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Venta] CHECK CONSTRAINT [FK_Venta_Empresas]
+GO
+ALTER TABLE [dbo].[Venta]  WITH CHECK ADD  CONSTRAINT [FK_Venta_Rutas] FOREIGN KEY([RutaId])
+REFERENCES [dbo].[Rutas] ([IdRutas])
+GO
+ALTER TABLE [dbo].[Venta] CHECK CONSTRAINT [FK_Venta_Rutas]
+GO
+ALTER TABLE [dbo].[Venta]  WITH CHECK ADD  CONSTRAINT [FK_Venta_Vendedores] FOREIGN KEY([VendedorId])
+REFERENCES [dbo].[Vendedores] ([IdVendedor])
+GO
+ALTER TABLE [dbo].[Venta] CHECK CONSTRAINT [FK_Venta_Vendedores]
+GO
+ALTER TABLE [dbo].[Visitas]  WITH CHECK ADD  CONSTRAINT [FK_visitas_DiasO] FOREIGN KEY([DiaO], [ruta])
+REFERENCES [dbo].[DiasO] ([DiaO], [RutaId])
+GO
+ALTER TABLE [dbo].[Visitas] CHECK CONSTRAINT [FK_visitas_DiasO]
+GO
+ALTER TABLE [dbo].[Visitas]  WITH CHECK ADD  CONSTRAINT [FK_Visitas_Empresas] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[Empresas] ([IdEmpresa])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Visitas] CHECK CONSTRAINT [FK_Visitas_Empresas]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'P-Porcentaje, F-Importe fijo, R-Rango de importes' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'DetalleLD', @level2type=N'COLUMN',@level2name=N'Tipo'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'R - Crédito, N - Contado, T - Ambos' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ListaD', @level2type=N'COLUMN',@level2name=N'Tipo'
+GO

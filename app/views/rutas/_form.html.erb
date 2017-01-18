@@ -1,0 +1,77 @@
+<%= form_for(@ruta) do |f| %>
+  <% if @ruta.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ruta.errors.count, "error") %> prohibited this ruta from being saved:</h2>
+
+      <ul>
+      <% @ruta.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Ruta %><br>
+    <%= f.text_field :Ruta %>
+  </div>
+  <div class="field">
+    <%= f.label :Activa %><br>
+    <%= f.text_field :Activa %>
+  </div>
+  <div class="field">
+    <%= f.label :TipoRuta %><br>
+    <%= f.text_field :TipoRuta %>
+  </div>
+  <div class="field">
+    <%= f.label :VenSinStock %><br>
+    <%= f.text_field :VenSinStock %>
+  </div>
+  <div class="field">
+    <%= f.label :Oficina %><br>
+    <%= f.text_field :Oficina %>
+  </div>
+  <div class="field">
+    <%= f.label :Sector %><br>
+    <%= f.text_field :Sector %>
+  </div>
+  <div class="field">
+    <%= f.label :Vendedor %><br>
+    <%= f.text_field :Vendedor %>
+  </div>
+  <div class="field">
+    <%= f.label :Tipo %><br>
+    <%= f.text_field :Tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :id_ayudante1 %><br>
+    <%= f.text_field :id_ayudante1 %>
+  </div>
+  <div class="field">
+    <%= f.label :id_ayudante2 %><br>
+    <%= f.text_field :id_ayudante2 %>
+  </div>
+  <div class="field">
+    <%= f.label :VendedorAyudante %><br>
+    <%= f.text_field :VendedorAyudante %>
+  </div>
+  <div class="field">
+    <%= f.label :Foranea %><br>
+    <%= f.text_field :Foranea %>
+  </div>
+  <div class="field">
+    <%= f.label :vehiculo %><br>
+    <%= f.text_field :vehiculo %>
+  </div>
+  <div class="field">
+    <%= f.label :idcrutas %><br>
+    <%= f.text_field :idcrutas %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

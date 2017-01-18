@@ -1,0 +1,193 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Empleados</h1>
+<style>
+.container {
+  width: 100%;
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewvendedor">
+        Nuevo Empleado
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="vendedores" class="display"><!--el id vendedores es de datatables referenciado en vendedores.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Pdapw</th>
+      <th>Metadiaria</th>
+      <th>Metames</th>
+      <th>Movil</th>
+      <th>Vencelic</th>
+      <th>Opciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_vendedores">
+      <%= render @vendedores %><!--carga todos los vendedores-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@vendedor, remote: true, html: {class: "form-horizontal vendedor-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewvendedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Empleado</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <%= f.label :Clave, "Clave:", class: "control-label col-md-2" %>
+            <div class="col-md-3">
+              <%= f.text_field :Clave, class: "form-control vendedor_clave", autofocus: true, required: "true" %>
+            </div>
+              <%= f.label :Nombre, "Nombre:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Nombre, class: "form-control vendedor_nombre", minlength: "7", required: "true" %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+
+
+            <%= f.label :Telefono, "Teléfono:", class: "control-label col-md-2" %>
+            <div class="col-md-3">
+              <%= f.text_field :Telefono, class: "form-control vendedor_telefono", required: "true" %>
+            </div>
+
+            <%= f.label :NumLicencia, "Licencia:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :NumLicencia, class: "form-control vendedor_numlicencia", minlength: "7", required: "true" %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+
+            <%= f.label :PdaPw, "PDA Pw:", class: "control-label col-md-2" %>
+            <div class="col-md-3">
+              <%= f.text_field :PdaPw, class: "form-control vendedor_pdapw", required: "true" %>
+            </div>
+
+            <%= f.label :Movil, "Movil:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Movil, class: "form-control vendedor_movil" %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+
+            <%= f.label :MetaDiaria, "MetaDiaria:", class: "control-label col-md-2" %>
+            <div class="col-md-3">
+              <%= f.number_field :MetaDiaria, class: "form-control vendedor_metadiaria", required: "true" %>
+            </div>
+
+            <%= f.label :MetaMes, "MetaMes:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.number_field :MetaMes, class: "form-control vendedor_metames", required: "true" %>
+            </div>
+
+          </div>
+          <div class="form-group">
+
+
+            <%= f.label :Tipo, "Categoría:", class: "control-label col-md-2"  %>
+            <div class="col-md-3">
+              <%= f.select :Tipo, ['Ayudante','Cobrador','Encuestador','Gerente','Repartidor','Supervisor','Vendedor'], class: "form-control"%>
+            </div>
+
+            <%= f.label :VenceLic, "Vencelic:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :VenceLic, class: "form-control datepicker vendedor_vencelic", minlength: "4", required: "true"  %>
+            </div>
+
+
+          </div>
+          <div class="form-group">
+
+            <%= f.label :Direccion, "Dirección:", class: "control-label col-md-3"  %>
+            <div class="col-md-7">
+              <%= f.text_area :Direccion, class: "form-control vendedor_direccion", minlength: "7", required: "true"  %>
+            </div>
+          </div>
+
+
+
+            <div class="col-md-3">
+              <%= f.label :Status, "Activo:", class: "control-label col-md-2" %>
+              <%= f.check_box :Status, class: "form-control vendedor_status", checked: true %>
+            </div>
+
+            <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewvendedorclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary"%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", vendedores_path(format:"csv") %> |
+  <%= link_to "Excel", vendedores_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>
+
+
+<div class="modal fade" id="myimportdata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar Datos</h4>
+      </div>
+      <div class="modal-body">
+      <p>
+        Nota: El formato excel a exportar debe ser .xlsx ó .csv
+      </p>
+        <%= form_tag import_vendedores_path, multipart: true do %>
+          <%= file_field_tag :file %>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="myimportdataclose">Close</button>
+        <%= submit_tag "Importar", class: "btn btn-primary", data: { disable_with: 'Importando' } %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Empleados eliminados ó inhabilitados<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, vendedores_inactivos_path, class: "btn btn-danger btn-xs"%>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Relactivos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Activo</th>
+      <th>Fechaasignacion</th>
+      <th>Idempresa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @relactivos.each do |relactivo| %>
+      <tr>
+        <td><%= relactivo.Cliente %></td>
+        <td><%= relactivo.Activo %></td>
+        <td><%= relactivo.FechaAsignacion %></td>
+        <td><%= relactivo.IdEmpresa %></td>
+        <td><%= link_to 'Show', relactivo %></td>
+        <td><%= link_to 'Edit', edit_relactivo_path(relactivo) %></td>
+        <td><%= link_to 'Destroy', relactivo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Relactivo', new_relactivo_path %>

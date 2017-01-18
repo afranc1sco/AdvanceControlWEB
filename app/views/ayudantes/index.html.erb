@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ayudantes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Direccion</th>
+      <th>Telefono</th>
+      <th>Status</th>
+      <th>Numlicencia</th>
+      <th>Vencelic</th>
+      <th>Clave</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ayudantes.each do |ayudante| %>
+      <tr>
+        <td><%= ayudante.nombre %></td>
+        <td><%= ayudante.direccion %></td>
+        <td><%= ayudante.telefono %></td>
+        <td><%= ayudante.status %></td>
+        <td><%= ayudante.numlicencia %></td>
+        <td><%= ayudante.vencelic %></td>
+        <td><%= ayudante.clave %></td>
+        <td><%= link_to 'Show', ayudante %></td>
+        <td><%= link_to 'Edit', edit_ayudante_path(ayudante) %></td>
+        <td><%= link_to 'Destroy', ayudante, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ayudante', new_ayudante_path %>

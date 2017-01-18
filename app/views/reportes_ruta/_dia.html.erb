@@ -1,0 +1,6 @@
+<div class="form-group">
+   <%= label_tag :Diao, "Selecciona Dia:", class: "control-label col-md-2" %>
+   <div class="col-md-2">
+    <%= select_tag :diao, options_for_select(@diao.map{|e|[e.DiaO, e.Id]}), class: "form-control js-example-basic-single" %>
+   </div>
+</div>

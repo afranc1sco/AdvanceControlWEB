@@ -1,0 +1,33 @@
+<%= form_for(@listapromomast) do |f| %>
+  <% if @listapromomast.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@listapromomast.errors.count, "error") %> prohibited this listapromomast from being saved:</h2>
+
+      <ul>
+      <% @listapromomast.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Id %><br>
+    <%= f.text_field :Id %>
+  </div>
+  <div class="field">
+    <%= f.label :ListaMaster %><br>
+    <%= f.text_field :ListaMaster %>
+  </div>
+  <div class="field">
+    <%= f.label :Promociones %><br>
+    <%= f.text_field :Promociones %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

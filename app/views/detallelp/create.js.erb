@@ -1,0 +1,21 @@
+$("#myproductadder_<%= @deta.Articulo %>").modal('hide');
+$(".tdcomision_rangoini").val('');
+$(".tdcomision_rangofin").val('');
+$(".tdcomision_angente").val('');
+$(".tdcomision_ayudante").val('');
+
+$("#producto_<%= @deta.Articulo %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+
+});
+$("#container_detallelp").prepend('<%= j render @deta %>'); //Prepend before append
+$("#deta_<%= @deta.id %>").hide().fadeIn(1000);
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

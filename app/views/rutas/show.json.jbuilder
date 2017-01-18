@@ -1,0 +1,1 @@
+json.extract! @ruta, :id, :Ruta, :Activa, :TipoRuta, :VenSinStock, :Oficina, :Sector, :Vendedor, :Tipo, :id_ayudante1, :id_ayudante2, :VendedorAyudante, :Foranea, :vehiculo, :idcrutas, :IdEmpresa, :created_at, :updated_at

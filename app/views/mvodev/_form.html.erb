@@ -1,0 +1,29 @@
+<%= form_for(@mvodevolucion) do |f| %>
+  <% if @mvodevolucion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mvodevolucion.errors.count, "error") %> prohibited this mvodevolucion from being saved:</h2>
+
+      <ul>
+      <% @mvodevolucion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :MvoDev %><br>
+    <%= f.text_field :MvoDev %>
+  </div>
+  <div class="field">
+    <%= f.label :Clave %><br>
+    <%= f.text_field :Clave %>
+  </div>
+  <div class="field">
+    <%= f.label :Status %><br>
+    <%= f.text_field :Status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

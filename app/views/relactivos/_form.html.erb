@@ -1,0 +1,33 @@
+<%= form_for(@relactivo) do |f| %>
+  <% if @relactivo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relactivo.errors.count, "error") %> prohibited this relactivo from being saved:</h2>
+
+      <ul>
+      <% @relactivo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Cliente %><br>
+    <%= f.text_field :Cliente %>
+  </div>
+  <div class="field">
+    <%= f.label :Activo %><br>
+    <%= f.text_field :Activo %>
+  </div>
+  <div class="field">
+    <%= f.label :FechaAsignacion %><br>
+    <%= f.text_field :FechaAsignacion %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Motivo Devoluciones inactivos</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+
+  <br>
+  <br>
+
+
+
+  <table id="mvodev" class="display"><!--el id mvodev es de datatables referenciado en mvodev.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Motivo</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_mvodev">
+      <%= render @mvodev %><!--carga todos los mvodev-->
+</tbody>
+
+
+</table>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", mvodev_path(format:"csv") %> |
+  <%= link_to "Excel", mvodev_path(format:"xls") %>
+</p>
+<%= link_to 'Volver a Motivos de devolución', mvodev_path, class: "btn btn-primary btn-lg" %>

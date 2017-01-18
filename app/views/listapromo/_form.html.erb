@@ -1,0 +1,254 @@
+<%= form_for(@listaprom, html: {class: "form-horizontal formulario-validado-create"} )do |f| %>
+  <% if @listaprom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@listaprom.errors.count, "error") %> prohibited this listaprom from being saved:</h2>
+
+      <ul>
+      <% @listaprom.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="well center-block">
+  <div class="form-group">
+    <%= f.label :Lista,"Lista:", class: "control-label col-md-2" %>
+    <div class="col-md-3">
+      <%= f.text_field :Lista, class: "form-control ", disabled: true   %>
+    </div>
+
+    <%= f.label :Descripcion,"Descripcion:", class: "control-label col-md-2" %>
+    <div class="col-md-3">
+      <%= f.text_field :Descripcion, class: "form-control ",minlength: "7", required: "true", disabled:true    %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :FechaI,"Fecha Inicial:", class: "control-label col-md-2" %>
+    <div class="col-md-3">
+      <%= f.text_field :FechaI, class: "form-control datepicker", :value => @listaprom.FechaI.strftime("%d-%m-%Y"), minlength: "7", required: "true", disabled:true  %>
+    </div>
+
+    <%= f.label :FechaF,"Fecha Final:", class: "control-label col-md-2" %>
+    <div class="col-md-3">
+      <%= f.text_field :FechaF, class: "form-control  datepicker", :value => @listaprom.FechaF.strftime("%d-%m-%Y"), minlength: "7", required: "true", disabled:true  %>
+    </div>
+  </div>
+  <div class="well center-block">
+
+  <div class="form-group ">
+    <%= f.label :Caduca,"Caduca:", class: "control-label col-xs-7 col-sm-6 col-md-4"%>
+    <div class="col-md-1">
+      <%= f.check_box :Caduca %>
+    </div>
+
+    <%= f.label :Activa,"Activa:", class: "control-label col-xs-7 col-sm-6 col-md-1"%>
+    <div class="col-md-1">
+      <%= f.check_box :Activa %>
+    </div>
+
+    <%= f.label :Tipo, "Tipo:", class: "control-label col-md-1"  %>
+    <div class="col-md-3">
+      <%= f.select :Tipo, ['Producto','Monto de Venta','Volumen'], class: "form-control"%>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div class="well center-block">
+  <div class="form-group">
+    <h3 class="col-md-5">Producto base:</h3>
+  </div>
+  <table id="listapromo" class="display"><!--el id listapromo es de datatables referenciado en listapromo.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Articulo</th>
+      <th>Cantidad</th>
+      <th>Monto</th>
+      <th>Volumen</th>
+      <th>Unidad</th>
+      <th>Descripción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_listapromo">
+      <%= f.fields_for :detallepromo do |builder| %>
+
+        <% if  builder.object.Tipo == false %>
+          <tr>
+            <td><%=builder.object.Articulo%>
+
+              <%= builder.hidden_field :id %><!--se coloca el id para que se pueda eliminar el registro-->
+            </td>
+            <td><%=builder.object.Cantidad%></td>
+            <td><%=builder.object.Monto%></td>
+            <td><%=builder.object.Volumen%></td>
+            <td>
+              <%if builder.object.TipMed == 0 %>
+                Pieza
+              <% elsif builder.object.TipMed == 1 %>
+                Caja
+              <%end%>
+            </td>
+            <td><%=builder.object.producto.Producto%></td>
+            <td>Eliminar<%=builder.check_box '_destroy' %></td>
+
+
+          </tr>
+        <% elsif builder.object.Tipo.nil? and @cantidad_de_productosbase<1%><!--solo se debe de crear un producto base por promocion-->
+
+
+        <div class="well center-block">
+
+
+        <div class="form-group">
+          <%= builder.label :Articulo,"Articulo:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.select :Articulo, options_for_select(@productos.map{|e|[[ e.Clave, e.Producto], e.Clave]})   %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= builder.label :Monto,"Monto:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.number_field :Monto, class: "form-control  mensaje_fechafinal", required: "true"   %>
+          </div>
+
+          <%= builder.label :Volumen,"Volumen:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.number_field :Volumen, class: "form-control  mensaje_fechafinal", required: "true"   %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= builder.label :Cantidad,"Cantidad:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.number_field :Cantidad, class: "form-control  mensaje_fechafinal",required: "true"   %>
+          </div>
+
+          <%= builder.label :TipMed,"Tipo Medida:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.select :TipMed, ([['Caja', 1], ['Pieza', 0]]), class: "form-control"%>
+          </div>
+        </div>
+        <%= builder.hidden_field :Tipo, value: 0 %>
+        <%= builder.hidden_field :Nivel, value: 0 %>
+        <%= builder.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+      </div>
+    <%end%>
+  <%end%>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+<div class="well center-block">
+  <div class="form-group">
+    <h3 class="col-md-5">Producto promoción:</h3>
+  </div>
+  <table id="promociones_regalo" class="display"><!--el id listapromo es de datatables referenciado en listapromo.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Articulo</th>
+      <th>Cantidad</th>
+      <th>Monto</th>
+      <th>Volumen</th>
+      <th>TipMed</th>
+      <th>Equivalente</th>
+      <th>Descripción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_listapromo">
+      <%= f.fields_for :detallepromo do |builder| %>
+
+        <% if builder.object.Monto != nil and builder.object.Tipo == true  %>
+          <tr>
+            <td><%=builder.object.Articulo%>
+              <%= builder.hidden_field :id %><!--se coloca el id para que se pueda modificar el nivel y eliminar el registro-->
+            </td>
+            <td><%=builder.object.Cantidad%>
+            <%= builder.hidden_field :Cantidad %><!--se coloca la cantidad para que se pueda modificar el nivel debido a que el programa rechazara el registro si cantidad esta en blanco-->
+          </td>
+            <td><%=builder.object.Monto%></td>
+            <td><%=builder.object.Volumen%> </td>
+            <td>
+              <%if builder.object.TipMed == 0 %>
+                Pieza
+              <% elsif builder.object.TipMed == 1 %>
+                Caja
+              <%end%>
+            </td>
+            <td><%= builder.number_field :Nivel, class: "form-control"   %></td>
+            <td><%=builder.object.producto.Producto%></td>
+            <td>Eliminar<%=builder.check_box '_destroy' %></td>
+
+
+          </tr>
+          <% elsif builder.object.Tipo.nil? %>
+
+        <div class="well center-block">
+
+
+        <div class="form-group">
+          <%= builder.label :Articulo,"Articulo:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.select :Articulo, options_for_select(@productos.map{|e|[[e.Clave, e.Producto], e.Clave]},selected: @listaprom.detallepromo.collect(&:Articulo))   %>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <%= builder.label :Monto,"Monto:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.number_field :Monto, class: "form-control  mensaje_fechafinal"   %>
+          </div>
+
+          <%= builder.label :Volumen,"Volumen:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.number_field :Volumen, class: "form-control  mensaje_fechafinal"   %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= builder.label :Cantidad,"Cantidad:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.number_field :Cantidad, class: "form-control  mensaje_fechafinal"   %>
+          </div>
+
+          <%= builder.label :TipMed,"Tipo Medida:", class: "control-label col-md-2" %>
+          <div class="col-md-3">
+            <%= builder.select :TipMed, ([['Caja', 1], ['Pieza', 0]]), class: "form-control"%>
+          </div>
+        </div>
+        <%= builder.hidden_field :Tipo, value: 1 %>
+        <%= builder.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+        <%= builder.hidden_field :Nivel, value: @cantidad_de_productosRegalo%>
+
+      </div>
+    <%end%>
+  <%end%>
+</tbody>
+</table>
+</div>
+
+  <div class="actions">
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= f.submit "Aceptar", class: "btn btn-primary btn-lg" %>
+      <%= link_to 'Volver a promociones', listapromo_path, class: "btn btn-primary btn-lg" %>
+      </div>
+    </div>
+  </div>
+<% end %>

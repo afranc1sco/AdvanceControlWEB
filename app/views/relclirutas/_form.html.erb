@@ -1,0 +1,29 @@
+<%= form_for(@relcliruta) do |f| %>
+  <% if @relcliruta.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relcliruta.errors.count, "error") %> prohibited this relcliruta from being saved:</h2>
+
+      <ul>
+      <% @relcliruta.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :IdCliente %><br>
+    <%= f.text_field :IdCliente %>
+  </div>
+  <div class="field">
+    <%= f.label :IdRuta %><br>
+    <%= f.text_field :IdRuta %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

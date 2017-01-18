@@ -1,0 +1,6 @@
+<div class="form-group">
+    <%= label_tag :Ruta, "Selecciona Ruta:", class: "control-label col-md-2" %>
+    <div class="col-md-2">
+     <%= select_tag :search, options_for_select(@rutas.map{|e|[e.Ruta, e.IdRutas]}), :prompt => "Por favor seleccione", class: "form-control js-example-basic-single" %>
+   </div>
+ </div>

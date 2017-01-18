@@ -1,0 +1,23 @@
+production:
+  adapter: sqlserver
+  mode: dblib
+  dataserver:
+  host: advcontroldb.database.windows.net
+  port: 1433
+  database: AdvanceControl_Copy
+  username: alejandro
+  password: Control5
+  timeout: 60000
+  azure: true
+
+development:
+  adapter: sqlserver
+  mode: dblib
+  dataserver:
+  host: advcontroldb.database.windows.net
+  port: 1433
+  database: AdvanceControl_Copy
+  username: alejandro
+  password: Control5
+  timeout: 60000
+  azure: true

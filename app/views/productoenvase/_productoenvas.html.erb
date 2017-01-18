@@ -1,0 +1,19 @@
+<tr id="productoenvas_<%= productoenvas.id %>">
+    <td><%= productoenvas.Id %></td>
+    <td><%= productoenvas.Producto %></td>
+    <td><%= productoenvas.Envase %></td>
+    <td><%= productoenvas.Cant_Base %></td>
+    <td><%= productoenvas.Cant_Eq %></td>
+
+
+
+    <td>
+
+      <%= link_to 'Eliminar', productoenvas, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+
+      </td>
+
+
+<td class="no" >
+</td>
+</tr>

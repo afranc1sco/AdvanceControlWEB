@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Clave: MyString
+  EnBaseA: MyString
+  Descripcion: MyString
+  Mensaje: MyString
+  FechaInicio: MyString
+  FechaFinal: MyString
+  Estado: false
+  IdEmpresa: MyString
+
+two:
+  Clave: MyString
+  EnBaseA: MyString
+  Descripcion: MyString
+  Mensaje: MyString
+  FechaInicio: MyString
+  FechaFinal: MyString
+  Estado: false
+  IdEmpresa: MyString

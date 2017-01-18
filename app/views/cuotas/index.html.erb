@@ -1,0 +1,154 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Lista de Cuotas</h1>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewcuota">
+        Nueva Cuota
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="cuotas" class="display"><!--el id cuotas es de datatables referenciado en cuotas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>En Base A</th>
+      <th>Producto</th>
+      <th>Descripcion</th>
+      <th>UniMed</th>
+      <th>Cuota</th>
+      <th>Inicio</th>
+      <th>Finaliza</th>
+      <th>Estado</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_cuotas">
+      <%= render @cuotas %><!--carga todos los cuotas-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@cuota, remote: true, html: {class: "form-horizontal formulario-validado-create"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewcuota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar Cuota</h4>
+        </div>
+        <div class="modal-body">
+
+          <% if @cuota.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@cuota.errors.count, "error") %> prohibited this cuota from being saved:</h2>
+
+              <ul>
+              <% @cuota.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="form-group">
+            <%= f.label :Clave, "Clave:", class: "control-label col-md-3" %>
+            <div class="col-md-5">
+              <%= f.text_field :Clave, class: "form-control cuota_clave", autofocus: true, required: "true", minlength: "1"  %>
+            </div>
+            <%= f.label :Tipo, "Clasificación:", class: "control-label col-xs-7 col-sm-6 col-md-2 " %>
+            <div class="col-md-1">
+              <%= f.check_box :Tipo, class:"cliente-credito" %>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <%= f.label :Producto, "Producto:", class: "control-label col-md-3"  %>
+            <div class="col-md-3">
+              <%= f.select :Producto, options_for_select(Producto.all.map{|e|[e.Producto, e.Clave]}) %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :UniMed, "Unidad Medida:", class: "control-label col-md-3"  %>
+            <div class="col-md-2">
+            <%= f.select :UniMed, ['PZA', 'CJ', 'KG'], class: "form-control "%>
+            </div>
+            <%= f.label :Cantidad, "Cuota:", class: "control-label col-md-1"  %>
+            <div class="col-md-3">
+              <%= f.number_field :Cantidad, class: "form-control cuota_cantidad", required: "true", minlength: "1"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :Descripcion, "Descripción:", class:"control-label col-md-3" %>
+            <div class="col-md-8">
+              <%= f.text_area :Descripcion, class: "form-control cuota_descripcion", required: "true", minlength: "7"  %>
+            </div>
+          </div>
+
+          <div class="well center-block">
+            <div class="form-group">
+              <h3 class="col-md-5">Periodo:</h3>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :FechaI,"Inicio:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaI, class: "form-control datepicker cuota_fechai", required: "true", minlength: "9"  %>
+              </div>
+
+              <%= f.label :FechaF,"Fin:", class: "control-label col-md-2" %>
+              <div class="col-md-3">
+                <%= f.text_field :FechaF, class: "form-control datepicker cuota_fechaf", required: "true", minlength: "9"  %>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <%= f.label :Activa,"Inactiva:", class: "control-label col-xs-7 col-sm-6 col-md-2"%>
+            <div class="col-md-1">
+              <%= f.check_box :Activa %>
+            </div>
+          </div>
+
+          <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewcuotaclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", cuotas_path(format:"csv") %> |
+  <%= link_to "Excel", cuotas_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>

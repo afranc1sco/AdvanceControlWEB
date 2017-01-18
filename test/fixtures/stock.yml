@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Articulo: MyString
+  Stock: MyString
+  Ruta: MyString
+  IdEmpresa: MyString
+
+two:
+  Articulo: MyString
+  Stock: MyString
+  Ruta: MyString
+  IdEmpresa: MyString

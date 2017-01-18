@@ -1,0 +1,16 @@
+$("#mynewmotivonoventa").modal('hide');
+$(".motivonoventa_clave").val('');
+$(".motivonoventa_motivo").val('');
+
+if (<%= @motivonoventa.Status == true %>){
+  $("#container_motivosnoventa").prepend('<%= j render @motivonoventa %>'); //Prepend before append
+  $("#motivonoventa_<%= @motivonoventa.id %>").hide().fadeIn(1000);
+}
+
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

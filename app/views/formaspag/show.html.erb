@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Forma:</strong>
+  <%= @formapag.forma %>
+</p>
+
+<p>
+  <strong>Clave:</strong>
+  <%= @formapag.clave %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @formapag.status %>
+</p>
+
+<%= link_to 'Edit', edit_formapag_path(@formapag) %> |
+<%= link_to 'Back', formaspag_path %>

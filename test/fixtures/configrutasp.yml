@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  RutaId: MyString
+  ModelPrinter: MyString
+  VelCom: MyString
+  COM: MyString
+  Server: MyString
+  Puerto: MyString
+  ServerGPS: MyString
+  GPS: MyString
+  PuertoG: MyString
+  PagoContado: MyString
+  CteNvo: MyString
+  CveCteNvo: MyString
+  IdEmpresa: MyString
+  SugerirCant: MyString
+  PromoEq: MyString
+
+two:
+  RutaId: MyString
+  ModelPrinter: MyString
+  VelCom: MyString
+  COM: MyString
+  Server: MyString
+  Puerto: MyString
+  ServerGPS: MyString
+  GPS: MyString
+  PuertoG: MyString
+  PagoContado: MyString
+  CteNvo: MyString
+  CveCteNvo: MyString
+  IdEmpresa: MyString
+  SugerirCant: MyString
+  PromoEq: MyString

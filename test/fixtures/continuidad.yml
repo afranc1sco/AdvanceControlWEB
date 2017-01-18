@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  RutaID: MyString
+  DiaO: MyString
+  FolVta: MyString
+  FolPed: MyString
+  FolDevol: MyString
+  FolCob: MyString
+  UDiaO: MyString
+  CteNvo: MyString
+  IdEmpresa: MyString
+
+two:
+  RutaID: MyString
+  DiaO: MyString
+  FolVta: MyString
+  FolPed: MyString
+  FolDevol: MyString
+  FolCob: MyString
+  UDiaO: MyString
+  CteNvo: MyString
+  IdEmpresa: MyString

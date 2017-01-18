@@ -1,0 +1,41 @@
+<%= form_for(@relprocla) do |f| %>
+  <% if @relprocla.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relprocla.errors.count, "error") %> prohibited this relprocla from being saved:</h2>
+
+      <ul>
+      <% @relprocla.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ProductoId %><br>
+    <%= f.text_field :ProductoId %>
+  </div>
+  <div class="field">
+    <%= f.label :ClasiF %><br>
+    <%= f.text_field :ClasiF %>
+  </div>
+  <div class="field">
+    <%= f.label :Nivel %><br>
+    <%= f.text_field :Nivel %>
+  </div>
+  <div class="field">
+    <%= f.label :Dep_Clasif %><br>
+    <%= f.text_field :Dep_Clasif %>
+  </div>
+  <div class="field">
+    <%= f.label :Dep_Nivel %><br>
+    <%= f.text_field :Dep_Nivel %>
+  </div>
+  <div class="field">
+    <%= f.label :IdEmpresa %><br>
+    <%= f.text_field :IdEmpresa %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

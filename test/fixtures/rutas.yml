@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Ruta: MyString
+  Activa: MyString
+  TipoRuta: MyString
+  VenSinStock: MyString
+  Oficina: MyString
+  Sector: MyString
+  Vendedor: MyString
+  Tipo: MyString
+  id_ayudante1: MyString
+  id_ayudante2: MyString
+  VendedorAyudante: MyString
+  Foranea: MyString
+  vehiculo: MyString
+  idcrutas: MyString
+  IdEmpresa: MyString
+
+two:
+  Ruta: MyString
+  Activa: MyString
+  TipoRuta: MyString
+  VenSinStock: MyString
+  Oficina: MyString
+  Sector: MyString
+  Vendedor: MyString
+  Tipo: MyString
+  id_ayudante1: MyString
+  id_ayudante2: MyString
+  VendedorAyudante: MyString
+  Foranea: MyString
+  vehiculo: MyString
+  idcrutas: MyString
+  IdEmpresa: MyString

@@ -1,0 +1,42 @@
+<% if @noventas != nil%>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Ruta</th>
+      <th>Cliente</th>
+      <th>Nombre Comercial</th>
+      <th>Responsable</th>
+      <th>Fecha</th>
+      <th>Vendedor</th>
+      <th>Motivo</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_noventasingular">
+      <% @noventas.each do |noventasingular| %>
+      <tr id="noventasingular_<%= noventasingular.id %>">
+        <td><%=noventasingular.RutaId%></td>
+        <td><%=noventasingular.Cliente%></td>
+        <td><%=noventasingular.cliente.NombreCorto%></td>
+        <td><%=noventasingular.cliente.Nombre%></td>
+        <td><%=noventasingular.Fecha%></td>
+        <td>vendedor</td>
+        <td><%=noventasingular.motivonoventa.Motivo%></td>
+
+
+      <td></td>
+      </tr>
+
+      <% end %>
+
+</tbody>
+
+
+</table>
+
+<% end %>

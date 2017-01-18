@@ -1,0 +1,163 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Sucursales <%=@EmpresaMadre.Empresa%></h1>
+<h2>RFC <%=@EmpresaMadre.RFC%></h2>
+<style>
+.container {
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewempresa">
+        Nueva Sucursal
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="empresas" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Clave</th>
+      <th>Sucursal</th>
+      <th>Acción</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_empresas">
+      <%= render @empresas %><!--carga todos los empresas-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@empresa, remote: true, html: {class: "form-horizontal empresa-validado"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewempresa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar sucursal</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <div class="col-md-10">
+              <h4>Empresa: <b><%=@EmpresaMadre.Empresa%></b></h4>
+            </div>
+          </div>
+
+            <div class="form-group">
+            <%= f.label :IdEmpresa, "Clave:", class: "control-label col-md-2 " %>
+            <div class="col-md-3">
+              <%= f.number_field :IdEmpresa, class: "form-control empresa_clave",autofocus: true, minlength: "1", required: "true"  %>
+            </div>
+
+            <%= f.label :Sucursal, "Sucursal:", class: "control-label col-md-2 " %>
+            <div class="col-md-5">
+              <%= f.text_field :Sucursal, class: "form-control empresa_clave", minlength: "5", required: "true"  %>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= f.label :NombreComercial, "No.Comercial:", class: "control-label col-md-2 " %>
+            <div class="col-md-3">
+              <%= f.text_field :NombreComercial, class: "form-control empresa_NombreComercial", maxlength: "10" %>
+            </div>
+              <%= f.label :Direccion, "Direccion:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Direccion, class: "form-control empresa_Direccion", minlength: "10", required: "true" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :Telefono, "Teléfono:", class: "control-label col-md-2 " %>
+            <div class="col-md-3">
+              <%= f.text_field :Telefono, class: "form-control empresa_Telefono", minlength: "7", required: "true"  %>
+            </div>
+              <%= f.label :Contacto, "Contacto:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :Contacto, class: "form-control empresa_Contacto",minlength: "4", required: "true"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <%= f.label :CP, "CP:", class: "control-label col-md-2" %>
+            <div class="col-md-3">
+              <%= f.text_field :CP, class: "form-control empresa_CP",minlength: "5", required: "true"  %>
+            </div>
+            <%= f.label :Email, "Email:", class: "control-label col-md-2 " %>
+            <div class="col-md-5">
+              <%= f.email_field :Email, class: "form-control empresa_Email", minlength: "7", required: "true"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :NoInterior, "No.Interior:", class: "control-label col-md-2 " %>
+            <div class="col-md-3">
+              <%= f.text_field :NoInterior, class: "form-control empresa_NoInterior", maxlength: "10"  %>
+            </div>
+              <%= f.label :NoExterior, "No.Exterior:", class: "control-label col-md-2" %>
+            <div class="col-md-5">
+              <%= f.text_field :NoExterior, class: "form-control empresa_NoExterior",maxlength: "10"  %>
+            </div>
+          </div>
+
+
+          <%= f.hidden_field :empresamadre_id, value: params[:id] %>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewempresaclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary, data: { disable_with: 'Creando' }"%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<p>
+  Download:
+  <%= link_to "CSV", empresas_path(format:"csv") %> |
+  <%= link_to "Excel", empresas_path(format:"xls") %>
+</p>
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myimportdata">
+  Importar Excel
+</button>
+
+
+<div class="modal fade" id="myimportdata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar Datos</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Nota: El formato excel a exportar debe ser .xlsx ó .csv
+        </p>
+        <%= form_tag import_empresas_path, multipart: true do %>
+          <%= file_field_tag :file %>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="myimportdataclose">Close</button>
+        <%= submit_tag "Importar", class: "btn btn-primary", data: { disable_with: 'Importando' } %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Clave enc:</strong>
+  <%= @encuesta.Clave_Enc %>
+</p>
+
+<p>
+  <strong>Desc enc:</strong>
+  <%= @encuesta.Desc_Enc %>
+</p>
+
+<p>
+  <strong>Tipo enc:</strong>
+  <%= @encuesta.Tipo_Enc %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @encuesta.IdEmpresa %>
+</p>
+
+<%= link_to 'Edit', edit_encuesta_path(@encuesta) %> |
+<%= link_to 'Back', encuestas_path %>

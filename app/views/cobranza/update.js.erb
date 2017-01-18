@@ -1,0 +1,15 @@
+$("#notice").html("<%= escape_javascript(render :partial => 'partials/flash' , :locals => { :flash => flash }).html_safe %>");
+
+$("#cobran_<%= @cobran.id %>").fadeOut(500, function(){
+  $(this).remove();
+  $(".child").remove();
+
+  $("#container_cobranza").prepend('<%= j render @cobran %>');
+
+});
+
+setTimeout(function(){
+  $('#notice').fadeIn("slow", function() {
+    $(this).create();
+  })
+}, 1500);

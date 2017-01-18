@@ -1,0 +1,81 @@
+<header>
+  <nav>
+    <ul class="nav nav-tabs"><!--hacemos uso de bootstrap-->
+  <% if usuario_signed_in? %><!-- el usuario inicio sesion? ese user que esta escrito alli, es el nombre del modelo que ejecutamos en el generador rails generate devise User. si fuese alumno, alumno_signed_in-->
+
+      <li>
+        <%= link_to "Inicio", root_path %>
+      </li>
+      <li>
+          <%= link_to "Rutas", rutas_path %>
+      </li>
+      <li>
+          <%= link_to "Promociones", listapromo_path %>
+      </li>
+      <li>
+        <%= link_to "Vendedores", vendedores_path %>
+      </li>
+      <li>
+        <%= link_to "Vehículos", vehiculos_path %>
+      </li>
+      <li>
+          <%= link_to "Empresas", empresasmadre_path %>
+      </li>
+      <li>
+          <%= link_to "Productos", productos_path %>
+      </li>
+      <li>
+          <%= link_to "Clientes", clientes_path %>
+      </li>
+      <li>
+          <%= link_to "Formas de Pago", formaspag_path %>
+      </li>
+      <li>
+          <%= link_to "Motivos de No Venta", motivosnoventa_path %>
+      </li>
+      <li>
+          <%= link_to "Motivos Devolución", mvodev_path %>
+      </li>
+      <li>
+          <%= link_to "Motivos de Merma", mvomerma_path %>
+      </li>
+      <li>
+          <%= link_to "Lista de Descuentos", listad_path %>
+      </li>
+      <li>
+          <%= link_to "Lista de Precios", listap_path %>
+      </li>
+      <li>
+          <%= link_to "Comision", th_comision_path %>
+      </li>
+      <li>
+          <%= link_to "Cuotas", cuotas_path %>
+      </li>
+      <li>
+          <%= link_to "Mensajes", mensajes_path %>
+      </li>
+      <li>
+          <%= link_to "Encuestas", encuestas_path %>
+      </li>
+      <li>
+          <%= link_to "Usuarios", usuarios_path %>
+      </li>
+    <li>
+      <%= link_to "Cerrar sesión", destroy_usuario_session_path, method: :delete%>
+    </li>
+
+    <%else%>
+
+    <li>
+      <%= link_to "Iniciar sesión", new_usuario_session_path%>
+    </li>
+    <li>
+      <%= link_to "Registrarse", new_usuario_registration_path%>
+    </li>
+
+  <%end%>
+
+
+ 		</ul>
+  </nav>
+</header>

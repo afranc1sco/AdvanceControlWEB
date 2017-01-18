@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Clave:</strong>
+  <%= @producto.Clave %>
+</p>
+
+<p>
+  <strong>Producto:</strong>
+  <%= @producto.Producto %>
+</p>
+
+<p>
+  <strong>Codbarras:</strong>
+  <%= @producto.CodBarras %>
+</p>
+
+<p>
+  <strong>Granel:</strong>
+  <%= @producto.Granel %>
+</p>
+
+<p>
+  <strong>Iva:</strong>
+  <%= @producto.IVA %>
+</p>
+
+<p>
+  <strong>Ieps:</strong>
+  <%= @producto.IEPS %>
+</p>
+
+<p>
+  <strong>Unimed:</strong>
+  <%= @producto.UniMed %>
+</p>
+
+<p>
+  <strong>VBase:</strong>
+  <%= @producto.VBase %>
+</p>
+
+<p>
+  <strong>Equivalente:</strong>
+  <%= @producto.Equivalente %>
+</p>
+
+<p>
+  <strong>Sector:</strong>
+  <%= @producto.Sector %>
+</p>
+
+<p>
+  <strong>Ban envase:</strong>
+  <%= @producto.Ban_Envase %>
+</p>
+
+<p>
+  <strong>Idclasp:</strong>
+  <%= @producto.idclasp %>
+</p>
+
+<p>
+  <strong>Idempresa:</strong>
+  <%= @producto.IdEmpresa %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @producto.Status %>
+</p>
+<div class="field">
+		<%= image_tag @producto.cover.url() %>
+	</div>
+
+<%= link_to 'Edit', edit_producto_path(@producto) %> |
+<%= link_to 'Back', productos_path %>

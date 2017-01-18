@@ -1,0 +1,156 @@
+<!--<p id="notice"><%= notice %></p>-->
+<h1>Activos</h1>
+<style>
+.container {
+  width: 100%;
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewactivo">
+        Nuevo activo
+      </button>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+  <table id="superior" class="display"><!--el id activos es de datatables referenciado en activos.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr><!--active es para sombrear la fila-->
+      <th>Id</th>
+      <th>Descripción</th>
+      <th>Modelo</th>
+      <th>FechaAlta</th>
+      <th>Serie</th>
+      <th>CB</th>
+      <th>Imagen</th>
+      <th>Status</th>
+      <th>Acciones</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_activos">
+      <%= render @activos %><!--carga todos los activos-->
+</tbody>
+
+
+</table>
+<!-- Modal create action -->
+<%= form_for(@activo, remote: true, html: {class: "form-horizontal activox"}) do |f| %> <!--ajax remote: true-->
+  <div class="modal fade" id="mynewactivo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Agregar activo</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-md-12">
+                  <div class="panel with-nav-tabs panel-default">
+                      <div class="panel-heading">
+                              <ul class="nav nav-tabs">
+                                  <li class="active"><a href="#tab1default" data-toggle="tab">Información general</a></li>
+                                  <li><a href="#tab2default" data-toggle="tab">Imagen</a></li>
+                              </ul>
+                      </div>
+
+                      <div class="panel-body">
+                          <div class="tab-content">
+                              <div class="tab-pane fade in active" id="tab1default">
+
+                                <div class="form-group">
+
+                                  <%= f.label :CB, "Código de Barras:", class: "control-label col-md-3"  %>
+                                  <div class="col-md-7">
+                                    <%= f.text_field :CB, class: "form-control activo_cb",autofocus: true, minlength: "1"  %>
+                                  </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :Serie, "Serie:", class: "control-label col-md-3"  %>
+                                  <div class="col-md-8">
+                                    <%= f.text_field :Serie, class: "form-control activo_serie", minlength: "3", required: "true"   %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :Descripcion, "Descripción:", class: "control-label col-md-3"  %>
+                                  <div class="col-md-8">
+                                    <%= f.text_field :Descripcion, class: "form-control activo_descripcion", minlength: "3", required: "true"  %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :Modelo, "Modelo:", class: "control-label col-md-3"  %>
+                                  <div class="col-md-8">
+                                    <%= f.text_field :Modelo, class: "form-control activo_modelo", minlength: "3", required: "true"  %>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <%= f.label :Status,"Activo:", class: "control-label col-xs-3 col-sm-6 col-md-1 " %>
+                                  <div class="col-md-1">
+                                    <%= f.check_box :Status,{checked: true}, "Disponible", "No disponible" %>
+
+                                  </div>
+                                </div>
+
+
+
+
+                                  <%= f.hidden_field :IdEmpresa, value: current_usuario.empresa_id %>
+                              </div>
+
+
+                              <div class="tab-pane fade" id="tab2default">
+                                  <div class="form-group">
+                                    <%= f.label :cover, "Imagen:", class: "control-label col-md-3" %>
+                                    <div class="col-md-9">
+                                      <%= f.file_field :cover, class: " cliente-telefono" %>
+                                    </div>
+                                  </div>
+
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewactivoclose">Cerrar</button>
+          <%= submit_tag "Crear", class: "btn btn-primary", data: { disable_with: 'Creando' }%>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<%= link_to 'Activos eliminados ó inhabilitados<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, activos_inactivos_path, class: "btn btn-danger btn-xs"%>
+<script>
+$(document).on("ready page:load", function() {
+$(".activoxd").validate({
+debug: true,
+rules: {
+"activo[CB]": {required: true, remote:'/activos/check_cb' },  //added this
+"activo[Serie]": {required: true, minlength: 6},
+"activo[Descripcion]": {required: true}
+}
+});
+});
+</script>

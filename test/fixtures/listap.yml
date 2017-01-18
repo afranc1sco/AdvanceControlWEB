@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lista: MyString
+  tipo: false
+  fechaini: 2016-08-03 13:18:26
+  fechafin: 2016-08-03 13:18:26
+  idempresa: MyString
+
+two:
+  lista: MyString
+  tipo: false
+  fechaini: 2016-08-03 13:18:26
+  fechafin: 2016-08-03 13:18:26
+  idempresa: MyString

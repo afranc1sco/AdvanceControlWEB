@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ProductoId: MyString
+  ClasiF: MyString
+  Nivel: MyString
+  Dep_Clasif: MyString
+  Dep_Nivel: MyString
+  IdEmpresa: MyString
+
+two:
+  ProductoId: MyString
+  ClasiF: MyString
+  Nivel: MyString
+  Dep_Clasif: MyString
+  Dep_Nivel: MyString
+  IdEmpresa: MyString

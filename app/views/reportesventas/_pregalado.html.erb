@@ -1,0 +1,51 @@
+<% if @pregalado != nil%>
+
+
+
+  <table id="superior" class="display"><!--el id empresas es de datatables referenciado en empresas.coffe y display class es una clase de datatables-->
+  <thead>
+
+    <tr>
+      <th>Fecha</th>
+      <th>Cliente</th>
+      <th>Responsable</th>
+      <th>Nombre Comercial</th>
+      <th>SKU</th>
+      <th>Producto</th>
+      <th>Cajas</th>
+      <th>Piezas</th>
+      <th>Documento</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody id="container_pregalad">
+      <% @pregalado.each do |pregalad| %>
+      <tr id="pregalad_<%= pregalad.id %>">
+        <td><%=@detallevet.where(:Docto => pregalad.Docto, :RutaId => pregalad.RutaId).count%></td>
+
+        <td><%=pregalad.Cliente%></td>
+        <td><%=pregalad.cliente.Nombre%></td>
+        <td><%=pregalad.cliente.NombreCorto%></td>
+        <td><%=pregalad.SKU%></td>
+        <td><%=pregalad.producto.Producto%></td>
+        <%if pregalad.Tipmed == "Caja" %>
+          <td><%=pregalad.Pz%></td>
+          <td>0</td>
+        <%else pregalad.Tipmed == "Pzas" %>
+          <td>0</td>
+          <td><%=pregalad.Pz%></td>
+        <%end%>
+        <td><%=pregalad.Docto%></td>
+
+      <td></td>
+      </tr>
+
+      <% end %>
+
+</tbody>
+
+
+</table>
+
+<% end %>

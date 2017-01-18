@@ -1,0 +1,43 @@
+<tr id="usuario_<%= usuario.id %>">
+  <td><%=usuario.IdUsuario%></td>
+  <td><%=usuario.usuario%></td>
+  <td><%=usuario.email%></td>
+
+
+
+
+
+    <td>
+
+        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateusuario_<%= usuario.id %>">
+          Edit
+        </button>
+        <!--Destroy-->
+        <%= link_to 'Destroy', usuario, method: :delete, class: "btn btn-danger btn-xs", remote:true %>
+      </td>
+
+
+<td class="no" >
+      <!--Modal - update usuario-->
+  <%= form_for(usuario, :method => :put, remote: true, html: {class: "form-horizontal"}) do |f| %><!--ajax-->
+    <div nohidden class="modal fade si" id="myupdateusuario_<%= usuario.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Editar usuario</h4>
+          </div>
+
+          <div class="modal-body">
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="myupdatebutton_<%= usuario.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= submit_tag "Update", class: "btn btn-primary"%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%></td>
+</tr>
